@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <button className='mt-10 btn btn-primary'>Hello</button>
       </header>
     </div>
   );
