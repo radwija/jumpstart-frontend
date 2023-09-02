@@ -7,7 +7,8 @@ export const Footer = () => {
       <footer className="footer p-10 bg-base-200 text-base-content">
         <div>
           <img src={logo} alt="Jumpstart logo" width="80" height="80" />
-          <p>Jumpstart<br />Providing reliable tech since 1992</p>
+          <h2 className="text-base-content text-lg font-bold">Jumpstart</h2>
+          <p>Developed by Pande Radwija 2023</p>
         </div>
         <div>
           <span className="footer-title">Services</span>
