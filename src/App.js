@@ -7,13 +7,14 @@ import Registration from './pages/Registration';
 import ForgottenPassword from './pages/ForgottenPassword';
 import ResetPassword from './pages/ResetPassword';
 import ProductDetail from './pages/ProductDetail';
+import Products from './pages/Products';
 
 
 function App() {
   return (
     <>
       <Navbar />
-      <ProductDetail />
+      <Products />
       <Footer />
     </>
   );
