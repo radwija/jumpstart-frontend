@@ -3,7 +3,7 @@ import logo from '../assets/logo.svg'
 
 export const Navbar = () => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">
           <img src={logo} alt="Jumpstart Logo" style={{ height: "30px" }} /> Jumpstart
