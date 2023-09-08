@@ -3,13 +3,16 @@ import logo from '../assets/logo.svg'
 
 export const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-md">
+    <div className="navbar bg-base-100 shadow">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">
-          <img src={logo} alt="Jumpstart Logo" style={{ height: "30px" }} /> Jumpstart
+          <img src={logo} alt="Jumpstart Logo" style={{ height: "30px" }} /> <span className='hidden sm:hidden md:block lg:block'>Jumpstart</span>
         </a>
       </div>
-      <div className="flex-none">
+      <div className="flex-none gap-2">
+        <div className="form-control">
+          <input type="text" placeholder="Search" className="input input-bordered md:w-auto" />
+        </div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <div className="indicator">
