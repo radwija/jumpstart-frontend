@@ -5,7 +5,7 @@ export const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">
+        <a className="btn btn-ghost text-xl">
           <img src={logo} alt="Jumpstart Logo" style={{ height: "30px" }} /> Jumpstart
         </a>
       </div>
