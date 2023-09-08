@@ -8,7 +8,7 @@ export const CartIcon = ({ customClass }) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      className={`${customClass || 'h-6 w-6 text-white'}`}
+      className={`${customClass || 'h-6 w-6'}`}
       viewBox="0 0 24 24"
     >
       <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -27,7 +27,7 @@ export const TruckIcon = ({ customClass }) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      className={`${customClass || 'h-6 w-6 text-white'}`}
+      className={`${customClass || 'h-6 w-6'}`}
       viewBox="0 0 24 24"
     >
       <path d="M1 3H16V16H1z"></path>
