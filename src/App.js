@@ -6,13 +6,14 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ForgottenPassword from './pages/ForgottenPassword';
 import ResetPassword from './pages/ResetPassword';
+import ProductDetail from './pages/ProductDetail';
 
 
 function App() {
   return (
     <>
       <Navbar />
-      <ResetPassword />
+      <ProductDetail />
       <Footer />
     </>
   );
