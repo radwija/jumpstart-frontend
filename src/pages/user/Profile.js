@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { BagIcon, CartIcon, EditIcon, LogOutIcon, UserIcon } from '../../assets/SvgIcons'
 
 const Sidebar = () => {
@@ -35,9 +35,9 @@ const ProfileInfo = () => {
         <div class="col-span-9 sm:col-span-9 md:col-span-9 lg:col-span-6">
           <div className='flex gap-1 mb-3'>
             <h1 className='text-3xl font-semibold'>My profile</h1>
-            <button>
+            <Link to={'/user/profile/update'}>
               <EditIcon />
-            </button>
+            </Link>
           </div>
           <div className='flex flex-col gap-3'>
             <div className='flex gap-4'>
@@ -71,7 +71,77 @@ const ProfileInfo = () => {
   );
 }
 
+const UpdateProfileForm = () => {
+  return (
+    <>
+      <h1 className='text-3xl font-semibold'>Update profile</h1>
+      <form action="" className='grid gap-y-3'>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">First name</span>
+          </label>
+          <input type="text" placeholder="First name" className="input input-bordered w-full" />
+        </div>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Last name</span>
+          </label>
+          <input type="text" placeholder="Last name" className="input input-bordered w-full" />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Gender</span>
+          </label>
+          <select className="select select-bordered max-w-xs">
+            <option disabled selected>Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">City</span>
+          </label>
+          <input type="text" placeholder="City" className="input input-bordered w-full" />
+        </div>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input type="text" placeholder="Country" className="input input-bordered w-full" />
+        </div>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Address</span>
+          </label>
+          <input type="text" placeholder="Address" className="input input-bordered w-full" />
+        </div>
+        <button type='submit' className='btn btn-primary'>Save update</button>
+      </form>
+    </>
+  );
+}
+
 export const Profile = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const handlePageView = () => {
+    switch (currentPath) {
+      case '/user/profile':
+        return <ProfileInfo />
+      case '/user/profile/update':
+        return <UpdateProfileForm />
+      case '/user/orders':
+        return <ProfileInfo />
+      default:
+        return <ProfileInfo />
+    }
+  }
+  // useEffect(() => {
+  //   handlePageView();
+  // })
+  console.log(currentPath);
   return (
     <>
       <Layout>
@@ -81,7 +151,9 @@ export const Profile = () => {
           </div>
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
             <div className="border rounded p-5">
-              <ProfileInfo />
+              {
+                handlePageView()
+              }
             </div>
           </div>
         </div>
