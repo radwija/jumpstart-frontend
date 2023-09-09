@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { Link, useLocation } from 'react-router-dom'
 import { BagIcon, CartIcon, EditIcon, LogOutIcon, UserIcon } from '../../assets/SvgIcons'
+import { OrderCard } from '../../components/OrderCard'
 
 const Sidebar = () => {
   return (
@@ -24,7 +25,7 @@ const ProfileInfo = () => {
   return (
     <>
       <div className='grid grid-cols-9 gap-4'>
-        <div class="flex flex-col gap-4 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3">
+        <div className="flex flex-col gap-4 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3">
           <div className='flex flex-col gap-3 mx-auto'>
             <div className='text-center flex flex-col gap-3 mask mask-circle w-32 sm:w-32 md:w-32 lg:w-full'>
               <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" alt="" className='mx-auto object-cover w-full h-full' />
@@ -32,9 +33,9 @@ const ProfileInfo = () => {
             <button className='btn btn-primary w-full'>Change picture</button>
           </div>
         </div>
-        <div class="col-span-9 sm:col-span-9 md:col-span-9 lg:col-span-6">
+        <div className="col-span-9 sm:col-span-9 md:col-span-9 lg:col-span-6">
           <div className='flex gap-1 mb-3'>
-            <h1 className='text-3xl font-semibold'>My profile</h1>
+            <h1 className='text-3xl font-semibold mb-2'>My profile</h1>
             <Link to={'/user/profile/update'}>
               <EditIcon />
             </Link>
@@ -74,7 +75,7 @@ const ProfileInfo = () => {
 const UpdateProfileForm = () => {
   return (
     <>
-      <h1 className='text-3xl font-semibold'>Update profile</h1>
+      <h1 className='text-3xl font-semibold mb-2'>Update profile</h1>
       <form action="" className='grid gap-y-3'>
         <div className="form-control w-full">
           <label className="label">
@@ -122,6 +123,27 @@ const UpdateProfileForm = () => {
   );
 }
 
+const Orders = () => {
+  return (
+    <>
+      <h1 className='text-3xl font-semibold mb-2'>Order history</h1>
+      <ul className='flex gap-3 mb-2'>
+        <li><Link className='btn btn-outline btn-primary btn-sm'>All orders</Link></li>
+        <li><Link className='btn btn-outline btn-primary btn-sm'>Processed</Link></li>
+        <li><Link className='btn btn-outline btn-primary btn-sm'>Completed</Link></li>
+        <li><Link className='btn btn-outline btn-primary btn-sm'>Cancelled</Link></li>
+      </ul>
+      <div className='flex flex-col gap-4'>
+        <OrderCard />
+        <OrderCard />
+        <OrderCard />
+        <OrderCard />
+        <OrderCard />
+      </div>
+    </>
+  );
+}
+
 export const Profile = () => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -133,7 +155,7 @@ export const Profile = () => {
       case '/user/profile/update':
         return <UpdateProfileForm />
       case '/user/orders':
-        return <ProfileInfo />
+        return <Orders />
       default:
         return <ProfileInfo />
     }
@@ -141,7 +163,6 @@ export const Profile = () => {
   // useEffect(() => {
   //   handlePageView();
   // })
-  console.log(currentPath);
   return (
     <>
       <Layout>
