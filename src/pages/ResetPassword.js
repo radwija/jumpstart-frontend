@@ -1,6 +1,7 @@
 import React from "react";
 import reset_password from '../assets/images/reset_password.svg'
 import { AlertMessage } from "../components/AlertMessage";
+import { Link } from "react-router-dom";
 
 const ResetPasswordForm = () => {
   return (
@@ -20,10 +21,10 @@ const ResetPasswordForm = () => {
           </label>
           <input type="password" placeholder="Confirm new password" className="input input-bordered w-full" />
         </div>
-        <button type="submit" className="btn btn-primary w-full">Login</button>
+        <button type="submit" className="btn btn-primary w-full">Reset password</button>
       </form>
       <hr />
-      <p className="text-center mt-4">Already have an account? <a href="">Login</a></p>
+      <p className="text-center mt-4">Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 }

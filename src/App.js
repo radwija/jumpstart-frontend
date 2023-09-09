@@ -1,7 +1,5 @@
 import './App.css';
 import { Route, Routes } from "react-router";
-import { Footer } from './components/Footer';
-import { Navbar } from './components/Navbar';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ForgottenPassword from './pages/ForgottenPassword';

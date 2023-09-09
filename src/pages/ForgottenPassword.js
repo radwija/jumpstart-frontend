@@ -1,6 +1,8 @@
 import React from "react";
 import forgot_password from '../assets/images/forgot_password.svg'
 import { AlertMessage } from "../components/AlertMessage";
+import Layout from "../components/Layout";
+import { Link } from "react-router-dom";
 
 const FindAccountForm = () => {
   return (
@@ -17,7 +19,7 @@ const FindAccountForm = () => {
         <button type="submit" className="btn btn-primary w-full">Login</button>
       </form>
       <hr />
-      <p className="text-center mt-4">Already have an account? <a href="">Login</a></p>
+      <p className="text-center mt-4">Already have an account? <Link to="">Login</Link></p>
     </div>
   );
 }
@@ -25,14 +27,16 @@ const FindAccountForm = () => {
 const ForgottenPassword = () => {
   return (
     <>
-      <div className='py-10 sm:flex sm:flex-wrap sm:flex-col md:grid md:grid-cols-12 p-5 '>
-        <div className='lg:px-20 md:px-8 py-5 sm:col-span-12 md:col-span-6 hidden sm:hidden md:block lg:block'>
-          <img src={forgot_password} alt="Forgotten password illustration" />
+      <Layout>
+        <div className='py-10 sm:flex sm:flex-wrap sm:flex-col md:grid md:grid-cols-12 p-5 '>
+          <div className='lg:px-20 md:px-8 py-5 sm:col-span-12 md:col-span-6 hidden sm:hidden md:block lg:block'>
+            <img src={forgot_password} alt="Forgotten password illustration" />
+          </div>
+          <div className='lg:px-20 md:px-8 py-5 sm:col-span-12 md:col-span-6'>
+            <FindAccountForm />
+          </div>
         </div>
-        <div className='lg:px-20 md:px-8 py-5 sm:col-span-12 md:col-span-6'>
-          <FindAccountForm />
-        </div>
-      </div>
+      </Layout>
     </>
   );
 }

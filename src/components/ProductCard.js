@@ -1,5 +1,6 @@
 import React from 'react'
 import { CartIcon } from '../assets/SvgIcons'
+import { Link } from 'react-router-dom'
 
 const ProductCard = () => {
   return (
@@ -10,7 +11,7 @@ const ProductCard = () => {
         </figure>
         <hr />
         <div className="card-body">
-          <a href='' className="badge badge-accent">Toy</a>
+          <Link to='' className="badge badge-accent">Toy</Link>
           <h2 className="card-title">Hot Wheels Fast and Furious</h2>
           <div>Price:</div>
           <div className='text-xl font-semibold m-0 p-0'>$10</div>

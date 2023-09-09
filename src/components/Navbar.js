@@ -1,13 +1,14 @@
 import React from 'react';
 import logo from '../assets/logo.svg'
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">
+        <Link to={'/'} className="btn btn-ghost text-xl">
           <img src={logo} alt="Jumpstart Logo" style={{ height: "30px" }} /> <span className='hidden sm:hidden md:block lg:block'>Jumpstart</span>
-        </a>
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
@@ -38,12 +39,12 @@ export const Navbar = () => {
           </label>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a className="justify-between">
+              <Link className="justify-between">
                 Profile
-              </a>
+              </Link>
             </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li><Link to={''}>Settings</Link></li>
+            <li><Link to={''}>Logout</Link></li>
           </ul>
         </div>
       </div>
