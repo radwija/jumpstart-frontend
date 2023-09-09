@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import useDocumentTitle from "./useDocumentTitle";
 
 const LoginForm = () => {
-  useDocumentTitle(`Login`)
+  useDocumentTitle(`Login`);
   return (
     <div className="p-5 rounded bg-white border shadow">
       <h1 className="text-4xl font-semibold mb-2">Login</h1>

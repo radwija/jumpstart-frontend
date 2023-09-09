@@ -3,6 +3,7 @@ import forgot_password from '../assets/images/forgot_password.svg'
 import { AlertMessage } from "../components/AlertMessage";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
+import useDocumentTitle from "./useDocumentTitle";
 
 const FindAccountForm = () => {
   return (
@@ -25,6 +26,7 @@ const FindAccountForm = () => {
 }
 
 const ForgottenPassword = () => {
+  useDocumentTitle(`Find Your Account`);
   return (
     <>
       <Layout>

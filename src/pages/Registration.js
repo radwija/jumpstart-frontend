@@ -3,8 +3,10 @@ import register from '../assets/images/register.svg'
 import { AlertMessage } from "../components/AlertMessage";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import useDocumentTitle from "./useDocumentTitle";
 
 const RegistrationForm = () => {
+  useDocumentTitle(`Register`);
   return (
     <div className="p-5 rounded bg-white border shadow">
       <h1 className="text-4xl font-semibold mb-2">Register</h1>
