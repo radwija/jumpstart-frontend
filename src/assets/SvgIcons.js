@@ -94,4 +94,23 @@ export const LogOutIcon = ({ customClass }) => {
   );
 }
 
+export const EditIcon = ({ customClass }) => {
+  return (
+    <svg
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path stroke="none" d="M0 0h24v24H0z"></path>
+      <path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"></path>
+      <path d="M9 15h3l8.5-8.5a1.5 1.5 0 00-3-3L9 12v3"></path>
+      <path d="M16 5L19 8"></path>
+    </svg>
+  );
+}
+
 

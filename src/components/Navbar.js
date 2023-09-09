@@ -39,12 +39,18 @@ export const Navbar = () => {
           </label>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <Link to={'/user/profile'} className="justify-between">
-                Profile
-              </Link>
+              <Link to={'/user/profile'} className="justify-between">Profile</Link>
             </li>
-            <li><Link to={''}>Settings</Link></li>
-            <li><Link to={''}>Logout</Link></li>
+            <li>
+              <Link to={'/user/orders'} className="justify-between">Orders</Link>
+            </li>
+            <li>
+              <Link to={'/my-cart'} className="justify-between">Shopping Cart</Link>
+            </li>
+            <li>
+              <button to={''} className="justify-between">Log Out</button>
+            </li>
+
           </ul>
         </div>
       </div>
