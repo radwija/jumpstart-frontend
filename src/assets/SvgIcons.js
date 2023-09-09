@@ -1,20 +1,17 @@
 export const CartIcon = ({ customClass }) => {
   return (
     <svg
-      width="24"
-      height="24"
       fill="none"
       stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
       className={`${customClass || 'h-6 w-6'}`}
       viewBox="0 0 24 24"
     >
-      <path stroke="none" d="M0 0h24v24H0z"></path>
-      <circle cx="9" cy="19" r="2"></circle>
-      <circle cx="17" cy="19" r="2"></circle>
-      <path d="M3 3h2l2 12a3 3 0 003 2h7a3 3 0 003-2l1-7H5.8"></path>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+      ></path>
     </svg>
   );
 }
