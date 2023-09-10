@@ -13,7 +13,7 @@ const ProductDetail = () => {
         <div className='py-10 sm:flex sm:flex-wrap sm:flex-col gap-y-10 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-36 lg:px-20'>
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-4'>
             <div className="aspect-square border rounded">
-              <img src="https://thumbs.dreamstime.com/b/vertical-panorama-country-road-9905521.jpg" alt="product thumbnail" className="object-cover w-full h-full rounded" />
+              <img src="https://thumbs.dreamstime.com/b/vertical-panorama-country-road-9905521.jpg" alt="product thumbnail" className="object-contain w-full h-full rounded" />
             </div>
           </div>
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-5 bg-white'>

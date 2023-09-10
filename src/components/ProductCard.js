@@ -1,6 +1,7 @@
 import React from 'react'
 import { CartIcon } from '../assets/SvgIcons'
 import { Link } from 'react-router-dom'
+import { CategoryBadge } from './CategoryBadge'
 
 const ProductCard = () => {
   return (
@@ -11,7 +12,7 @@ const ProductCard = () => {
         </figure>
         <hr />
         <div className="card-body">
-          <Link to='' className="badge badge-accent">Toy</Link>
+          <CategoryBadge categoryUrl='' categoryName='CategoryNameHere' />
           <h2 className="card-title">Hot Wheels Fast and Furious</h2>
           <div>Price:</div>
           <div className='text-xl font-semibold m-0 p-0'>$10</div>

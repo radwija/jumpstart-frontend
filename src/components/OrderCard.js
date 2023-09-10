@@ -5,7 +5,7 @@ const Product = () => {
   return (
     <div className='flex gap-3'>
       <Link to={`/product`} className='aspect-square border rounded'>
-        <img src="https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" className='object-cover w-20 h-20  rounded' />
+        <img src="https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" className='object-contain w-20 h-20  rounded' />
       </Link>
       <div>
         <Link to={`/product`} className='text-lg font-medium'>Hot Wheels Fast and Furious Orange Nissan Skyline GT-R BNR34 R34</Link>

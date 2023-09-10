@@ -7,6 +7,7 @@ import ResetPassword from './pages/ResetPassword';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import { Profile } from './pages/user/Profile';
+import { MyCart } from './pages/user/MyCart';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 
           {/* User Routes */}
           <Route path='/user/*' element={<Profile />} />
+          <Route path='/my-cart' element={<MyCart />} />
         </Routes>
       </div>
     </>
