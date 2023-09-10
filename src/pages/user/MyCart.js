@@ -18,7 +18,7 @@ export const MyCart = () => {
             </div>
           </div>
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3'>
-            <div className="flex flex-col gap-3 border shadow rounded p-5">
+            <div className="fixed bottom-0 left-0 right-0 z-10 lg:static bg-white flex flex-col gap-3 border shadow rounded px-10 lg:px-5 py-5">
               <div className='text-lg font-semibold'>Order summary</div>
               <div>
                 <div>Total items: 2</div>
