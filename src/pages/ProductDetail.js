@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { CartIcon } from "../assets/SvgIcons";
 import Layout from "../components/Layout";
 
 const ProductDetail = () => {
-  function handleWheel(event) {
-    event.preventDefault();
+  const [productNumber, setProductNumber] = useState(1)
+  const handleProductNumber = (e) => {
+    console.log(e.target.value)
   }
-
   return (
     <>
       <Layout>
@@ -36,22 +36,24 @@ const ProductDetail = () => {
               <h1 className="text-xl font-semibold">Order product</h1>
               <div className="mb-3">Stocks: 100</div>
 
+              <div className="join w-full mb-3">
+                <button className="btn join-item" onClick={() => setProductNumber((prev) => prev - 1)}>-</button>
+                <input type="number" className="join-item mx-2 w-full border text-center" value={productNumber} onInput={(e) => setProductNumber(Number(e.target.value))} min={1} max={10} />
+                <button className="btn join-item" onClick={() => setProductNumber((prev) => prev + 1)}>+</button>
+              </div>
+
               <form action="">
-                <div className="join w-full mb-3">
-                  <button className="btn join-item">-</button>
-                  <input type="number" className="join-item mx-2 w-full border text-center" value={1} min={1} max={100} />
-                  <button className="btn join-item">+</button>
-                </div>
+                <input type="hidden" className="join-item mx-2 w-full border text-center" value={productNumber} />
                 <div className="flex justify-between mb-3">
                   <div>Total:</div>
-                  <div className="text-xl font-semibold">$20</div>
+                  <div className="text-xl font-semibold">${productNumber * 20}</div>
                 </div>
                 <button type="submit" className="btn btn-primary w-full"><CartIcon /> Add to cart</button>
               </form>
             </div>
           </div>
-        </div>
-      </Layout>
+        </div >
+      </Layout >
     </>
   )
 }
