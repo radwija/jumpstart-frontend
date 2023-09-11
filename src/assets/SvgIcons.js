@@ -132,4 +132,43 @@ export const TrashIcon = ({ customClass }) => {
   );
 }
 
+export const DashboardIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path stroke="none" d="M0 0h24v24H0z"></path>
+      <circle cx="12" cy="13" r="2"></circle>
+      <path d="M13.45 11.55L15.5 9.5"></path>
+      <path d="M6.4 20a9 9 0 1111.2 0z"></path>
+    </svg>
+  );
+}
+
+export const UsersIcon = ({ customClass }) => {
+  return (
+    <svg
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+      <circle cx="9" cy="7" r="4"></circle>
+      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
+    </svg>
+  );
+}
+
 

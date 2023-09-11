@@ -13,10 +13,10 @@ const Sidebar = () => {
         <h1 className='text-xl font-semibold'>Naruto Uzumaki</h1>
       </div>
       <ul className='mt-6'>
-        <li><Link to={`/user/profile`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'>{<UserIcon />} Profile</Link></li>
-        <li><Link to={`/user/orders`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'>{<BagIcon />} Orders</Link></li>
-        <li><Link to={`/my-cart`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'>{<CartIcon />} Shopping Cart</Link></li>
-        <li><button className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'>{<LogOutIcon />} Log Out</button></li>
+        <li><Link to={`/user/profile`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><UserIcon /> Profile</Link></li>
+        <li><Link to={`/user/orders`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><BagIcon /> Orders</Link></li>
+        <li><Link to={`/my-cart`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><CartIcon /> Shopping Cart</Link></li>
+        <li><button className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><LogOutIcon /> Log Out</button></li>
       </ul>
     </div>
   );
