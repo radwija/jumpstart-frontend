@@ -10,6 +10,8 @@ import { Profile } from './pages/user/Profile';
 import { MyCart } from './pages/user/MyCart';
 import Dashboard from './pages/admin/Dashboard';
 import UserManagement from './pages/admin/UserManagement';
+import OrderManagement from './pages/admin/OrderManagement';
+import Inventory from './pages/admin/Inventory';
 
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
 
           {/* Admin Routes */}
           <Route path='/admin' element={<Dashboard />} />
-          <Route path='/admin/orders' element={<Dashboard />} />
+          <Route path='/admin/orders' element={<OrderManagement />} />
+          <Route path='/admin/inventory' element={<Inventory />} />
           <Route path='/admin/users' element={<UserManagement />} />
         </Routes>
       </div>
