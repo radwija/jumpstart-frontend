@@ -32,7 +32,7 @@ const Inventory = () => {
               <td>Date</td>
               <td>Status</td>
               <td>Total Amount</td>
-              <td>
+              <td className='flex gap-3'>
                 <Link className='btn'><EyeIcon /></Link>
                 <Link className='btn'><EditIcon /></Link>
                 <button className='btn'><TrashIcon /></button>

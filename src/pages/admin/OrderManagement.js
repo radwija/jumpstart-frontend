@@ -15,6 +15,7 @@ const OrderManagement = () => {
       <AdminLayout>
         <PageHeading headingTitle='Order Management' />
         <AdminTable>
+
           <thead>
             <tr>
               <th>User ID</th>
@@ -26,13 +27,14 @@ const OrderManagement = () => {
             </tr>
           </thead>
           <tbody>
+            {/* row 1 */}
             <tr>
-              <td>User ID</td>
+              <td>1</td>
               <td>Customer Name</td>
               <td>Date</td>
               <td>Status</td>
               <td>Total Amount</td>
-              <td>
+              <td className='flex gap-3'>
                 <Link className='btn'><EyeIcon /></Link>
                 <button className='btn'><TrashIcon /></button>
               </td>

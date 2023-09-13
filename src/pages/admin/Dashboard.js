@@ -13,6 +13,9 @@ const Dashboard = () => {
         <PageHeading headingTitle='Admin Dashboard' />
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-5">
           <Stat name='Revenue' amount='20' />
+          <Stat name='Revenue' amount='20' />
+          <Stat name='Revenue' amount='20' />
+          <Stat name='Revenue' amount='20' />
         </div>
       </AdminLayout>
     </>

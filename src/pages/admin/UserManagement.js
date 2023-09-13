@@ -32,7 +32,7 @@ const UserManagement = () => {
               <td>spongebob@email.com</td>
               <td>07/09/2023</td>
               <td>USER</td>
-              <td>
+              <td className='flex gap-3'>
                 <Link className='btn'><EyeIcon /></Link>
                 <button className='btn'><TrashIcon /></button>
               </td>

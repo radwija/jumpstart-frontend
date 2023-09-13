@@ -3,8 +3,8 @@ import React from 'react'
 export const AdminTable = (props) => {
   return (
     <>
-      <div className='relative overflow-x-scroll'>
-        <table className='w-full min-w-[800px] border-collapse'>
+      <div className="overflow-x-auto">
+        <table className="table">
           {props.children}
         </table>
       </div>

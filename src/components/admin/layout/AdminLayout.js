@@ -7,7 +7,7 @@ const AdminLayout = (props) => {
   return (
     <>
       <Layout>
-        <div className='py-10 flex flex-wrap flex-col sm:flex sm:flex-wrap sm:flex-col gap-y-5 sm:gap-y-5 md:gap-y-5 lg:gap-y-5 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-44 lg:px-20'>
+        <div className='py-10 grid grid-cols-12 px-5 sm:px-5 md:px-5 lg:px-20'>
           <div className='mx-5 hidden sm:hidden md:hidden lg:block lg:col-span-3'>
             <AdminSidebar />
           </div>
