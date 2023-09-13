@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { AdminSidebar } from '../header/AdminSidebar';
+import { AdminSidebar, adminLinks } from '../header/AdminSidebar';
 import { useWindowSize } from "@uidotdev/usehooks";
 import Layout from '../../Layout';
+import { map } from 'jquery';
+import { Link } from 'react-router-dom';
 
 const AdminLayout = (props) => {
   return (
@@ -12,6 +14,21 @@ const AdminLayout = (props) => {
             <AdminSidebar />
           </div>
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
+            <div className='lg:hidden overflow-x-auto mb-5'>
+              <div className='flex gap-3'>
+                {
+                  adminLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      className='btn btn-outline btn-primary'
+                    >{link.name}
+                    </Link>
+                  )
+                  )
+                }
+              </div>
+            </div>
             <div className="border rounded p-5">
               {props.children}
             </div>

@@ -10,12 +10,38 @@ import { AdminTable } from '../../components/AdminTable'
 
 const OrderManagement = () => {
   useDocumentTitle('User Management')
+
+  const orderManagementNavigation = [
+    {
+      name: "All orders",
+      path: ""
+    },
+    {
+      name: "Processed",
+      path: ""
+    },
+    {
+      name: "Completed",
+      path: ""
+    },
+    {
+      name: "Cancelled",
+      path: ""
+    },
+  ]
+
   return (
     <>
       <AdminLayout>
         <PageHeading headingTitle='Order Management' />
+        <div className='overflow-x-auto mb-5'>
+          <div className='flex gap-3'>
+            {orderManagementNavigation.map((link) => (
+              <Link to={link.path} key={link.name} className='btn btn-outline btn-primary'>{link.name}</Link>
+            ))}
+          </div>
+        </div>
         <AdminTable>
-
           <thead>
             <tr>
               <th>User ID</th>

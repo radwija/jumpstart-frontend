@@ -3,31 +3,30 @@ import { BagIcon, CartIcon, DashboardIcon, LogOutIcon, UserIcon, UsersIcon } fro
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg'
 
+export const adminLinks = [
+  {
+    name: "Dashboard",
+    path: "/admin",
+    icon: <DashboardIcon />
+  },
+  {
+    name: "Orders",
+    path: "/admin/orders",
+    icon: <BagIcon />
+  },
+  {
+    name: "Inventory",
+    path: "/admin/inventory",
+    icon: <CartIcon />
+  },
+  {
+    name: "Users",
+    path: "/admin/users",
+    icon: <UsersIcon />
+  }
+];
+
 export const AdminSidebar = () => {
-  const adminLinks = [
-    {
-      name: "Dashboard",
-      path: "/admin",
-      icon: <DashboardIcon />
-    },
-    {
-      name: "Orders",
-      path: "/admin/orders",
-      icon: <BagIcon />
-    },
-    {
-      name: "Inventory",
-      path: "/admin/inventory",
-      icon: <CartIcon />
-    },
-    {
-      name: "Users",
-      path: "/admin/users",
-      icon: <UsersIcon />
-    }
-  ];
-
-
   return (
     <>
       <div className="border shadow rounded p-5">
