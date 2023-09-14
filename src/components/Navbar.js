@@ -11,6 +11,8 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="flex-none gap-2">
+        <Link to={'/products'} className='btn btn-ghost drawer-button font-normal'>Products</Link>
+        <Link to={'/category'} className='btn btn-ghost drawer-button font-normal'>Category</Link>
         <div className="form-control">
           <input type="text" placeholder="Search" className="input input-bordered md:w-auto" />
         </div>
@@ -34,7 +36,7 @@ export const Navbar = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" />
+              <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" alt='user avatar' />
             </div>
           </label>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

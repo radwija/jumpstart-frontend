@@ -1,8 +1,6 @@
 import React from 'react'
-import { AdminSidebar } from '../../components/admin/header/AdminSidebar'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
-import { Stat } from '../../components/Stat'
 import useDocumentTitle from '../useDocumentTitle'
 import { EditIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
 import { Link } from 'react-router-dom'
@@ -47,11 +45,11 @@ const Inventory = () => {
           </thead>
           <tbody>
             <tr>
-              <td>User ID</td>
-              <td>Customer Name</td>
-              <td>Date</td>
-              <td>Status</td>
-              <td>Total Amount</td>
+              <td>1</td>
+              <td>Product Name</td>
+              <td>Category</td>
+              <td>200</td>
+              <td>$20</td>
               <td className='flex gap-3'>
                 <Link className='btn'><EyeIcon /></Link>
                 <Link className='btn'><EditIcon /></Link>

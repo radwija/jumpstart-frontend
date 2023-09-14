@@ -12,6 +12,8 @@ import Dashboard from './pages/admin/Dashboard';
 import UserManagement from './pages/admin/UserManagement';
 import OrderManagement from './pages/admin/OrderManagement';
 import Inventory from './pages/admin/Inventory';
+import UpdateProfile from './pages/user/UpdateProfile';
+import MyOrders from './pages/user/MyOrders';
 
 
 function App() {
@@ -28,7 +30,10 @@ function App() {
           <Route path='/reset-password' element={<ResetPassword />} />
 
           {/* User Routes */}
-          <Route path='/user/*' element={<Profile />} />
+          <Route path='/user' element={<Profile />} />
+          <Route path='/user/profile' element={<Profile />} />
+          <Route path='/user/profile/update' element={<UpdateProfile />} />
+          <Route path='/user/orders' element={<MyOrders />} />
           <Route path='/my-cart' element={<MyCart />} />
 
           {/* Admin Routes */}
