@@ -6,7 +6,7 @@ const ContactUs = () => {
   return (
     <>
       <Layout>
-        <div className='py-10 px-96'>
+        <div className='py-10 px-10 sm:px-10 md:px-40 lg:px-72'>
           <div className="text-center">
             <PageHeading headingTitle='Do you want to send us message? Contact Us' />
           </div>
@@ -30,7 +30,7 @@ const ContactUs = () => {
               <textarea className="textarea textarea-bordered" placeholder="Enter your message"></textarea>
             </div>
 
-            <button type='submit' className='btn btn-primary'>Save update</button>
+            <button type='submit' className='btn btn-primary'>Submit</button>
           </form>
         </div>
       </Layout>
