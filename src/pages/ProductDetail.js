@@ -31,7 +31,7 @@ const ProductDetail = () => {
             <h1 className="text-xl font-semibold">Description</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi. Diam maecenas sed enim ut sem viverra aliquet. Ut sem nulla pharetra diam sit amet. Vitae purus faucibus ornare suspendisse sed nisi. Augue mauris augue neque gravida in fermentum et. At elementum eu facilisis sed odio morbi. Consectetur a erat nam at lectus urna. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Lacus luctus accumsan tortor posuere ac ut consequat semper. Venenatis cras sed felis eget velit aliquet sagittis. Sit amet purus gravida quis blandit turpis cursus. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Elementum curabitur vitae nunc sed velit dignissim sodales ut. Aliquam ultrices sagittis orci a. Elit eget gravida cum sociis. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Proin nibh nisl condimentum id venenatis a condimentum vitae.</p>
           </div>
-          <div className='sm:col-span-12 md:col-span-12 lg:col-span-3'>
+          <div className='fixed bottom-0 left-0 right-0 z-10 lg:static sm:col-span-12 md:col-span-12 lg:col-span-3'>
             <div className="p-5 rounded bg-white border shadow">
               <h1 className="text-xl font-semibold">Order product</h1>
               <div className="mb-3">Stocks: 100</div>
