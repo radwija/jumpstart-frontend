@@ -18,6 +18,8 @@ import AddProduct from './pages/admin/AddProduct';
 import CreateCategory from './pages/admin/CreateCategory';
 import ContactUs from './pages/ContactUs';
 import UpdateProduct from './pages/admin/UpdateProduct';
+import { HomePage } from './pages/HomePage';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
       <div className="App">
         <Routes>
           {/* Public Routes */}
+          <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Registration />} />
           <Route path='/products' element={<Products />} />
@@ -33,6 +36,8 @@ function App() {
           <Route path='/find-account' element={<ForgottenPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/contact-us' element={<ContactUs />} />
+
+          <Route path='*' element={<NotFound />} />
 
           {/* User Routes */}
           <Route path='/user' element={<Profile />} />
