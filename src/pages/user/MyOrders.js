@@ -3,8 +3,10 @@ import UserLayout from '../../components/user/layout/UserLayout';
 import { PageHeading } from '../../components/PageHeading';
 import { Link } from 'react-router-dom';
 import { OrderCard } from '../../components/OrderCard';
+import useDocumentTitle from '../useDocumentTitle';
 
 const MyOrders = () => {
+  useDocumentTitle("Order History")
   return (
     <UserLayout>
       <PageHeading headingTitle='Order history' />

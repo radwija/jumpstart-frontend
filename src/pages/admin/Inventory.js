@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 
 const Inventory = () => {
-  useDocumentTitle('User Management')
+  useDocumentTitle('Inventory')
 
   const inventoryNavigation =
     [

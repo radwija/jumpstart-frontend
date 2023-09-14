@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 
 const OrderManagement = () => {
-  useDocumentTitle('User Management')
+  useDocumentTitle('Order Management')
 
   const orderManagementNavigation = [
     {

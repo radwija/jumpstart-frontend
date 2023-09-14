@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 import { EditIcon } from '../../assets/SvgIcons'
 import { PageHeading } from '../../components/PageHeading'
 import UserLayout from '../../components/user/layout/UserLayout'
+import useDocumentTitle from '../useDocumentTitle'
 
 export const Profile = () => {
+  useDocumentTitle("My Profile")
   return (
     <>
       <UserLayout>

@@ -2,8 +2,10 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { PageHeading } from '../../components/PageHeading'
 import { ItemCard } from '../../components/ItemCard'
+import useDocumentTitle from '../useDocumentTitle'
 
 export const MyCart = () => {
+  useDocumentTitle("My Shopping Cart")
   return (
     <>
       <Layout>
