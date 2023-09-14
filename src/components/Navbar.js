@@ -11,8 +11,10 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="flex-none gap-2">
-        <Link to={'/products'} className='btn btn-ghost drawer-button font-normal'>Products</Link>
-        <Link to={'/category'} className='btn btn-ghost drawer-button font-normal'>Category</Link>
+        <div className='hidden sm:hidden md:block lg:block'>
+          <Link to={'/products'} className='btn btn-ghost drawer-button font-normal'>Products</Link>
+          <Link to={'/category'} className='btn btn-ghost drawer-button font-normal'>Category</Link>
+        </div>
         <div className="form-control">
           <input type="text" placeholder="Search" className="input input-bordered md:w-auto" />
         </div>
