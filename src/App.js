@@ -18,7 +18,7 @@ import AddProduct from './pages/admin/AddProduct';
 import CreateCategory from './pages/admin/CreateCategory';
 import ContactUs from './pages/ContactUs';
 import UpdateProduct from './pages/admin/UpdateProduct';
-import { HomePage } from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 
 

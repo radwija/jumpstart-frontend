@@ -11,7 +11,7 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="flex-none gap-2">
-        <div className='hidden sm:hidden md:block lg:block'>
+        <div className='hidden sm:hidden md:flex lg:flex gap-2'>
           <Link to={'/products'} className='btn btn-ghost drawer-button font-normal'>Products</Link>
           <Link to={'/category'} className='btn btn-ghost drawer-button font-normal'>Category</Link>
         </div>

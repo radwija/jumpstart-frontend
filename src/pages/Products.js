@@ -1,8 +1,10 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard';
 import Layout from '../components/Layout';
+import useDocumentTitle from './useDocumentTitle';
 
 const Products = () => {
+  useDocumentTitle("Products")
   return (
     <>
       <Layout>
