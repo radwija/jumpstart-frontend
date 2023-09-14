@@ -195,4 +195,23 @@ export const EyeIcon = ({ customClass }) => {
   );
 }
 
+export const BackIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path stroke="none" d="M0 0h24v24H0z"></path>
+      <path d="M9 13L5 9l4-4M5 9h11a4 4 0 010 8h-1"></path>
+    </svg>
+  );
+}
+
 

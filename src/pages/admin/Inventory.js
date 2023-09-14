@@ -13,11 +13,11 @@ const Inventory = () => {
     [
       {
         name: "+ Add product",
-        path: ""
+        path: "/admin/add-product"
       },
       {
         name: "Create category",
-        path: ""
+        path: "/admin/create-category"
       },
     ]
 

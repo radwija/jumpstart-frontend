@@ -2,12 +2,16 @@ import React from 'react'
 import { PageHeading } from '../../components/PageHeading';
 import UserLayout from '../../components/user/layout/UserLayout';
 import useDocumentTitle from '../useDocumentTitle';
+import { BackButton } from '../../components/BackButton';
 
 const UpdateProfile = () => {
   useDocumentTitle("Update Profile")
   return (
     <UserLayout>
-      <PageHeading headingTitle='Update profile' />
+      <div className='flex'>
+        <BackButton to="/user" />
+        <PageHeading headingTitle='Update profile' />
+      </div>
       <form action="" className='grid gap-y-3'>
         <div className="form-control w-full">
           <label className="label">

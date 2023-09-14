@@ -14,6 +14,8 @@ import OrderManagement from './pages/admin/OrderManagement';
 import Inventory from './pages/admin/Inventory';
 import UpdateProfile from './pages/user/UpdateProfile';
 import MyOrders from './pages/user/MyOrders';
+import AddProduct from './pages/admin/AddProduct';
+import CreateCategory from './pages/admin/CreateCategory';
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
           <Route path='/admin/orders' element={<OrderManagement />} />
           <Route path='/admin/inventory' element={<Inventory />} />
           <Route path='/admin/users' element={<UserManagement />} />
+          <Route path='/admin/add-product' element={<AddProduct />} />
+          <Route path='/admin/create-category' element={<CreateCategory />} />
         </Routes>
       </div>
     </>
