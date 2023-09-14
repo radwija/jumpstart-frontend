@@ -34,9 +34,9 @@ const AddProduct = () => {
           </div>
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text">Description</span>
+              <span className="label-text">Product Description</span>
             </label>
-            <input type="text" placeholder="Description" className="input input-bordered w-full" />
+            <textarea className="textarea textarea-bordered" placeholder="Product Description"></textarea>
           </div>
           <div className="form-control w-full">
             <label className="label">

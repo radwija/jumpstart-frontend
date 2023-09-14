@@ -16,6 +16,8 @@ import UpdateProfile from './pages/user/UpdateProfile';
 import MyOrders from './pages/user/MyOrders';
 import AddProduct from './pages/admin/AddProduct';
 import CreateCategory from './pages/admin/CreateCategory';
+import ContactUs from './pages/ContactUs';
+import UpdateProduct from './pages/admin/UpdateProduct';
 
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
           <Route path='/product' element={<ProductDetail />} />
           <Route path='/find-account' element={<ForgottenPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/contact-us' element={<ContactUs />} />
 
           {/* User Routes */}
           <Route path='/user' element={<Profile />} />
@@ -44,6 +47,7 @@ function App() {
           <Route path='/admin/inventory' element={<Inventory />} />
           <Route path='/admin/users' element={<UserManagement />} />
           <Route path='/admin/add-product' element={<AddProduct />} />
+          <Route path='/admin/update-product' element={<UpdateProduct />} />
           <Route path='/admin/create-category' element={<CreateCategory />} />
         </Routes>
       </div>
