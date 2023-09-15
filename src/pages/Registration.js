@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import useDocumentTitle from "./useDocumentTitle";
 import { useFormik } from "formik";
 import axios from "../api/axios";
+import * as Yup from "yup";
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
@@ -19,6 +20,17 @@ const RegistrationForm = () => {
       email: "",
       password: ""
     },
+    validationSchema: Yup.object({
+      firstName: Yup.string()
+        .required("First name required"),
+      lastName: Yup.string()
+        .required("Last name required"),
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Email required"),
+      password: Yup.string()
+        .required("Password required")
+    }),
     onSubmit: async (values) => {
       try {
         const formData = {
@@ -92,8 +104,12 @@ const RegistrationForm = () => {
             name="firstName"
             value={values.firstName}
             onChange={handleChange}
-            required
           />
+          {errors.firstName && touched.firstName &&
+            <label className="label">
+              <span className="label-text-alt text-red-600">{errors.firstName}</span>
+            </label>
+          }
         </div>
         <div className="form-control w-full">
           <label className="label">
@@ -106,8 +122,12 @@ const RegistrationForm = () => {
             name="lastName"
             value={values.lastName}
             onChange={handleChange}
-            required
           />
+          {errors.lastName && touched.lastName &&
+            <label className="label">
+              <span className="label-text-alt text-red-600">{errors.lastName}</span>
+            </label>
+          }
         </div>
         <div className="form-control w-full">
           <label className="label">
@@ -120,8 +140,12 @@ const RegistrationForm = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
-            required
           />
+          {errors.email && touched.email &&
+            <label className="label">
+              <span className="label-text-alt text-red-600">{errors.email}</span>
+            </label>
+          }
         </div>
         <div className="form-control w-full">
           <label className="label">
@@ -134,8 +158,12 @@ const RegistrationForm = () => {
             name="password"
             value={values.password}
             onChange={handleChange}
-            required
           />
+          {errors.password && touched.password &&
+            <label className="label">
+              <span className="label-text-alt text-red-600">{errors.password}</span>
+            </label>
+          }
         </div>
         <button type="submit" className="btn btn-primary w-full">Register</button>
       </form>
