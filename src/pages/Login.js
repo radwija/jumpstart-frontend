@@ -4,12 +4,13 @@ import { AlertMessage } from "../components/AlertMessage";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import useDocumentTitle from "./useDocumentTitle";
+import { PageHeading } from "../components/PageHeading";
 
 const LoginForm = () => {
   useDocumentTitle(`Login`);
   return (
     <div className="p-5 rounded bg-white border shadow">
-      <h1 className="text-4xl font-semibold mb-2">Login</h1>
+      <PageHeading headingTitle="Register" />
       {/* <AlertMessage /> */}
       <form action="" className="grid gap-y-3">
         <div className="form-control w-full">

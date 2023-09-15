@@ -7,6 +7,7 @@ import useDocumentTitle from "./useDocumentTitle";
 import { useFormik } from "formik";
 import axios from "../api/axios";
 import * as Yup from "yup";
+import { PageHeading } from "../components/PageHeading"
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
@@ -85,7 +86,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="p-5 rounded bg-white border shadow">
-      <h1 className="text-4xl font-semibold mb-2">Register</h1>
+      <PageHeading headingTitle="Register" />
       {
         alertMessage &&
         <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
