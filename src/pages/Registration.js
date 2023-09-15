@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import register from '../assets/images/register.svg'
 import { AlertMessage } from "../components/AlertMessage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import useDocumentTitle from "./useDocumentTitle";
 import { useFormik } from "formik";
@@ -9,6 +9,8 @@ import axios from "../api/axios";
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
+
+  const [alertMessage, setAlertMessage] = useState(null)
 
   const formik = useFormik({
     initialValues: {
@@ -27,18 +29,39 @@ const RegistrationForm = () => {
         }
         await axios.post("/api/auth/register", formData)
           .then(res => {
-            alert("Registration done successfully!")
+            formik.resetForm();
+            setAlertMessage(
+              {
+                messageType: "success",
+                message: "Registration done successfully!"
+              }
+            )
           })
       }
       catch (error) {
         if (error?.response?.data) {
           // error message from backend
-          alert("Error 1: " + error?.response?.data.message);
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error?.response?.data.message
+            }
+          )
         } else if (error) {
           // error message from client
-          alert("Error 2:" + error.message);
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error.message
+            }
+          )
         } else {
-          alert("No Response From Server");
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: "No response from server"
+            }
+          )
         }
       }
     }
@@ -51,7 +74,12 @@ const RegistrationForm = () => {
   return (
     <div className="p-5 rounded bg-white border shadow">
       <h1 className="text-4xl font-semibold mb-2">Register</h1>
-      {/* <AlertMessage /> */}
+      {
+        alertMessage &&
+        <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
+      }
+
+
       <form onSubmit={handleSubmit} className="grid gap-y-3 mb-4">
         <div className="form-control w-full">
           <label className="label">
@@ -64,6 +92,7 @@ const RegistrationForm = () => {
             name="firstName"
             value={values.firstName}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-control w-full">
@@ -77,6 +106,7 @@ const RegistrationForm = () => {
             name="lastName"
             value={values.lastName}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-control w-full">
@@ -90,6 +120,7 @@ const RegistrationForm = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-control w-full">
@@ -103,6 +134,7 @@ const RegistrationForm = () => {
             name="password"
             value={values.password}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary w-full">Register</button>
