@@ -105,6 +105,7 @@ const RegistrationForm = () => {
             name="firstName"
             value={values.firstName}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           {errors.firstName && touched.firstName &&
             <label className="label">
@@ -123,6 +124,7 @@ const RegistrationForm = () => {
             name="lastName"
             value={values.lastName}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           {errors.lastName && touched.lastName &&
             <label className="label">
@@ -141,6 +143,7 @@ const RegistrationForm = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           {errors.email && touched.email &&
             <label className="label">
@@ -159,6 +162,7 @@ const RegistrationForm = () => {
             name="password"
             value={values.password}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           {errors.password && touched.password &&
             <label className="label">
