@@ -111,14 +111,14 @@ const LoginForm = () => {
           }
           <label className="label">
             <span className="label-text-alt">
-              <Link to="/find-account">Forgotten password?</Link>
+              <Link to="/find-account" className="link">Forgotten password?</Link>
             </span>
           </label>
         </div>
         <button type="submit" className="btn btn-primary w-full">Login</button>
       </form>
       <hr className="my-4" />
-      <p className="text-center">Don't have an account? <Link to="/register">Register</Link></p>
+      <p className="text-center">Don't have an account? <Link to="/register" className="link">Register</Link></p>
     </div>
   );
 }

@@ -186,7 +186,7 @@ const RegistrationForm = () => {
         <button type="submit" className="btn btn-primary w-full">Register</button>
       </form>
       <hr />
-      <p className="text-center mt-4">Already have an account? <Link to="/login">Login</Link></p>
+      <p className="text-center mt-4">Already have an account? <Link to="/login" className="link">Login</Link></p>
     </div>
   );
 }
