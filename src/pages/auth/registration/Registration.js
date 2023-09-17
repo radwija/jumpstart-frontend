@@ -46,7 +46,7 @@ const RegistrationForm = () => {
             setAlertMessage(
               {
                 messageType: "success",
-                message: "Registration done successfully! Check your email to activate your account."
+                message: res.data.message
               }
             )
           })
