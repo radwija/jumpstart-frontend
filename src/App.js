@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from "react-router";
-import Login from './pages/Login';
+import Login from './pages/auth/login/Login';
 import Registration from './pages/Registration';
 import ForgottenPassword from './pages/ForgottenPassword';
 import ResetPassword from './pages/ResetPassword';

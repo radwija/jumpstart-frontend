@@ -11,6 +11,7 @@ import { PageHeading } from "../components/PageHeading"
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
+  const navigate = useNavigate();
 
   const [alertMessage, setAlertMessage] = useState(null)
 
@@ -46,7 +47,7 @@ const RegistrationForm = () => {
             setAlertMessage(
               {
                 messageType: "success",
-                message: "Registration done successfully!"
+                message: "Registration done successfully! Check your email to activate your account."
               }
             )
           })

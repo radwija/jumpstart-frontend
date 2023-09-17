@@ -1,10 +1,10 @@
 import React from "react";
-import login from '../assets/images/login.svg'
-import { AlertMessage } from "../components/AlertMessage";
+import login from '../../../assets/images/login.svg'
+import { AlertMessage } from "../../../components/AlertMessage";
 import { Link } from "react-router-dom";
-import Layout from "../components/Layout";
-import useDocumentTitle from "./useDocumentTitle";
-import { PageHeading } from "../components/PageHeading";
+import Layout from "../../../components/Layout";
+import useDocumentTitle from "../../useDocumentTitle";
+import { PageHeading } from "../../../components/PageHeading";
 
 const LoginForm = () => {
   useDocumentTitle(`Login`);
