@@ -20,7 +20,7 @@ import ContactUs from './pages/ContactUs';
 import UpdateProduct from './pages/admin/UpdateProduct';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
-import AccountActivation from './pages/auth/registration/AccountActivation';
+import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
 
 
 function App() {
