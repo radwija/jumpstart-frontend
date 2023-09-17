@@ -43,7 +43,7 @@ const UpdateProfile = () => {
         </div>
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text">Country</span>
           </label>
           <input type="text" placeholder="Country" className="input input-bordered w-full" />
         </div>

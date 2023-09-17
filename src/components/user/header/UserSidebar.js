@@ -1,18 +1,37 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { BagIcon, CartIcon, UserIcon } from '../../../assets/SvgIcons'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { BagIcon, CartIcon, CompanyIcon, UserIcon } from '../../../assets/SvgIcons'
+import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit';
 
-export const UserSidebar = () => {
+export const UserSidebar = (props) => {
   return (
     <div className="border shadow rounded p-5">
       <div className='text-center flex flex-col gap-3'>
         <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
-        <h1 className='text-xl font-semibold'>Naruto Uzumaki</h1>
+        <div>
+          <h1 className='text-xl font-semibold'>{props?.fullname}</h1>
+          <div class="group relative">
+            <div className="truncate max-w-xs" title={props.email}>
+              {props.email}
+            </div>
+            <div className="hidden group-hover:block absolute z-10 p-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap left-1/2 transform -translate-x-1/2">
+              {props.email}
+            </div>
+          </div>
+        </div>
       </div>
+
       <ul className='mt-6'>
         <li><Link to={`/user/profile`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><UserIcon /> Profile</Link></li>
-        <li><Link to={`/user/orders`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><BagIcon /> Orders</Link></li>
-        <li><Link to={`/my-cart`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><CartIcon /> Shopping Cart</Link></li>
+        {props?.isAdmin &&
+          <li><Link to={`/admin`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><CompanyIcon /> Administrator</Link></li>
+        }
+        {!props?.isAdmin &&
+          <li><Link to={`/user/orders`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><BagIcon /> Orders</Link></li>
+        }
+        {!props.isAdmin &&
+          <li><Link to={`/my-cart`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><CartIcon /> Shopping Cart</Link></li>
+        }
       </ul>
     </div>
   )

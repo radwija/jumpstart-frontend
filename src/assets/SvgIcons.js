@@ -214,4 +214,27 @@ export const BackIcon = ({ customClass }) => {
   );
 }
 
+export const CompanyIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path stroke="none" d="M0 0h24v24H0z"></path>
+      <path d="M8 9l5 5v7H8v-4m0 4H3v-7l5-5m1 1V4a1 1 0 011-1h10a1 1 0 011 1v17h-8"></path>
+      <path d="M13 7L13 7.01"></path>
+      <path d="M17 7L17 7.01"></path>
+      <path d="M17 11L17 11.01"></path>
+      <path d="M17 15L17 15.01"></path>
+    </svg>
+  );
+}
+
 

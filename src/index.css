@@ -31,3 +31,14 @@ input[type=number] {
 .card-body {
   gap: 0 !important;
 }
+
+.truncate {
+  white-space: nowrap;
+  /* Prevent text from wrapping to the next line */
+  overflow: hidden;
+  /* Hide overflowing text */
+  text-overflow: ellipsis;
+  /* Add an ellipsis (...) to indicate truncated text */
+  /* max-width: 200px; */
+  /* Adjust the max-width as needed */
+}

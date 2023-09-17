@@ -1,13 +1,41 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { } from '../../components/OrderCard'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { EditIcon } from '../../assets/SvgIcons'
 import { PageHeading } from '../../components/PageHeading'
 import UserLayout from '../../components/user/layout/UserLayout'
 import useDocumentTitle from '../useDocumentTitle'
+import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit'
+import { myProfileApi } from '../../api/user-api'
 
 export const Profile = () => {
   useDocumentTitle("My Profile")
+
+  const auth = useAuthUser();
+  const role = auth()?.role?.[0]
+  const token = auth()?.token
+  const isLogin = useIsAuthenticated()
+  const isAdmin = isLogin() && role === "ROLE_ADMIN"
+
+  const [userProfile, setUserProfile] = useState({})
+
+  useEffect(() => {
+    myProfileApi(token)
+      .then(res => {
+        setUserProfile({
+          firstName: res.firstName,
+          lastName: res.lastName,
+          gender: res.gender,
+          city: res.city,
+          country: res.country,
+          address: res.address
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, [token])
+
   return (
     <>
       <UserLayout>
@@ -30,27 +58,27 @@ export const Profile = () => {
             <div className='flex flex-col gap-3'>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>First name</span>
-                <span>Naruto</span>
+                <span>{userProfile?.firstName}</span>
               </div>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>Last name</span>
-                <span>Uzumaki</span>
+                <span>{userProfile?.lastName}</span>
               </div>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>Gender</span>
-                <span>Male</span>
+                <span>{userProfile?.gender}</span>
               </div>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>City</span>
-                <span>Denpasar</span>
+                <span>{userProfile?.city}</span>
               </div>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>Country</span>
-                <span>Indonesia</span>
+                <span>{userProfile?.country}</span>
               </div>
               <div className='flex gap-4'>
                 <span className='w-28 flex-shrink-0'>Address</span>
-                <p>Jl. Raya Puputan No.86, Dangin Puri Klod, Kec. Denpasar Tim., Kota Denpasar</p>
+                <p>{userProfile?.address}</p>
               </div>
             </div>
           </div>
