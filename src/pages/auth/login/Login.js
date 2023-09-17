@@ -9,7 +9,7 @@ import { PageHeading } from "../../../components/PageHeading";
 const LoginForm = () => {
   return (
     <div className="p-5 rounded bg-white border shadow">
-      <PageHeading headingTitle="Register" />
+      <PageHeading headingTitle="Login" />
       {/* <AlertMessage /> */}
       <form action="" className="grid gap-y-3">
         <div className="form-control w-full">
