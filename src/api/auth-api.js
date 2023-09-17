@@ -25,3 +25,20 @@ export const registrationApi = async (registrationRequest) => {
 export const accountActivationApi = async (uuid) => {
   return await axios.get(`/api/auth/account-activation/${uuid}`)
 }
+
+export const loginApi = async (loginRequest) => {
+  try {
+    const response = await axios.post(`/api/auth/login`, loginRequest)
+    if (response.data) {
+      return response.data
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return error.response.data
+    } else {
+      return "No respon from server"
+    }
+  }
+
+
+}
