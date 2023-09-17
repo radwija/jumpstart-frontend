@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import register from '../assets/images/register.svg'
-import { AlertMessage } from "../components/AlertMessage";
+import register from '../../../assets/images/register.svg'
+import { AlertMessage } from "../../../components/AlertMessage";
 import { Link, useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
-import useDocumentTitle from "./useDocumentTitle";
+import Layout from "../../../components/Layout";
+import useDocumentTitle from "../../useDocumentTitle";
 import { useFormik } from "formik";
-import axios from "../api/axios";
+import axios from "../../../api/axios";
 import * as Yup from "yup";
-import { PageHeading } from "../components/PageHeading"
+import { PageHeading } from "../../../components/PageHeading"
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
-  const navigate = useNavigate();
 
   const [alertMessage, setAlertMessage] = useState(null)
 

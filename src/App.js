@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from "react-router";
 import Login from './pages/auth/login/Login';
-import Registration from './pages/Registration';
+import Registration from './pages/auth/registration/Registration';
 import ForgottenPassword from './pages/ForgottenPassword';
 import ResetPassword from './pages/ResetPassword';
 import Products from './pages/Products';
