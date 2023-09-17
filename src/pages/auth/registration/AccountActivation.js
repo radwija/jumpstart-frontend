@@ -22,14 +22,13 @@ const AccountActivation = () => {
   const { uuid } = useParams();
 
   const [email, setEmail] = useState("")
-  const [isValidUrl, setValidUrl] = useState(true)
+  const [isValidUrl, setValidUrl] = useState(false)
 
   useEffect(() => {
     accountActivationApi(uuid)
       .then(res => {
         setValidUrl(true)
         setEmail(res.data.result.email)
-        console.log(res)
       })
       .catch((error) => {
         if (error?.response?.data) {

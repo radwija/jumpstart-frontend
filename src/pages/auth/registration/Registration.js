@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import register from '../../../assets/images/register.svg'
 import { AlertMessage } from "../../../components/AlertMessage";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../../../components/Layout";
 import useDocumentTitle from "../../useDocumentTitle";
 import { useFormik } from "formik";
