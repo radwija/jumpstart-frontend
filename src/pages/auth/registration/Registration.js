@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import register from '../../../assets/images/register.svg'
 import { AlertMessage } from "../../../components/AlertMessage";
 import { Link } from "react-router-dom";
@@ -8,11 +8,24 @@ import { useFormik } from "formik";
 import axios from "../../../api/axios";
 import * as Yup from "yup";
 import { PageHeading } from "../../../components/PageHeading"
+import { useRedirectUser } from "../../../hooks/redirectUser";
+import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
 
 const RegistrationForm = () => {
   useDocumentTitle(`Register`);
 
+  const redirectUser = useRedirectUser()
+  const auth = useAuthUser();
+  const role = auth()?.role?.[0]
+  const isLogin = useIsAuthenticated()
+
   const [alertMessage, setAlertMessage] = useState(null)
+
+  useEffect(() => {
+    if (isLogin()) {
+      redirectUser(role)
+    }
+  }, [])
 
   const formik = useFormik({
     initialValues: {

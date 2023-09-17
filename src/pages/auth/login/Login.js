@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import login from '../../../assets/images/login.svg'
 import { AlertMessage } from "../../../components/AlertMessage";
 import { Link } from "react-router-dom";
@@ -8,13 +8,22 @@ import { PageHeading } from "../../../components/PageHeading";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginApi } from "../../../api/auth-api";
-import { useSignIn } from "react-auth-kit";
+import { useAuthUser, useIsAuthenticated, useSignIn } from "react-auth-kit";
 import { useRedirectUser } from "../../../hooks/redirectUser";
 
 const LoginForm = () => {
   const [alertMessage, setAlertMessage] = useState(null)
   const signIn = useSignIn()
   const redirectUser = useRedirectUser()
+  const auth = useAuthUser();
+  const role = auth()?.role?.[0]
+  const isLogin = useIsAuthenticated()
+
+  useEffect(() => {
+    if (isLogin()) {
+      redirectUser(role)
+    }
+  }, [])
 
   const formik = useFormik({
     initialValues: {

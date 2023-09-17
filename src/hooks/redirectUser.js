@@ -12,7 +12,7 @@ export const useRedirectUser = (role) => {
         navigate("/admin")
         break
       default:
-        navigate("/profile")
+        navigate("/user")
         break
     }
   }
