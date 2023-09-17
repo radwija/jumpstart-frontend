@@ -7,7 +7,6 @@ import useDocumentTitle from "../../useDocumentTitle";
 import { PageHeading } from "../../../components/PageHeading";
 
 const LoginForm = () => {
-  useDocumentTitle(`Login`);
   return (
     <div className="p-5 rounded bg-white border shadow">
       <PageHeading headingTitle="Register" />
@@ -39,6 +38,7 @@ const LoginForm = () => {
 }
 
 const Login = () => {
+  useDocumentTitle(`Login`);
   return (
     <>
       <Layout>

@@ -21,3 +21,7 @@ export const registrationApi = async (registrationRequest) => {
     console.log(error)
   })
 }
+
+export const accountActivationApi = async (uuid) => {
+  return await axios.get(`/api/auth/account-activation/${uuid}`)
+}

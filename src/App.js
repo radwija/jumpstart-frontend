@@ -20,6 +20,7 @@ import ContactUs from './pages/ContactUs';
 import UpdateProduct from './pages/admin/UpdateProduct';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
+import AccountActivation from './pages/auth/registration/AccountActivation';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Registration />} />
+          <Route path='/account-activation/:uuid' element={<AccountActivation />} />
           <Route path='/products' element={<Products />} />
           <Route path='/product' element={<ProductDetail />} />
           <Route path='/find-account' element={<ForgottenPassword />} />
