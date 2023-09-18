@@ -9,7 +9,7 @@ export const addProductApi = async (token, productRequest) => {
       },
       withCredentials: true
     })
-    console.log(response)
+    return response
   } catch (error) {
 
   }

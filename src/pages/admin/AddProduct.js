@@ -30,9 +30,9 @@ const AddProduct = () => {
     initialValues: {
       productName: "",
       description: "",
-      price: 0,
-      stock: 0,
-      weight: 0,
+      price: Number,
+      stock: Number,
+      weight: Number,
       categoryId: 0
     },
     validationSchema: Yup.object({
@@ -45,13 +45,13 @@ const AddProduct = () => {
         .max(9999999.99),
       stock: Yup.number()
         .required("Stock required")
-        .min(1),
+        .min(1, "Stock must be greater than or equal to 1"),
       weight: Yup.number()
         .required("Weight required (in kg)")
-        .min(0.01),
+        .min(0.01, "Weight must be greater than or equal to 0.01 kg"),
       categoryId: Yup.number()
-        .required("Please choose category")
-        .min(1),
+        .notOneOf([0], "Please choose category")
+        .required('Category is required'),
     }),
     onSubmit: (values) => {
       addProductApi(token, {
@@ -63,7 +63,13 @@ const AddProduct = () => {
         categoryId: values.categoryId
       })
         .then(res => {
-          navigate("/product")
+          navigate("/product", {
+            state: {
+              isNewAddedProduct: true,
+              messageType: "success",
+              message: res.data.message
+            }
+          })
         })
         .catch(error => {
           console.log(error)
@@ -112,16 +118,22 @@ const AddProduct = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              <option disabled selected value={0}>Category</option>
+              <option disabled selected value={0}>Choose category</option>
               <option value={1}>Category 1</option>
               <option value={2}>Category 2</option>
               <option value={3}>Category 3</option>
             </select>
-            {errors.category && touched.category &&
+            {errors.categoryId && touched.categoryId &&
               <label className="label">
-                <span className="label-text-alt text-red-600">{errors.category}</span>
+                <span className="label-text-alt text-red-600">{errors.categoryId}</span>
               </label>
             }
+          </div>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Product Image</span>
+            </label>
+            <input type="file" className="file-input file-input-bordered  w-full max-w-xs" />
           </div>
           <div className="form-control w-full">
             <label className="label">
@@ -169,6 +181,7 @@ const AddProduct = () => {
               placeholder="Stock"
               className="input input-bordered w-full"
               name='stock'
+
               value={values.stock}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -192,6 +205,11 @@ const AddProduct = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.weight && touched.weight &&
+              <label className="label">
+                <span className="label-text-alt text-red-600">{errors.weight}</span>
+              </label>
+            }
           </div>
           <button type='submit' className='btn btn-primary'>Add product</button>
         </form>

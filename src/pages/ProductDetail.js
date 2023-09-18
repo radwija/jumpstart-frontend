@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CartIcon } from "../assets/SvgIcons";
 import Layout from "../components/Layout";
+import { useLocation } from "react-router-dom";
+import { AlertMessage } from "../components/AlertMessage";
 
 const ProductDetail = () => {
   const [productNumber, setProductNumber] = useState(1)
   const handleProductNumber = (e) => {
     console.log(e.target.value)
   }
+
+  const location = useLocation();
+  const isNewAddedProduct = location?.state?.isNewAddedProduct;
+  const messageType = location?.state?.messageType;
+  const message = location?.state?.message;
+
+  console.log(isNewAddedProduct)
   return (
     <>
       <Layout>
         <div className='py-10 sm:flex sm:flex-wrap sm:flex-col gap-y-10 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-36 lg:px-20'>
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-4'>
+            {isNewAddedProduct &&
+              <div className="mb-3">
+                <AlertMessage messageType={messageType} message={message} />
+              </div>
+            }
             <div className="aspect-square border rounded">
               <img src="https://thumbs.dreamstime.com/b/vertical-panorama-country-road-9905521.jpg" alt="product thumbnail" className="object-contain w-full h-full rounded" />
             </div>
