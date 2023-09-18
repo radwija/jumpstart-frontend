@@ -14,12 +14,6 @@ const UserLayout = (props) => {
   const isAdmin = isLogin() && role === "ROLE_ADMIN"
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!isLogin()) {
-      navigate("/")
-    }
-  })
-
   const [fullname, setFullname] = useState("")
 
   useEffect(() => {

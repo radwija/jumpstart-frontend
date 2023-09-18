@@ -21,6 +21,7 @@ import UpdateProduct from './pages/admin/UpdateProduct';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
+import { RequireAuth } from 'react-auth-kit';
 
 
 function App() {
@@ -42,20 +43,92 @@ function App() {
           <Route path='*' element={<NotFound />} />
 
           {/* User Routes */}
-          <Route path='/user' element={<Profile />} />
-          <Route path='/user/profile' element={<Profile />} />
-          <Route path='/user/profile/update' element={<UpdateProfile />} />
-          <Route path='/user/orders' element={<MyOrders />} />
-          <Route path='/my-cart' element={<MyCart />} />
+          <Route
+            path='/user'
+            element={
+              <RequireAuth loginPath='/login'>
+                <Profile />
+              </RequireAuth>
+            } />
+          <Route
+            path='/user/profile'
+            element={
+              <RequireAuth loginPath='/login'>
+                <Profile />
+              </RequireAuth>
+            } />
+          <Route
+            path='/user/profile/update'
+            element={
+              <RequireAuth loginPath='/login'>
+                <UpdateProfile />
+              </RequireAuth>
+            } />
+          <Route
+            path='/user/orders'
+            element={
+              <RequireAuth loginPath='/login'>
+                <MyOrders />
+              </RequireAuth>
+            } />
+          <Route
+            path='/my-cart'
+            element={
+              <RequireAuth loginPath='/login'>
+                <MyCart />
+              </RequireAuth>
+            } />
 
           {/* Admin Routes */}
-          <Route path='/admin' element={<Dashboard />} />
-          <Route path='/admin/orders' element={<OrderManagement />} />
-          <Route path='/admin/inventory' element={<Inventory />} />
-          <Route path='/admin/users' element={<UserManagement />} />
-          <Route path='/admin/add-product' element={<AddProduct />} />
-          <Route path='/admin/update-product' element={<UpdateProduct />} />
-          <Route path='/admin/create-category' element={<CreateCategory />} />
+          <Route
+            path='/admin'
+            element={
+              <RequireAuth loginPath='/login'>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/admin/orders'
+            element={
+              <RequireAuth loginPath='/login'>
+                <OrderManagement />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/admin/inventory'
+            element={
+              <RequireAuth loginPath='/login'>
+                <Inventory />
+              </RequireAuth>
+            } />
+          <Route
+            path='/admin/users'
+            element={
+              <RequireAuth loginPath='/login'>
+                <UserManagement />
+              </RequireAuth>} />
+          <Route
+            path='/admin/add-product'
+            element={
+              <RequireAuth loginPath='/login'>
+                <AddProduct />
+              </RequireAuth>} />
+          <Route
+            path='/admin/update-product'
+            element={
+              <RequireAuth loginPath='/login'>
+                <UpdateProduct />
+              </RequireAuth>
+            } />
+          <Route
+            path='/admin/create-category'
+            element={
+              <RequireAuth loginPath='/login'>
+                <CreateCategory />
+              </RequireAuth>
+            } />
         </Routes>
       </div>
     </>

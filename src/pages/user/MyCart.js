@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { PageHeading } from '../../components/PageHeading'
 import { ItemCard } from '../../components/ItemCard'
 import useDocumentTitle from '../useDocumentTitle'
+import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
+import { useRedirectUser } from '../../hooks/redirectUser'
+import { useNavigate } from 'react-router-dom'
 
 export const MyCart = () => {
   useDocumentTitle("My Shopping Cart")
+
+  const auth = useAuthUser();
+  const role = auth()?.role?.[0]
+  const email = auth()?.email
+  const token = auth()?.token
+  const isLogin = useIsAuthenticated()
+  const isAdmin = isLogin() && role === "ROLE_ADMIN"
+  const navigate = useNavigate()
+  const redirectUser = useRedirectUser()
+
+  useEffect(() => {
+    if (isLogin() && isAdmin) {
+      redirectUser(role)
+    }
+  })
+
   return (
     <>
       <Layout>
