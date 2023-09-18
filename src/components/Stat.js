@@ -7,7 +7,7 @@ export const Stat = (props) => {
         className="text-center text-2xl font-medium py-4 px-6 border shadow border-primary rounded-lg bg-light"
       >
         <p className="stat-title">{props.name}</p>
-        <div class="group relative">
+        <div className="group relative">
           <div className="truncate max-w-xs" title={props.email}>
             {props.amount}
           </div>

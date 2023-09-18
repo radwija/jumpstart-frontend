@@ -10,7 +10,7 @@ export const UserSidebar = (props) => {
         <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
         <div>
           <h1 className='text-xl font-semibold'>{props?.fullname}</h1>
-          <div class="group relative">
+          <div className="group relative">
             <div className="truncate max-w-xs" title={props.email}>
               {props.email}
             </div>
