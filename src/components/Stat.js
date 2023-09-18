@@ -3,11 +3,17 @@ import React from 'react'
 export const Stat = (props) => {
   return (
     <>
-      <div className="stats shadow">
-
-        <div className="stat">
-          <div className="stat-title">{props.name}</div>
-          <div className="truncate stat-value">{props.amount}</div>
+      <div
+        className="text-center text-2xl font-medium py-4 px-6 border shadow border-primary rounded-lg bg-light"
+      >
+        <p className="stat-title">{props.name}</p>
+        <div class="group relative">
+          <div className="truncate max-w-xs" title={props.email}>
+            {props.amount}
+          </div>
+          <div className="hidden group-hover:block absolute z-10 p-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap left-1/2 transform -translate-x-1/2">
+            {props.amount}
+          </div>
         </div>
 
       </div>
