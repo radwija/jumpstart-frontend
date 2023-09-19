@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
 import useDocumentTitle from '../useDocumentTitle'
@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
+import { showAllProductsApi } from '../../api/public-api'
 
 const Inventory = () => {
   useDocumentTitle('Inventory')
@@ -32,6 +33,22 @@ const Inventory = () => {
       },
     ]
 
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    showAllProductsApi()
+      .then(res => {
+        setProducts(res.data.result)
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data)
+        } else {
+          return "No respon from server"
+        }
+      })
+  }, [])
+
   return (
     <>
       <AdminLayout>
@@ -55,18 +72,21 @@ const Inventory = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Product Name</td>
-              <td>Category</td>
-              <td>200</td>
-              <td>$20</td>
-              <td className='flex gap-3'>
-                <Link className='btn'><EyeIcon /></Link>
-                <Link className='btn'><EditIcon /></Link>
-                <button className='btn'><TrashIcon /></button>
-              </td>
-            </tr>
+            {products.map((product) => (
+              <tr key={product.productId}>
+                <td>{product.productId}</td>
+                <td>{product.productName}</td>
+                <td>{product.category.categoryName}</td>
+                <td>{product.stock}</td>
+                <td>{'$' + product.productId}</td>
+                <td className='flex gap-3'>
+                  <Link to={`/p/${product.productId}`} className='btn'><EyeIcon /></Link>
+                  <Link className='btn'><EditIcon /></Link>
+                  <button className='btn'><TrashIcon /></button>
+                </td>
+              </tr>
+            ))}
+
           </tbody>
         </AdminTable>
       </AdminLayout >
