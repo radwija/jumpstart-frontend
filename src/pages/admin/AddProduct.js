@@ -180,7 +180,7 @@ const AddProduct = () => {
               <span className="label-text">Product Description</span>
             </label>
             <textarea
-              className="textarea textarea-bordered"
+              className="textarea textarea-bordered h-80"
               placeholder="Product Description"
               name='description'
               value={values.description}
