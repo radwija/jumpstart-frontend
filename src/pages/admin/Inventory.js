@@ -97,7 +97,7 @@ const Inventory = () => {
                 <td>{product.stock}</td>
                 <td>{'$' + product.productId}</td>
                 <td className='flex gap-3'>
-                  <Link to={`/p/${product.slug}`} className='btn btn-primary'><EyeIcon /></Link>
+                  <Link to={`/p/${product.slug}`} className='btn btn-neutral'><EyeIcon /></Link>
                   <Link className='btn btn-secondary'><EditIcon /></Link>
                   <ConfirmWindow
                     elementId={`confirm-${product.productId}`}

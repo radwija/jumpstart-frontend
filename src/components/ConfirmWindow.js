@@ -3,7 +3,12 @@ import React from 'react'
 export const ConfirmWindow = (props) => {
   return (
     <>
-      <button className={props.buttonClass ? props.buttonClass : "btn"} onClick={() => document.getElementById(props.elementId).showModal()}>{props.children}</button>
+      <button
+        className={props.buttonClass ? props.buttonClass : "btn"}
+        onClick={() => document.getElementById(props.elementId).showModal()}
+      >
+        {props.children}
+      </button>
       <dialog id={props.elementId} className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Confirmation</h3>
@@ -15,6 +20,7 @@ export const ConfirmWindow = (props) => {
             </form>
             <button type='button'
               className='btn btn-error'
+              // TODO: make button text customizable with use case
               onClick={props.action}>Yes, delete product</button>
           </div>
         </div>

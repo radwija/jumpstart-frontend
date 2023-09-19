@@ -237,4 +237,42 @@ export const CompanyIcon = ({ customClass }) => {
   );
 }
 
+export const CheckIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <path stroke="none" d="M0 0h24v24H0z"></path>
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M9 12l2 2 4-4"></path>
+    </svg>
+  );
+}
+
+export const CrossIcon = ({ customClass }) => {
+  return (
+    <svg
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className={`${customClass || 'h-6 w-6'}`}
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M15 9L9 15"></path>
+      <path d="M9 9L15 15"></path>
+    </svg>
+  );
+}
+
 

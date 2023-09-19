@@ -62,6 +62,7 @@ const ProductDetail = () => {
         <Layout>
           <div className='py-10 sm:flex sm:flex-wrap sm:flex-col gap-y-10 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-36 lg:px-20'>
             <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-4'>
+              {/* // TODO: create time alert shown for 2 seconds and then set isNewAddedProduct null */}
               {isNewAddedProduct &&
                 <div className="mb-3">
                   <AlertMessage messageType={messageType} message={message} />

@@ -4,11 +4,12 @@ import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
 import { Stat } from '../../components/Stat'
 import useDocumentTitle from '../useDocumentTitle'
-import { EyeIcon, TrashIcon } from '../../assets/SvgIcons'
+import { EditIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
 import { Link, useNavigate } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
+import { ConfirmWindow } from '../../components/ConfirmWindow'
 
 const UserManagement = () => {
   useDocumentTitle('User Management')
@@ -45,8 +46,17 @@ const UserManagement = () => {
               <td>07/09/2023</td>
               <td>USER</td>
               <td className='flex gap-3'>
-                <Link className='btn'><EyeIcon /></Link>
-                <button className='btn'><TrashIcon /></button>
+                <Link to={`/p/{product.slug}`} className='btn btn-neutral'><EyeIcon /></Link>
+                <Link className='btn btn-secondary'><EditIcon /></Link>
+                <ConfirmWindow
+                  elementId={`confirm-{user.productId}`}
+                  buttonClass="btn btn-error"
+                  message={`Are you sure to delete user ID: {user.productId}?`}
+                  productName={"user.productName"}
+                // action={() => handleDeleteProduct(product.productId)}
+                >
+                  <TrashIcon />
+                </ConfirmWindow>
               </td>
             </tr>
           </tbody>
