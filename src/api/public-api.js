@@ -25,3 +25,16 @@ export const showAllProductsApi = async () => {
     }
   }
 }
+
+export const showProductDetailsApi = async (productId) => {
+  try {
+    const response = await axios.get(`/api/product/products/${productId}`)
+    return response
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return error.response.data
+    } else {
+      return "No respon from server"
+    }
+  }
+}

@@ -35,7 +35,7 @@ function App() {
           <Route path='/register' element={<Registration />} />
           <Route path='/account-activation/:uuid' element={<AccountActivation />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/product' element={<ProductDetail />} />
+          <Route path='/p/:productId' element={<ProductDetail />} />
           <Route path='/find-account' element={<ForgottenPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/contact-us' element={<ContactUs />} />

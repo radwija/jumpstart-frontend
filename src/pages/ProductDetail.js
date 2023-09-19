@@ -1,21 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { CartIcon } from "../assets/SvgIcons";
 import Layout from "../components/Layout";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { AlertMessage } from "../components/AlertMessage";
+import { showProductDetailsApi } from "../api/public-api";
+import { CategoryBadge } from "../components/CategoryBadge";
 
 const ProductDetail = () => {
   const [productNumber, setProductNumber] = useState(1)
   const handleProductNumber = (e) => {
     console.log(e.target.value)
   }
+  const { productId } = useParams();
+  const [product, setProduct] = useState({
+    productId: 0,
+    productName: "",
+    description: "",
+    price: 0,
+    stock: 0,
+    weight: 0,
+    createdAt: null,
+    updatedAt: null,
+    category: {
+      categoryId: 0,
+      categoryName: "",
+      categorySlug: ""
+    }
+  })
+  useEffect(() => {
+    showProductDetailsApi(productId)
+      .then(res => {
+        setProduct(res.data.result)
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data)
+        } else {
+          return "No respon from server"
+        }
+      })
+  }, [])
 
   const location = useLocation();
   const isNewAddedProduct = location?.state?.isNewAddedProduct;
   const messageType = location?.state?.messageType;
   const message = location?.state?.message;
 
-  console.log(isNewAddedProduct)
   return (
     <>
       <Layout>
@@ -31,24 +61,24 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-5 bg-white'>
-            <h1 className="text-xl font-semibold">Hot Wheels Fast and Furious Orange Nissan Skyline GT-R BNR34 R34</h1>
-            <div className="text-4xl font-bold">$20</div>
+            <h1 className="text-xl font-semibold">{product.productName}</h1>
+            <div className="text-4xl font-bold">${product.price}</div>
 
             <hr className="my-3" />
 
             <h1 className="text-xl font-semibold">Details</h1>
-            <div>Weight: 100</div>
-            <div>Category: Toy</div>
+            <div>Weight: {product.weight} kg</div>
+            <div>Category: <CategoryBadge categoryName={product.category.categoryName} categoryUrl={product.category?.categorySlug} /></div>
 
             <hr className="my-3" />
 
             <h1 className="text-xl font-semibold">Description</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi. Diam maecenas sed enim ut sem viverra aliquet. Ut sem nulla pharetra diam sit amet. Vitae purus faucibus ornare suspendisse sed nisi. Augue mauris augue neque gravida in fermentum et. At elementum eu facilisis sed odio morbi. Consectetur a erat nam at lectus urna. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Lacus luctus accumsan tortor posuere ac ut consequat semper. Venenatis cras sed felis eget velit aliquet sagittis. Sit amet purus gravida quis blandit turpis cursus. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Elementum curabitur vitae nunc sed velit dignissim sodales ut. Aliquam ultrices sagittis orci a. Elit eget gravida cum sociis. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Proin nibh nisl condimentum id venenatis a condimentum vitae.</p>
+            <p className="paragraph">{product.description}</p>
           </div>
           <div className='fixed bottom-0 left-0 right-0 z-10 lg:static sm:col-span-12 md:col-span-12 lg:col-span-3'>
             <div className="p-5 rounded bg-white border shadow">
               <h1 className="text-xl font-semibold">Order product</h1>
-              <div className="mb-3">Stocks: 100</div>
+              <div className="mb-3">Stocks: {product.stock}</div>
 
               <form action="">
                 {/* <input type="hidden" className="join-item mx-2 w-full border text-center" value={productNumber} /> */}

@@ -28,11 +28,11 @@ const HomePage = () => {
           <section>
             <PageHeading headingTitle="Our Products" />
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 xl:gap-5'>
+              {/* <ProductCard />
               <ProductCard />
               <ProductCard />
               <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              <ProductCard /> */}
             </div>
           </section>
         </div>

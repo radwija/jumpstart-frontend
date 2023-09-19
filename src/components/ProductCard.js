@@ -14,8 +14,8 @@ const ProductCard = (props) => {
         </Link>
         <hr />
         <div className="card-body">
-          <CategoryBadge categoryUrl={`/products/category/${props.category.categorySlug}`} categoryName={props.category.categoryName} />
-          <Link to={`/products/detail/${props.productId}`}>
+          <CategoryBadge categorySlug={`${props.category.categorySlug}`} categoryName={props.category.categoryName} />
+          <Link to={`/p/${props.productId}`}>
             <h2 className="truncate-card card-title">{props.productName}</h2>
           </Link>
           <div>Price:</div>
