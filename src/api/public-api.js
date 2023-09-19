@@ -26,15 +26,15 @@ export const showAllProductsApi = async () => {
   }
 }
 
-export const showProductDetailsApi = async (slug) => {
+export const showProductDetailsApiBySlug = async (slug) => {
   try {
     const response = await axios.get(`/api/product/products/slug/${slug}`)
     return response
   } catch (error) {
     if (error.response && error.response.data) {
-      return error.response.data
+      throw error.response
     } else {
-      return "No respon from server"
+      throw "No respon from server"
     }
   }
 }

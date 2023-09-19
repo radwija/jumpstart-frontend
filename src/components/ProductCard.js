@@ -7,7 +7,7 @@ const ProductCard = (props) => {
   return (
     <>
       <div className="card card-compact bg-base-100 border shadow">
-        <Link to={`/products/detail/${props.productId}`}>
+        <Link to={`/p/${props.slug}`}>
           <figure className='aspect-square'>
             <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
           </figure>
@@ -15,7 +15,7 @@ const ProductCard = (props) => {
         <hr />
         <div className="card-body">
           <CategoryBadge categorySlug={`${props.category.categorySlug}`} categoryName={props.category.categoryName} />
-          <Link to={`/p/${props.productId}`}>
+          <Link to={`/p/${props.slug}`}>
             <h2 className="truncate-card card-title">{props.productName}</h2>
           </Link>
           <div>Price:</div>

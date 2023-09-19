@@ -80,7 +80,7 @@ const Inventory = () => {
                 <td>{product.stock}</td>
                 <td>{'$' + product.productId}</td>
                 <td className='flex gap-3'>
-                  <Link to={`/p/${product.productId}`} className='btn'><EyeIcon /></Link>
+                  <Link to={`/p/${product.slug}`} className='btn'><EyeIcon /></Link>
                   <Link className='btn'><EditIcon /></Link>
                   <button className='btn'><TrashIcon /></button>
                 </td>
