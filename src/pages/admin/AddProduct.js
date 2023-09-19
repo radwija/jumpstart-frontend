@@ -30,6 +30,9 @@ const AddProduct = () => {
       .then(res => {
         setCategories(res.data.result)
       })
+      .catch(error => {
+        console.log(error)
+      })
   }, [])
 
 
@@ -39,7 +42,7 @@ const AddProduct = () => {
       description: "",
       price: Number,
       stock: Number,
-      weight: null,
+      weight: 0,
       categoryId: 0
     },
     validationSchema: Yup.object({
@@ -126,8 +129,8 @@ const AddProduct = () => {
               onBlur={handleBlur}
             >
               <option disabled selected value={0}>Choose category</option>
-              {categories.map((category) => (
-                <option value={category.categoryId} key={category.categoryId}>{category.categoryName}</option>
+              {categories.length !== 0 && categories.map((category) => (
+                <option value={category?.categoryId} key={category?.categoryId}>{category.categoryName}</option>
               )
               )}
             </select>
