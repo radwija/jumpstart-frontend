@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react'
-import { AdminSidebar } from '../../components/admin/header/AdminSidebar'
+import React, { useEffect, useState } from 'react'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
-import { Stat } from '../../components/Stat'
 import useDocumentTitle from '../useDocumentTitle'
-import { BackIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
 import { Link, useNavigate } from 'react-router-dom'
-import { AdminTable } from '../../components/AdminTable'
 import { BackButton } from '../../components/BackButton'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { addProductApi } from '../../api/admin-api'
+import { showAllCategoriesApi } from '../../api/public-api'
 
 const AddProduct = () => {
   useDocumentTitle('Add Product')
@@ -26,13 +23,23 @@ const AddProduct = () => {
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
 
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    showAllCategoriesApi()
+      .then(res => {
+        setCategories(res.data.result)
+      })
+  }, [])
+
+
   const formik = useFormik({
     initialValues: {
       productName: "",
       description: "",
       price: Number,
       stock: Number,
-      weight: Number,
+      weight: null,
       categoryId: 0
     },
     validationSchema: Yup.object({
@@ -119,9 +126,10 @@ const AddProduct = () => {
               onBlur={handleBlur}
             >
               <option disabled selected value={0}>Choose category</option>
-              <option value={1}>Category 1</option>
-              <option value={2}>Category 2</option>
-              <option value={3}>Category 3</option>
+              {categories.map((category) => (
+                <option value={category.categoryId} key={category.categoryId}>{category.categoryName}</option>
+              )
+              )}
             </select>
             {errors.categoryId && touched.categoryId &&
               <label className="label">
