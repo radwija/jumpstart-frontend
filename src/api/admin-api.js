@@ -12,9 +12,28 @@ export const addProductApi = async (token, productRequest) => {
     return response
   } catch (error) {
     if (error.response && error.response.data) {
-      return error.response.data
+      throw error.response.data
     } else {
-      return "No respon from server"
+      throw "No respon from server"
+    }
+  }
+}
+
+export const deleteProductByProductIdApi = async (token, productId) => {
+  try {
+    const response = await axios.delete(`/api/admin/delete-product/${productId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
     }
   }
 }

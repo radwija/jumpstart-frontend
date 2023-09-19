@@ -129,7 +129,7 @@ const AddProduct = () => {
           </div>
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text">Product name</span>
+              <span className="label-text">Slug</span>
             </label>
             <input
               type="text"

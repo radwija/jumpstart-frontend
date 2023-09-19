@@ -8,6 +8,8 @@ import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { showAllProductsApi } from '../../api/public-api'
+import { deleteProductByProductIdApi } from '../../api/admin-api'
+import { ConfirmWindow } from '../../components/ConfirmWindow'
 
 const Inventory = () => {
   useDocumentTitle('Inventory')
@@ -20,6 +22,21 @@ const Inventory = () => {
   const isAdmin = isLogin() && role === "ROLE_ADMIN"
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
+
+  const handleDeleteProduct = (productId) => {
+    deleteProductByProductIdApi(token, productId)
+      .then(response => {
+        console.log(response)
+        setProducts((prevProducts) => prevProducts.filter((product) => product.productId !== productId));
+      })
+      .catch(error => {
+        if (typeof error === "string") {
+          console.log("Error message: " + error)
+        } else {
+          console.log(error)
+        }
+      })
+  }
 
   const inventoryNavigation =
     [
@@ -80,9 +97,17 @@ const Inventory = () => {
                 <td>{product.stock}</td>
                 <td>{'$' + product.productId}</td>
                 <td className='flex gap-3'>
-                  <Link to={`/p/${product.slug}`} className='btn'><EyeIcon /></Link>
-                  <Link className='btn'><EditIcon /></Link>
-                  <button className='btn'><TrashIcon /></button>
+                  <Link to={`/p/${product.slug}`} className='btn btn-primary'><EyeIcon /></Link>
+                  <Link className='btn btn-secondary'><EditIcon /></Link>
+                  <ConfirmWindow
+                    elementId={`confirm-${product.productId}`}
+                    buttonClass="btn btn-error"
+                    message={`Are you sure to delete product ID: ${product.productId}?`}
+                    productName={product.productName}
+                    action={() => handleDeleteProduct(product.productId)}
+                  >
+                    <TrashIcon />
+                  </ConfirmWindow>
                 </td>
               </tr>
             ))}
