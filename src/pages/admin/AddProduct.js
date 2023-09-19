@@ -31,7 +31,11 @@ const AddProduct = () => {
         setCategories(res.data.result)
       })
       .catch(error => {
-        console.log(error)
+        if (error.response && error.response.data) {
+          console.log(error.response.data)
+        } else {
+          return "No respon from server"
+        }
       })
   }, [])
 

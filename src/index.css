@@ -34,11 +34,20 @@ input[type=number] {
 
 .truncate {
   white-space: nowrap;
-  /* Prevent text from wrapping to the next line */
   overflow: hidden;
-  /* Hide overflowing text */
   text-overflow: ellipsis;
-  /* Add an ellipsis (...) to indicate truncated text */
-  /* max-width: 200px; */
-  /* Adjust the max-width as needed */
+}
+
+.truncate-card {
+  max-width: 100%;
+  max-height: 100%;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 4px;
+  min-height: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

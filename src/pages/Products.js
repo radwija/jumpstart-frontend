@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard';
 import Layout from '../components/Layout';
 import useDocumentTitle from './useDocumentTitle';
+import { showAllProductsApi } from '../api/public-api';
 
 const Products = () => {
   useDocumentTitle("Products")
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    showAllProductsApi()
+      .then(res => {
+        setProducts(res.data.result)
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data)
+        } else {
+          return "No respon from server"
+        }
+      })
+  }, [])
   return (
     <>
       <Layout>
@@ -36,7 +53,16 @@ const Products = () => {
           <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
             <div className='grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-9 gap-5'>
               <div className='col-span-6 sm:col-span-6 md:col-span-6 lg:col-span-3'>
-                <ProductCard />
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.productId}
+                    productId={product.productId}
+                    productName={product.productName}
+                    category={product.category}
+                    price={product.price}
+                  />
+                )
+                )}
               </div>
             </div>
           </div>
