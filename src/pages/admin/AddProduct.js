@@ -43,6 +43,7 @@ const AddProduct = () => {
   const formik = useFormik({
     initialValues: {
       productName: "",
+      slug: "",
       description: "",
       price: Number,
       stock: Number,
@@ -51,6 +52,9 @@ const AddProduct = () => {
     },
     validationSchema: Yup.object({
       productName: Yup.string()
+        .required("Product name required"),
+      slug: Yup.string()
+        .matches(/^[a-zA-Z0-9-]+$/, "Only alphabets, numbers, and hyphens are allowed")
         .required("Product name required"),
       description: Yup.string()
         .required("Please add description"),
@@ -70,6 +74,7 @@ const AddProduct = () => {
     onSubmit: (values) => {
       addProductApi(token, {
         productName: values.productName,
+        slug: values.slug,
         description: values.description,
         price: values.price,
         stock: values.stock,
@@ -77,7 +82,8 @@ const AddProduct = () => {
         categoryId: values.categoryId
       })
         .then(res => {
-          navigate("/product", {
+          console.log(res.data.result.slug)
+          navigate(`/p/${res.data.result.slug}`, {
             state: {
               isNewAddedProduct: true,
               messageType: "success",
@@ -118,6 +124,25 @@ const AddProduct = () => {
             {errors.productName && touched.productName &&
               <label className="label">
                 <span className="label-text-alt text-red-600">{errors.productName}</span>
+              </label>
+            }
+          </div>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Product name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Ex: product-name"
+              className="input input-bordered w-full"
+              name='slug'
+              value={values.slug}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.slug && touched.slug &&
+              <label className="label">
+                <span className="label-text-alt text-red-600">{errors.slug}</span>
               </label>
             }
           </div>

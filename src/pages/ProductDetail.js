@@ -5,13 +5,14 @@ import { useLocation, useParams } from "react-router-dom";
 import { AlertMessage } from "../components/AlertMessage";
 import { showProductDetailsApi } from "../api/public-api";
 import { CategoryBadge } from "../components/CategoryBadge";
+import useDocumentTitle from "./useDocumentTitle";
 
 const ProductDetail = () => {
   const [productNumber, setProductNumber] = useState(1)
   const handleProductNumber = (e) => {
     console.log(e.target.value)
   }
-  const { productId } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState({
     productId: 0,
     productName: "",
@@ -27,8 +28,11 @@ const ProductDetail = () => {
       categorySlug: ""
     }
   })
+
+  useDocumentTitle(product.productName)
+
   useEffect(() => {
-    showProductDetailsApi(productId)
+    showProductDetailsApi(slug)
       .then(res => {
         setProduct(res.data.result)
       })
