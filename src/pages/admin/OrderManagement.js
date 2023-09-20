@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
-import { AdminSidebar } from '../../components/admin/header/AdminSidebar'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
-import { Stat } from '../../components/Stat'
 import useDocumentTitle from '../useDocumentTitle'
-import { CheckIcon, CrossIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
+import { CheckIcon, CrossIcon, EyeIcon } from '../../assets/SvgIcons'
 import { Link, useNavigate } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
@@ -76,24 +74,24 @@ const OrderManagement = () => {
                 <Link className='btn btn-neutral'><EyeIcon /></Link>
 
                 <ConfirmWindow
-                  elementId={`confirm-{order.productId}`}
+                  elementId={`confirm-{order.product}`}
                   buttonClass="btn btn-primary"
+                  confirmButtonText="Complete product"
                   message={`Are you sure to complete order ID: {order.productId}?`}
-                  productName={"order.productName"}
-                // action={() => handleDeleteProduct(product.productId)}
-                >
-                  <CheckIcon />
-                </ConfirmWindow>
+                  name={"order.productName"}
+                  // action={() => handleDeleteProduct(product.productId)}
+                  icon={<CheckIcon />}
+                />
 
                 <ConfirmWindow
                   elementId={`confirm-{order.productId}`}
                   buttonClass="btn btn-error"
+                  confirmButtonText="Yes, delete product"
                   message={`Are you sure to cancel order ID: {order.productId}?`}
                   productName={"order.productName"}
-                // action={() => handleDeleteProduct(product.productId)}
-                >
-                  <CrossIcon />
-                </ConfirmWindow>
+                  // action={() => handleDeleteProduct(product.productId)}
+                  icon={<CrossIcon />}
+                />
               </td>
             </tr>
           </tbody>

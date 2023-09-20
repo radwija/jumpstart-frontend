@@ -102,12 +102,12 @@ const Inventory = () => {
                   <ConfirmWindow
                     elementId={`confirm-${product.productId}`}
                     buttonClass="btn btn-error"
+                    confirmButtonText="Yes, delete product"
                     message={`Are you sure to delete product ID: ${product.productId}?`}
-                    productName={product.productName}
+                    name={product.productName}
                     action={() => handleDeleteProduct(product.productId)}
-                  >
-                    <TrashIcon />
-                  </ConfirmWindow>
+                    icon={<TrashIcon />}
+                  />
                 </td>
               </tr>
             ))}

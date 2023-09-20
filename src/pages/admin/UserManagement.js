@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-import { AdminSidebar } from '../../components/admin/header/AdminSidebar'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
-import { Stat } from '../../components/Stat'
 import useDocumentTitle from '../useDocumentTitle'
 import { EditIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
 import { Link, useNavigate } from 'react-router-dom'
@@ -51,12 +49,12 @@ const UserManagement = () => {
                 <ConfirmWindow
                   elementId={`confirm-{user.productId}`}
                   buttonClass="btn btn-error"
+                  confirmButtonText="Yes, delete user"
                   message={`Are you sure to delete user ID: {user.productId}?`}
-                  productName={"user.productName"}
-                // action={() => handleDeleteProduct(product.productId)}
-                >
-                  <TrashIcon />
-                </ConfirmWindow>
+                  name={"user.productName"}
+                  // action={() => handleDeleteProduct(product.productId)}
+                  icon={<TrashIcon />}
+                />
               </td>
             </tr>
           </tbody>
