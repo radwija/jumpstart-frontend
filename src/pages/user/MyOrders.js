@@ -28,11 +28,11 @@ const MyOrders = () => {
   return (
     <UserLayout>
       <PageHeading headingTitle='Order history' />
-      <ul className='flex gap-3 mb-2'>
-        <li><Link className='btn btn-outline btn-primary btn-sm'>All orders</Link></li>
-        <li><Link className='btn btn-outline btn-primary btn-sm'>Processed</Link></li>
-        <li><Link className='btn btn-outline btn-primary btn-sm'>Completed</Link></li>
-        <li><Link className='btn btn-outline btn-primary btn-sm'>Cancelled</Link></li>
+      <ul className='flex gap-3 overflow-x-auto mb-2'>
+        <li><Link className='btn btn-outline btn-primary'>All orders</Link></li>
+        <li><Link className='btn btn-outline btn-primary'>Processed</Link></li>
+        <li><Link className='btn btn-outline btn-primary'>Completed</Link></li>
+        <li><Link className='btn btn-outline btn-primary'>Cancelled</Link></li>
       </ul>
       <div className='flex flex-col gap-4'>
         <OrderCard />
