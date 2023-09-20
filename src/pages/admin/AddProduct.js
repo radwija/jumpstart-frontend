@@ -44,11 +44,12 @@ const AddProduct = () => {
     initialValues: {
       productName: "",
       slug: "",
+      categoryId: 0,
+      image: null,
       description: "",
       price: Number,
       stock: Number,
-      weight: 0,
-      categoryId: 0
+      weight: 0
     },
     validationSchema: Yup.object({
       productName: Yup.string()
@@ -56,6 +57,10 @@ const AddProduct = () => {
       slug: Yup.string()
         .matches(/^[a-zA-Z0-9-]+$/, "Only alphabets, numbers, and hyphens are allowed")
         .required("Product name required"),
+      categoryId: Yup.number()
+        .notOneOf([0], "Please choose category")
+        .required('Category is required'),
+      image: Yup.mixed().required("Please provide an image"),
       description: Yup.string()
         .required("Please add description"),
       price: Yup.number()
@@ -67,20 +72,18 @@ const AddProduct = () => {
       weight: Yup.number()
         .required("Weight required (in kg)")
         .min(0.01, "Weight must be greater than or equal to 0.01 kg"),
-      categoryId: Yup.number()
-        .notOneOf([0], "Please choose category")
-        .required('Category is required'),
     }),
     onSubmit: (values) => {
-      addProductApi(token, {
-        productName: values.productName,
-        slug: values.slug,
-        description: values.description,
-        price: values.price,
-        stock: values.stock,
-        weight: values.weight,
-        categoryId: values.categoryId
-      })
+      const formData = new FormData()
+      formData.append("productName", values.productName,)
+      formData.append("slug", values.slug,)
+      formData.append("descripti,on", values.description,)
+      formData.append("categoryId", values.categoryId,)
+      formData.append("image", values.image,)
+      formData.append("price", values.price,)
+      formData.append("stock", values.stock,)
+      formData.append("weight", values.weight)
+      addProductApi(token, formData)
         .then(res => {
           console.log(res.data.result.slug)
           navigate(`/p/${res.data.result.slug}`, {
@@ -173,7 +176,21 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text">Product Image</span>
             </label>
-            <input type="file" className="file-input file-input-bordered  w-full max-w-xs" />
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png,.avif,.webp"
+              className="file-input file-input-bordered  w-full max-w-xs"
+              name='image'
+              onChange={(event) =>
+                formik.setFieldValue("image", event.target.files[0])
+              }
+              onBlur={handleBlur}
+            />
+            {touched.image && errors.image && (
+              <label className="label">
+                <span className="label-text-alt text-red-600">{errors.image}</span>
+              </label>
+            )}
           </div>
           <div className="form-control w-full">
             <label className="label">
