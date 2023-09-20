@@ -26,6 +26,7 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
+    disableScroll()
     showAllCategoriesApi()
       .then(res => {
         setCategories(res.data.result)
@@ -39,14 +40,24 @@ const AddProduct = () => {
       })
   }, [])
 
+  const disableScroll = () => {
+    const inputs = document.querySelectorAll('.input-number');
+
+    inputs.forEach(input => {
+      input.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        input.blur();
+      });
+    });
+  };
 
   const formik = useFormik({
     initialValues: {
       productName: "",
       slug: "",
       description: "",
-      price: Number,
-      stock: Number,
+      price: 0,
+      stock: 0,
       weight: 0,
       categoryId: 0
     },
@@ -200,7 +211,7 @@ const AddProduct = () => {
             <input
               type="number"
               placeholder="Price"
-              className="input input-bordered w-full"
+              className="input input-number input-bordered w-full"
               name='price'
               value={values.price}
               onChange={handleChange}
@@ -219,7 +230,7 @@ const AddProduct = () => {
             <input
               type="number"
               placeholder="Stock"
-              className="input input-bordered w-full"
+              className="input input-number input-bordered w-full"
               name='stock'
 
               value={values.stock}
@@ -239,7 +250,7 @@ const AddProduct = () => {
             <input
               type="number"
               placeholder="Weight"
-              className="input input-bordered w-full"
+              className="input input-number input-bordered w-full"
               name='weight'
               value={values.weight}
               onChange={handleChange}
