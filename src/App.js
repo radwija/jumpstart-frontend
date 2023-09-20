@@ -22,6 +22,7 @@ import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
 import { RequireAuth } from 'react-auth-kit';
+import Category from './pages/Category';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Registration />} />
           <Route path='/account-activation/:uuid' element={<AccountActivation />} />
+          <Route path='/category' element={<Category />} />
           <Route path='/products' element={<Products />} />
           <Route path='/p/:slug' element={<ProductDetail />} />
           <Route path='/find-account' element={<ForgottenPassword />} />

@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const Stat = (props) => {
+export const PlainCategoryCard = (props) => {
   return (
     <>
-      <div
+      <Link to={`/category/${props.category}`}
         className="text-center text-2xl font-medium py-4 px-6 border shadow border-primary rounded-lg bg-light"
       >
         <p className="stat-title">{props.name}</p>
@@ -16,7 +17,7 @@ export const Stat = (props) => {
           </div>
         </div>
 
-      </div>
+      </Link>
     </>
   )
 }
