@@ -7,6 +7,7 @@ import { showProductDetailsApiBySlug } from "../api/public-api";
 import { CategoryBadge } from "../components/CategoryBadge";
 import useDocumentTitle from "./useDocumentTitle";
 import NotFound from "./NotFound";
+import { useHistoryState } from "@uidotdev/usehooks";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const ProductDetail = () => {
           }
         }
       })
+    window.history.replaceState({}, null)
   }, [slug])
 
   const location = useLocation();
