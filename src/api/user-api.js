@@ -21,7 +21,7 @@ export const myProfileApi = async (token) => {
   }
 }
 
-export const addProductToCart = async (token, cartItemRequest) => {
+export const addProductToCartApi = async (token, cartItemRequest) => {
   try {
     const response = await axios.post(`${USER_URL}/add-product-to-cart`, cartItemRequest, {
       headers: {
@@ -44,6 +44,27 @@ export const addProductToCart = async (token, cartItemRequest) => {
 export const getMyCartApi = async (token) => {
   try {
     const response = await axios.get(`${USER_URL}/get-my-cart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
+
+
+export const deleteCartItemByIdApi = async (token, cartItemId) => {
+  try {
+    const response = await axios.delete(`${USER_URL}/delete-cart-item/${cartItemId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"

@@ -19,16 +19,17 @@ export const Navbar = () => {
   }
 
   const [cart, setCart] = useState({})
-
+  const [itemNumbers, setItemNumbers] = useState(cart.itemNumbers)
   useEffect(() => {
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
+        console.log("mantap")
       })
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }, [token])
 
   return (
     <div className="fixed z-20 navbar bg-base-100 shadow">
@@ -66,7 +67,12 @@ export const Navbar = () => {
                     <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                       <div className="card-body">
                         <span className="font-bold text-lg">{cart.itemNumbers} Items</span>
-                        <span className="text-info">Subtotal: ${cart.total}</span>
+                        {cart && cart.total !== undefined ? (
+                          <span>Subtotal: ${cart.total.toLocaleString("en-US")}</span>
+                        ) : (
+                          <div>Loading...</div>
+                        )}
+
                         <div className="card-actions">
                           <Link to={'/my-cart'} className="btn btn-primary btn-block">View cart</Link>
                         </div>

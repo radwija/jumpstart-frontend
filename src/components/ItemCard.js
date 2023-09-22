@@ -1,9 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CategoryBadge } from './CategoryBadge'
 import { TrashIcon } from '../assets/SvgIcons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { deleteCartItemByIdApi } from '../api/user-api'
+import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 
 export const ItemCard = (props) => {
+  const auth = useAuthUser();
+  const role = auth()?.role?.[0]
+  const email = auth()?.email
+  const token = auth()?.token
+  const isLogin = useIsAuthenticated()
+  const isAdmin = isLogin() && role === "ROLE_ADMIN"
+  const navigate = useNavigate()
+
+  const [alertMessage, setAlertMessage] = useState(null)
+
+  const handleDeleteCartItem = (itemId) => {
+    deleteCartItemByIdApi(token, itemId)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        if (typeof error === "string") {
+          console.log("Error message: " + error)
+        } else {
+          if (error?.response?.data) {
+            // error message from backend
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: error?.response?.data.message
+              }
+            )
+          } else if (error) {
+            // error message from client
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: error.message
+              }
+            )
+          } else {
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: "No response from server"
+              }
+            )
+          }
+          setTimeout(() => {
+            setAlertMessage(null)
+          }, 3000)
+        }
+      })
+  }
+
   return (
     <>
       <div className='flex flex-col gap-4 rounded border p-5'>
@@ -22,7 +74,10 @@ export const ItemCard = (props) => {
           </div>
         </div>
         <div className='flex items-center gap-4 justify-end'>
-          <button className='text-gray-500'>
+          <button
+            type='button'
+            onClick={() => handleDeleteCartItem(props.itemId)}
+            className='text-gray-500'>
             <TrashIcon />
           </button>
           <div className="join">

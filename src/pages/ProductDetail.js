@@ -8,7 +8,7 @@ import { CategoryBadge } from "../components/CategoryBadge";
 import useDocumentTitle from "./useDocumentTitle";
 import NotFound from "./NotFound";
 import { useHistoryState } from "@uidotdev/usehooks";
-import { addProductToCart } from "../api/user-api";
+import { addProductToCartApi } from "../api/user-api";
 import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
 
 const ProductDetail = () => {
@@ -27,7 +27,7 @@ const ProductDetail = () => {
       quantity: productNumber,
       requestFrom: null
     }
-    addProductToCart(token, cartItemRequest)
+    addProductToCartApi(token, cartItemRequest)
       .then(res => {
         console.log(res)
         setAlertMessage({
