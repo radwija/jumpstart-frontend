@@ -20,11 +20,11 @@ const ProductCard = (props) => {
           </Link>
           <div>Price:</div>
           <div className='text-xl font-semibold m-0 p-0'>${props.price}</div>
-          <div className="card-actions justify-end">
+          {/* <div className="card-actions justify-end">
             <button className="btn btn-primary">
               <CartIcon /> <span className='hidden sm:hidden md:hidden lg:block'>Add to cart</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

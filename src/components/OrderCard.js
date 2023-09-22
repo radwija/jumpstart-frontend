@@ -22,6 +22,7 @@ export const OrderCard = () => {
         <div className='mb-3'>
           <div className='text-lg font-semibold'>Order ID: 200</div>
           <div>September 9, 2023 | <span className='font-semibold text-yellow-500'>PROCESSED</span></div>
+          <span className='font-semibold text-red-500'>PRODUCT DELETED</span>
         </div>
         <div className='flex flex-col gap-4 mb-3'>
           <Product />
