@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { PageHeading } from '../../components/PageHeading'
 import { ItemCard } from '../../components/ItemCard'
@@ -6,6 +6,7 @@ import useDocumentTitle from '../useDocumentTitle'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { useNavigate } from 'react-router-dom'
+import { getMyCart, getMyCartApi } from '../../api/user-api'
 
 export const MyCart = () => {
   useDocumentTitle("My Shopping Cart")
@@ -19,11 +20,25 @@ export const MyCart = () => {
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
 
+  const [cart, setCart] = useState({})
+  const [cartItems, setCartItems] = useState([])
+
   useEffect(() => {
     if (isLogin() && isAdmin) {
       redirectUser(role)
     }
   })
+
+  useEffect(() => {
+    getMyCartApi(token)
+      .then(res => {
+        setCart(res.data.result)
+        setCartItems(res.data.result.cartItems)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <>
@@ -32,18 +47,25 @@ export const MyCart = () => {
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
             <PageHeading headingTitle='My shopping cart' />
             <div className='flex flex-col gap-5'>
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+              {cartItems.map((item) => (
+                <ItemCard
+                  key={item.itemId}
+                  productName={item.product.productName}
+                  slug={item.product.slug}
+                  categoryName={item.product.category.categoryName}
+                  quantity={item.quantity}
+                  price={item.product.price}
+                  itemPriceTotal={item.itemPriceTotal}
+                />
+              ))}
             </div>
           </div>
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3'>
             <div className="fixed bottom-0 left-0 right-0 z-10 lg:static bg-white flex flex-col gap-3 border shadow rounded px-10 lg:px-5 py-5">
               <div className='text-lg font-semibold'>Order summary</div>
               <div>
-                <div>Total items: 2</div>
-                <div>Total amount: $40</div>
+                <div>Total items: {cart.itemNumbers}</div>
+                <div>Total amount: ${cart.total}</div>
               </div>
               <button className='btn btn-primary w-full'>Checkout</button>
             </div>
