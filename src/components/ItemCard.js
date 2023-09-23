@@ -58,6 +58,8 @@ export const ItemCard = (props) => {
   }
 
   const [productNumber, setProductNumber] = useState(props.quantity)
+  const isIncrementButtonDisabled = productNumber === props.product.stock ? true : false
+  const isDecrementButtonDisabled = productNumber === 1 ? true : false
 
   const handleProductNumber = (counter) => {
     if (counter === "+") {
@@ -116,13 +118,26 @@ export const ItemCard = (props) => {
 
   const handleInputProductNumberChange = (e) => {
     const newProductNumber = Number(e.target.value);
-    console.log("newProductNumber" + newProductNumber)
     setProductNumber(newProductNumber)
-    handleUpdateItemNumberChange(token, {
-      productId: props.product.productId,
-      quantity: newProductNumber,
-      requestFrom: "FROM_CART"
-    })
+
+    if (newProductNumber > props.product.stock) {
+      // If it does, set it to the stock value
+      setProductNumber(productNumber);
+    } else if (newProductNumber <= 0) {
+      // Check if it's less than or equal to zero, set it to 1
+      setProductNumber(1);
+    } else {
+      // Otherwise, set it to the user's input
+      setProductNumber(newProductNumber);
+    }
+
+    if (newProductNumber > 0 && newProductNumber <= props.product.stock) {
+      handleUpdateItemNumberChange(token, {
+        productId: props.product.productId,
+        quantity: newProductNumber,
+        requestFrom: "FROM_CART"
+      })
+    }
   }
 
   useState(() => {
@@ -153,9 +168,12 @@ export const ItemCard = (props) => {
             className='text-gray-500'>
             <TrashIcon />
           </button>
-          {productNumber}
           <div className="join">
-            <button type="button" className="btn join-item" onClick={() => handleProductNumber("-")}>-</button>
+            <button
+              type="button"
+              className="btn join-item"
+              disabled={isDecrementButtonDisabled}
+              onClick={() => handleProductNumber("-")}>-</button>
             <input
               type="number"
               className="join-item mx-2 w-20 border text-center"
@@ -163,7 +181,11 @@ export const ItemCard = (props) => {
               onChange={(e) => handleInputProductNumberChange(e)}
             // onInput={(e) => setProductNumber(Number(e.target.value))}
             />
-            <button type="button" className="btn join-item" onClick={() => handleProductNumber("+")}>+</button>
+            <button
+              type="button"
+              className="btn join-item"
+              disabled={isIncrementButtonDisabled}
+              onClick={() => handleProductNumber("+")}>+</button>
           </div>
         </div>
       </div >
