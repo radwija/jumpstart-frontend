@@ -5,8 +5,9 @@ import { ItemCard } from '../../components/ItemCard'
 import useDocumentTitle from '../useDocumentTitle'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getMyCart, getMyCartApi } from '../../api/user-api'
+import empty from '../../assets/images/empty.svg'
 
 export const MyCart = () => {
   useDocumentTitle("My Shopping Cart")
@@ -46,45 +47,67 @@ export const MyCart = () => {
     setCartUpdated(false)
   }, [token, isCartUpdated])
 
+
+  const Cart = () => {
+    return (
+      <div className='py-10 flex flex-wrap flex-col sm:flex sm:flex-wrap sm:flex-col gap-y-5 sm:gap-y-5 md:gap-y-5 lg:gap-y-5 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-44 lg:px-20'>
+        <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
+          <PageHeading headingTitle='My shopping cart' />
+          <div className='flex flex-col gap-5'>
+            {cartItems.map((item) => (
+              <ItemCard
+                key={item.itemId}
+                extraAction={{ setCartUpdated }}
+                product={item.product}
+                itemId={item.itemId}
+                productName={item.product.productName}
+                slug={item.product.slug}
+                categoryName={item.product.category.categoryName}
+                quantity={item.quantity}
+                price={item.product.price}
+                itemPriceTotal={item.itemPriceTotal}
+              />
+            ))}
+
+          </div>
+        </div>
+        <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3'>
+          <div className="fixed bottom-0 left-0 right-0 z-10 lg:static bg-white flex flex-col gap-3 border shadow rounded px-10 lg:px-5 py-5">
+            <div className='text-lg font-semibold'>Order summary</div>
+            {cart && cart.total !== undefined ? (
+              <>
+                <div>Total items: {cart.itemNumbers}</div>
+                <div>Total amount: ${cart.total?.toLocaleString("en-US")}</div>
+              </>
+            ) : (
+              <div>Loading...</div>
+            )}
+            <button className='btn btn-primary w-full'>Checkout</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const EmptyCartView = () => {
+    return (
+      <div className='py-10 px-10 sm:px-10 md:px-40 lg:px-72' >
+        <div className='text-center'>
+          <PageHeading headingTitle="Your cart is empty" />
+          <Link to={'/products'} className='btn btn-primary mb-10'>See products</Link>
+          <img src={empty} alt="url not found illustration" />
+        </div>
+      </div >
+    )
+  }
+
   return (
     <>
       <Layout>
-        <div className='py-10 flex flex-wrap flex-col sm:flex sm:flex-wrap sm:flex-col gap-y-5 sm:gap-y-5 md:gap-y-5 lg:gap-y-5 md:grid md:grid-cols-12 px-5 sm:px-5 md:px-44 lg:px-20'>
-          <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
-            <PageHeading headingTitle='My shopping cart' />
-            <div className='flex flex-col gap-5'>
-              {cartItems.map((item) => (
-                <ItemCard
-                  key={item.itemId}
-                  extraAction={{ setCartUpdated }}
-                  product={item.product}
-                  itemId={item.itemId}
-                  productName={item.product.productName}
-                  slug={item.product.slug}
-                  categoryName={item.product.category.categoryName}
-                  quantity={item.quantity}
-                  price={item.product.price}
-                  itemPriceTotal={item.itemPriceTotal}
-                />
-              ))}
-
-            </div>
-          </div>
-          <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3'>
-            <div className="fixed bottom-0 left-0 right-0 z-10 lg:static bg-white flex flex-col gap-3 border shadow rounded px-10 lg:px-5 py-5">
-              <div className='text-lg font-semibold'>Order summary</div>
-              {cart && cart.total !== undefined ? (
-                <>
-                  <div>Total items: {cart.itemNumbers}</div>
-                  <div>Total amount: ${cart.total?.toLocaleString("en-US")}</div>
-                </>
-              ) : (
-                <div>Loading...</div>
-              )}
-              <button className='btn btn-primary w-full'>Checkout</button>
-            </div>
-          </div>
-        </div>
+        {
+          cartItems.length !== 0 ?
+            (<Cart />) : (<EmptyCartView />)
+        }
       </Layout>
     </>
   )
