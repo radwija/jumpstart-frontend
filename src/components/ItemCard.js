@@ -61,19 +61,23 @@ export const ItemCard = (props) => {
   const handleProductNumber = (counter) => {
     if (counter === "+") {
       setProductNumber((prev) => (prev + 1 > props.product.stock ? prev : prev + 1))
-      handleUpdateItemNumberChange(token)
+      handleUpdateItemNumberChange(token, {
+        productId: props.product.productId,
+        quantity: productNumber + 1,
+        requestFrom: "FROM_CART"
+      })
     }
     else {
       setProductNumber((prev) => (prev - 1 === 0 ? 1 : prev - 1))
-      handleUpdateItemNumberChange(token)
+      handleUpdateItemNumberChange(token, {
+        productId: props.product.productId,
+        quantity: productNumber - 1,
+        requestFrom: "FROM_CART"
+      })
     }
   }
-  const handleUpdateItemNumberChange = (token) => {
-    addProductToCartApi(token, {
-      productId: props.product.productId,
-      quantity: productNumber,
-      requestFrom: "FROM_CART"
-    })
+  const handleUpdateItemNumberChange = (token, request) => {
+    addProductToCartApi(token, request)
       .then(res => {
         console.log(res)
       })
@@ -107,10 +111,21 @@ export const ItemCard = (props) => {
         }, 3000)
       })
   }
+
   const handleInputProductNumberChange = (e) => {
-    setProductNumber(Number(e.target.value))
-    handleUpdateItemNumberChange(token)
+    const newProductNumber = Number(e.target.value);
+    console.log("newProductNumber" + newProductNumber)
+    setProductNumber(newProductNumber)
+    handleUpdateItemNumberChange(token, {
+      productId: props.product.productId,
+      quantity: newProductNumber,
+      requestFrom: "FROM_CART"
+    })
   }
+
+  useState(() => {
+    console.log("use" + productNumber)
+  }, [productNumber])
 
   const stockValidation = (productNumber <= 0 || productNumber > props.product.stock) ? true : false
   return (
@@ -126,7 +141,6 @@ export const ItemCard = (props) => {
             <Link to={`/p/${props.slug}`} className="font-bold text-lg"><div>{props.productName}</div></Link>
             <CategoryBadge categoryName={props.categoryName} />
             <div className="">Price: ${props.price.toLocaleString("en-US")}</div>
-            <div className="">Qty:  {props.quantity}</div>
             <div className="font-semibold text-lg">Total Price: ${props.itemPriceTotal.toLocaleString("en-US")}</div>
           </div>
         </div>
