@@ -12,7 +12,7 @@ export const InvalidUrlView = () => {
     <>
       <PageHeading headingTitle="Invalid URL" />
       <Link to={'/'} className='btn btn-primary'>Go to home</Link>
-      <img src={not_found} alt="url not found illustration" />
+      <img src={not_found} alt="url not found illustration" className='mx-auto h-96' />
     </>
   )
 }
@@ -58,7 +58,7 @@ const AccountActivation = () => {
 
                   <div className='text-xl mb-3'>Your email: <span className='p-2 rounded-md bg-accent'>{email}</span></div>
                   <Link to={'/login'} className='btn btn-primary'>Login</Link>
-                  <img src={welcome} alt="welcome illustration" />
+                  <img src={welcome} alt="welcome illustration" className='mx-auto h-96' />
                 </>
               ) :
               (

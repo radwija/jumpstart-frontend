@@ -95,7 +95,7 @@ export const MyCart = () => {
         <div className='text-center'>
           <PageHeading headingTitle="Your cart is empty" />
           <Link to={'/products'} className='btn btn-primary mb-10'>See products</Link>
-          <img src={empty} alt="url not found illustration" />
+          <img src={empty} alt="url not found illustration" className='mx-auto h-96' />
         </div>
       </div >
     )

@@ -14,7 +14,7 @@ const NotFound = () => {
           <div className='text-center'>
             <PageHeading headingTitle="404 Not Found" />
             <Link to={'/'} className='btn btn-primary'>Go to home</Link>
-            <img src={not_found} alt="url not found illustration" />
+            <img src={not_found} alt="url not found illustration" className='mx-auto h-96' />
           </div>
         </div>
       </Layout>
