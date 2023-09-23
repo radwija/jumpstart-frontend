@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { CategoryBadge } from './CategoryBadge'
 import { TrashIcon } from '../assets/SvgIcons'
 import { Link, useNavigate } from 'react-router-dom'
-import { deleteCartItemByIdApi } from '../api/user-api'
+import { addProductToCartApi, deleteCartItemByIdApi } from '../api/user-api'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 
 export const ItemCard = (props) => {
@@ -56,6 +56,63 @@ export const ItemCard = (props) => {
       })
   }
 
+  const [productNumber, setProductNumber] = useState(props.quantity)
+
+  const handleProductNumber = (counter) => {
+    if (counter === "+") {
+      setProductNumber((prev) => (prev + 1 > props.product.stock ? prev : prev + 1))
+      handleUpdateItemNumberChange(token)
+    }
+    else {
+      setProductNumber((prev) => (prev - 1 === 0 ? 1 : prev - 1))
+      handleUpdateItemNumberChange(token)
+    }
+  }
+  const handleUpdateItemNumberChange = (token) => {
+    addProductToCartApi(token, {
+      productId: props.product.productId,
+      quantity: productNumber,
+      requestFrom: "FROM_CART"
+    })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        if (error?.response?.data) {
+          // error message from backend
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error?.response?.data.message
+            }
+          )
+        } else if (error) {
+          // error message from client
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error.message
+            }
+          )
+        } else {
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: "No response from server"
+            }
+          )
+        }
+        setTimeout(() => {
+          setAlertMessage(null)
+        }, 3000)
+      })
+  }
+  const handleInputProductNumberChange = (e) => {
+    setProductNumber(Number(e.target.value))
+    handleUpdateItemNumberChange(token)
+  }
+
+  const stockValidation = (productNumber <= 0 || productNumber > props.product.stock) ? true : false
   return (
     <>
       <div className='flex flex-col gap-4 rounded border p-5'>
@@ -69,7 +126,7 @@ export const ItemCard = (props) => {
             <Link to={`/p/${props.slug}`} className="font-bold text-lg"><div>{props.productName}</div></Link>
             <CategoryBadge categoryName={props.categoryName} />
             <div className="">Price: ${props.price.toLocaleString("en-US")}</div>
-            <div className="">Qty: ${props.quantity}</div>
+            <div className="">Qty:  {props.quantity}</div>
             <div className="font-semibold text-lg">Total Price: ${props.itemPriceTotal.toLocaleString("en-US")}</div>
           </div>
         </div>
@@ -80,10 +137,17 @@ export const ItemCard = (props) => {
             className='text-gray-500'>
             <TrashIcon />
           </button>
+          {productNumber}
           <div className="join">
-            <button className="btn join-item">-</button>
-            <input type="number" className="join-item mx-2 w-20 border text-center" min={1} max={10} />
-            <button className="btn join-item">+</button>
+            <button type="button" className="btn join-item" onClick={() => handleProductNumber("-")}>-</button>
+            <input
+              type="number"
+              className="join-item mx-2 w-20 border text-center"
+              value={productNumber === 0 ? setProductNumber(1) : productNumber}
+              onChange={(e) => handleInputProductNumberChange(e)}
+            // onInput={(e) => setProductNumber(Number(e.target.value))}
+            />
+            <button type="button" className="btn join-item" onClick={() => handleProductNumber("+")}>+</button>
           </div>
         </div>
       </div >

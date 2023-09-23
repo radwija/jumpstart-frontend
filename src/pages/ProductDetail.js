@@ -100,6 +100,7 @@ const ProductDetail = () => {
   const stockValidation = (productNumber <= 0 || productNumber > product.stock) ? true : false
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     showProductDetailsApiBySlug(slug)
       .then(res => {
         setProduct(res.data.result)

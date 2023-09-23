@@ -22,6 +22,7 @@ export const MyCart = () => {
 
   const [cart, setCart] = useState({})
   const [cartItems, setCartItems] = useState([])
+  const [itemNumbers, setItemNumbers] = useState(0)
 
   useEffect(() => {
     if (isLogin() && isAdmin) {
@@ -30,6 +31,7 @@ export const MyCart = () => {
   })
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
@@ -50,6 +52,7 @@ export const MyCart = () => {
               {cartItems.map((item) => (
                 <ItemCard
                   key={item.itemId}
+                  product={item.product}
                   itemId={item.itemId}
                   productName={item.product.productName}
                   slug={item.product.slug}
