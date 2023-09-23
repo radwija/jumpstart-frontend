@@ -24,7 +24,6 @@ export const Navbar = () => {
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
-        console.log("mantap")
       })
       .catch(error => {
         console.log(error)

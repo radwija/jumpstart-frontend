@@ -48,7 +48,9 @@ const ProductDetail = () => {
             }
           )
         } else if (error) {
-          // error message from client
+          if (error.status) {
+            navigate("/login")
+          }
           setAlertMessage(
             {
               messageType: "error",
