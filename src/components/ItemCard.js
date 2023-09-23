@@ -20,6 +20,7 @@ export const ItemCard = (props) => {
     deleteCartItemByIdApi(token, itemId)
       .then(res => {
         console.log(res)
+        props.extraAction.setCartUpdated()
       })
       .catch(error => {
         if (typeof error === "string") {
@@ -80,6 +81,7 @@ export const ItemCard = (props) => {
     addProductToCartApi(token, request)
       .then(res => {
         console.log(res)
+        props.extraAction.setCartUpdated()
       })
       .catch(error => {
         if (error?.response?.data) {

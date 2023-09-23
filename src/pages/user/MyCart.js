@@ -24,6 +24,7 @@ export const MyCart = () => {
   const [cartItems, setCartItems] = useState([])
   const [itemNumbers, setItemNumbers] = useState(0)
 
+  const [isCartUpdated, setCartUpdated] = useState(false)
   useEffect(() => {
     if (isLogin() && isAdmin) {
       redirectUser(role)
@@ -31,7 +32,9 @@ export const MyCart = () => {
   })
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (isCartUpdated === true) {
+      window.scrollTo(0, 0)
+    }
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
@@ -40,7 +43,8 @@ export const MyCart = () => {
       .catch(error => {
         console.log(error)
       })
-  }, [token])
+    setCartUpdated(false)
+  }, [token, isCartUpdated])
 
   return (
     <>
@@ -52,6 +56,7 @@ export const MyCart = () => {
               {cartItems.map((item) => (
                 <ItemCard
                   key={item.itemId}
+                  extraAction={{ setCartUpdated }}
                   product={item.product}
                   itemId={item.itemId}
                   productName={item.product.productName}
@@ -62,6 +67,7 @@ export const MyCart = () => {
                   itemPriceTotal={item.itemPriceTotal}
                 />
               ))}
+
             </div>
           </div>
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3'>
