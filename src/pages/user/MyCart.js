@@ -22,7 +22,7 @@ export const MyCart = () => {
   const redirectUser = useRedirectUser()
 
   const [cart, setCart] = useState({})
-  const [cartItems, setCartItems] = useState([])
+  const [items, setitems] = useState([])
   const [itemNumbers, setItemNumbers] = useState(0)
 
   const [isCartUpdated, setCartUpdated] = useState(false)
@@ -39,7 +39,8 @@ export const MyCart = () => {
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
-        setCartItems(res.data.result.cartItems)
+        console.log(res.data.result)
+        setitems(res.data.result.items)
       })
       .catch(error => {
         console.log(error)
@@ -54,7 +55,7 @@ export const MyCart = () => {
         <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
           <PageHeading headingTitle='My shopping cart' />
           <div className='flex flex-col gap-5'>
-            {cartItems.map((item) => (
+            {items.map((item) => (
               <ItemCard
                 key={item.itemId}
                 extraAction={{ setCartUpdated }}
@@ -105,7 +106,7 @@ export const MyCart = () => {
     <>
       <Layout>
         {
-          cartItems.length !== 0 ?
+          items.length !== 0 ?
             (<Cart />) : (<EmptyCartView />)
         }
       </Layout>
