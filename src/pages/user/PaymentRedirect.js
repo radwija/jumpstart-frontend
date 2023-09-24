@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { completePaymentApi } from '../../api/transaction-api'
 import { useAuthUser } from 'react-auth-kit'
 
-const RedirectCapture = () => {
+export const RedirectCapture = () => {
   const queryParameters = new URLSearchParams(window.location.search)
   const captureToken = queryParameters.get("token")
 
@@ -22,4 +22,8 @@ const RedirectCapture = () => {
   })
 }
 
-export default RedirectCapture
+export const RedirectCancel = () => {
+  useEffect(() => {
+    window.location.href = "http://localhost:3000/my-cart"
+  })
+}

@@ -23,7 +23,7 @@ import NotFound from './pages/NotFound';
 import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
 import { RequireAuth } from 'react-auth-kit';
 import Category from './pages/Category';
-import RedirectCapture from './pages/user/RedirectCapture';
+import { RedirectCapture, RedirectCancel } from './pages/user/PaymentRedirect';
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
           <Route path='/contact-us' element={<ContactUs />} />
 
           <Route path='/capture' element={<RedirectCapture />} />
+          <Route path='/cancel' element={<RedirectCancel />} />
 
           <Route path='*' element={<NotFound />} />
 
