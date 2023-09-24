@@ -20,6 +20,7 @@ const MyOrders = () => {
   const redirectUser = useRedirectUser()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (isLogin() && isAdmin) {
       redirectUser(role)
     }

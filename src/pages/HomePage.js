@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from "../components/Layout";
 import useDocumentTitle from './useDocumentTitle';
 import hero from '../assets/images/hero.png'
@@ -8,7 +8,9 @@ import ProductCard from '../components/ProductCard';
 
 const HomePage = () => {
   useDocumentTitle("Welcome to Jumpstart")
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Layout>

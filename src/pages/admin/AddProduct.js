@@ -26,6 +26,7 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     disableScroll()
     showAllCategoriesApi()
       .then(res => {

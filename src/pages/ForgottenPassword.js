@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import forgot_password from '../assets/images/forgot_password.svg'
 import { AlertMessage } from "../components/AlertMessage";
 import Layout from "../components/Layout";
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import useDocumentTitle from "./useDocumentTitle";
 
 const FindAccountForm = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="p-5 rounded bg-white border shadow">
       <h1 className="text-4xl font-semibold mb-2">Find your account</h1>

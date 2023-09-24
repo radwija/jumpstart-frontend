@@ -12,7 +12,11 @@ import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 
 const CreateCategory = () => {
-  useDocumentTitle('Add Product')
+  useDocumentTitle('Create Category')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const auth = useAuthUser();
   const role = auth()?.role?.[0]

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import reset_password from '../assets/images/reset_password.svg'
 import { AlertMessage } from "../components/AlertMessage";
 import { Link } from "react-router-dom";
@@ -7,6 +7,9 @@ import Layout from "../components/Layout";
 
 const ResetPasswordForm = () => {
   useDocumentTitle(`Reset Password`);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="p-5 rounded bg-white border shadow">
       <h1 className="text-4xl font-semibold mb-2">Reset password</h1>

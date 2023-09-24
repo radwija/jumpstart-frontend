@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout';
 import { PageHeading } from '../components/PageHeading';
 
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Layout>

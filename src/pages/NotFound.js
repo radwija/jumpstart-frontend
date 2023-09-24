@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout';
 import { PageHeading } from '../components/PageHeading';
 import not_found from '../assets/images/not_found.svg'
@@ -7,6 +7,9 @@ import useDocumentTitle from './useDocumentTitle';
 
 const NotFound = () => {
   useDocumentTitle("Not Found")
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Layout>

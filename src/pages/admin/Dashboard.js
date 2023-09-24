@@ -20,6 +20,10 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <AdminLayout>

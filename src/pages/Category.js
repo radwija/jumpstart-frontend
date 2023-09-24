@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { PageHeading } from '../components/PageHeading'
 import { PlainCategoryCard } from '../components/PlainCategoryCard'
@@ -6,6 +6,9 @@ import useDocumentTitle from './useDocumentTitle'
 
 const Category = () => {
   useDocumentTitle("Category")
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Layout>
