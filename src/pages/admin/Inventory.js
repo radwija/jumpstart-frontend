@@ -3,13 +3,14 @@ import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
 import useDocumentTitle from '../useDocumentTitle'
 import { EditIcon, EyeIcon, TrashIcon } from '../../assets/SvgIcons'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { showAllProductsApi } from '../../api/public-api'
 import { deleteProductByProductIdApi } from '../../api/admin-api'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
+import { AlertMessage } from '../../components/AlertMessage'
 
 const Inventory = () => {
   useDocumentTitle('Inventory')
@@ -22,6 +23,7 @@ const Inventory = () => {
   const isAdmin = isLogin() && role === "ROLE_ADMIN"
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
+  const location = useLocation();
 
   const handleDeleteProduct = (productId) => {
     deleteProductByProductIdApi(token, productId)
@@ -51,6 +53,9 @@ const Inventory = () => {
     ]
 
   const [products, setProducts] = useState([])
+  const isNewCreatedCategory = location?.state?.isNewCreatedCategory;
+  const messageType = location?.state?.messageType;
+  const message = location?.state?.message;
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -65,11 +70,15 @@ const Inventory = () => {
           return "No respon from server"
         }
       })
+    window.history.replaceState(null, null)
   }, [])
 
   return (
     <>
       <AdminLayout>
+        {isNewCreatedCategory &&
+          <AlertMessage messageType={messageType} message={message} />
+        }
         <PageHeading headingTitle='Inventory' />
         <div className='overflow-x-auto mb-5'>
           <div className='flex gap-3'>
