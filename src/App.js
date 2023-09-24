@@ -23,6 +23,7 @@ import NotFound from './pages/NotFound';
 import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
 import { RequireAuth } from 'react-auth-kit';
 import Category from './pages/Category';
+import RedirectCapture from './pages/user/RedirectCapture';
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
           <Route path='/find-account' element={<ForgottenPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/contact-us' element={<ContactUs />} />
+
+          <Route path='/capture' element={<RedirectCapture />} />
 
           <Route path='*' element={<NotFound />} />
 

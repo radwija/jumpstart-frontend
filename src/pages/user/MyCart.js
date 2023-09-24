@@ -8,6 +8,7 @@ import { useRedirectUser } from '../../hooks/redirectUser'
 import { Link, useNavigate } from 'react-router-dom'
 import { getMyCart, getMyCartApi } from '../../api/user-api'
 import empty from '../../assets/images/empty.svg'
+import { createPaymentApi, mantap } from '../../api/transaction-api'
 
 export const MyCart = () => {
   useDocumentTitle("My Shopping Cart")
@@ -39,7 +40,6 @@ export const MyCart = () => {
     getMyCartApi(token)
       .then(res => {
         setCart(res.data.result)
-        console.log(res.data.result)
         setitems(res.data.result.items)
       })
       .catch(error => {
@@ -48,6 +48,21 @@ export const MyCart = () => {
     setCartUpdated(false)
   }, [token, isCartUpdated])
 
+  const [isCheckoutBtnLoading, setCheckoutBtnLoading] = useState(false)
+
+  const handlePayment = () => {
+    setCheckoutBtnLoading(true)
+    createPaymentApi(token)
+      .then(res => {
+        const paymentUrl = res.data.result
+        window.location.href = paymentUrl
+        setCheckoutBtnLoading(false)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
 
   const Cart = () => {
     return (
@@ -83,7 +98,11 @@ export const MyCart = () => {
             ) : (
               <div>Loading...</div>
             )}
-            <button className='btn btn-primary w-full'>Checkout</button>
+            <button
+              type='button'
+              onClick={() => handlePayment()}
+              disabled={isCheckoutBtnLoading}
+              className='btn btn-primary w-full'>{!isCheckoutBtnLoading ? "Checkout" : "Loading..."}</button>
           </div>
         </div>
       </div>

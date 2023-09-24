@@ -141,7 +141,7 @@ export const ItemCard = (props) => {
   }
 
   useState(() => {
-    console.log("use" + productNumber)
+    // console.log("use" + productNumber)
   }, [productNumber])
 
   const stockValidation = (productNumber <= 0 || productNumber > props.product.stock) ? true : false
