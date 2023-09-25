@@ -59,6 +59,9 @@ const ProductSnapshot = () => {
           if (error.status === 404) {
             setIsNotFound(true)
           }
+          else if (error.status === 500) {
+            navigate("/")
+          }
         }
       })
   }, [slug])
