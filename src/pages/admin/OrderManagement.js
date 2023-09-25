@@ -10,7 +10,7 @@ import { useRedirectUser } from '../../hooks/redirectUser'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
 import { cancelOrderApi, completeOrderApi, getOrdersApi } from '../../api/admin-api'
 import { detailFormatDate, formatDate } from '../../utils/utils'
-import { OrderCard } from '../../components/OrderCard'
+import { OrderCard, handleStatusText } from '../../components/OrderCard'
 import { AlertMessage } from '../../components/AlertMessage'
 
 const OrderManagement = () => {
@@ -191,7 +191,7 @@ const OrderManagement = () => {
                 <td>{order.fullName}</td>
                 <td>{order.email}</td>
                 <td>{detailFormatDate(order.createdAt)}</td>
-                <td>{order.status}</td>
+                <td><span className={handleStatusText(order.status).color}>{handleStatusText(order.status).status}</span></td>
                 <td>{order.total}</td>
                 <td className='flex gap-3'>
                   {/* <Link className='btn btn-neutral'><EyeIcon /></Link> */}

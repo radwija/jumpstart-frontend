@@ -22,6 +22,31 @@ const Product = ({
   );
 }
 
+export const handleStatusText = (status) => {
+  switch (status) {
+    case "PENDING":
+      return {
+        status: status,
+        color: "font-semibold text-yellow-500"
+      }
+    case "COMPLETED":
+      return {
+        status: status,
+        color: "font-semibold text-green-500"
+      }
+    case "CANCELLED":
+      return {
+        status: status,
+        color: "font-semibold text-red-500"
+      }
+    default:
+      return {
+        status: status,
+        color: "font-semibold text-black"
+      }
+  }
+}
+
 export const OrderCard = ({
   orderId,
   status,
@@ -37,30 +62,6 @@ export const OrderCard = ({
   }, [productSnapshots])
 
   console.log(snapshots)
-  const handleStatusClass = (status) => {
-    switch (status) {
-      case "PENDING":
-        return {
-          status: status,
-          color: "yellow-500"
-        }
-      case "COMPLETED":
-        return {
-          status: status,
-          color: "green-500"
-        }
-      case "CANCELLED":
-        return {
-          status: status,
-          color: "red-500"
-        }
-      default:
-        return {
-          status: status,
-          color: "black"
-        }
-    }
-  }
 
   return (
     <>
@@ -68,7 +69,7 @@ export const OrderCard = ({
         <div className='mb-3'>
           <div className='text-lg font-semibold'>Order ID: {orderId}</div>
           <div>{date} |
-            <span className={`font-semibold text-${handleStatusClass(status).color}`}> {handleStatusClass(status).status}</span>
+            <span className={`${handleStatusText(status).color}`}> {handleStatusText(status).status}</span>
           </div>
         </div>
         <div className='flex flex-col gap-4 mb-3'>
