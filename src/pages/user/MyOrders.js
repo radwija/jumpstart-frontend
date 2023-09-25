@@ -7,6 +7,7 @@ import useDocumentTitle from '../useDocumentTitle';
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
 import { useRedirectUser } from '../../hooks/redirectUser';
 import { getMyOrdersApi } from '../../api/user-api';
+import { formatDate } from '../../utils/utils';
 
 const MyOrders = () => {
   useDocumentTitle("Order History")
@@ -39,12 +40,6 @@ const MyOrders = () => {
         console.log(err)
       })
   }, [token, filter])
-
-  const formatDate = (inputDate) => {
-    const options = { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' };
-    const date = new Date(inputDate);
-    return date.toLocaleDateString('en-US', options);
-  }
 
   return (
     <UserLayout>

@@ -24,6 +24,7 @@ import AccountActivation from './pages/auth/registration/AccountActivation';
 import { RequireAuth } from 'react-auth-kit';
 import Category from './pages/Category';
 import { RedirectCapture, RedirectCancel } from './hooks/PaymentRedirect';
+import ProductSnapshot from './pages/ProductSnapshot';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path='/category' element={<Category />} />
           <Route path='/products' element={<Products />} />
           <Route path='/p/:slug' element={<ProductDetail />} />
+          <Route path='/p/snapshot/:slug' element={<ProductSnapshot />} />
           <Route path='/find-account' element={<ForgottenPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/contact-us' element={<ContactUs />} />
