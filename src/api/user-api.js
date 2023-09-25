@@ -81,3 +81,48 @@ export const deleteCartItemByIdApi = async (token, cartItemId) => {
     }
   }
 }
+
+export const getMyOrdersApi = async (token, filter) => {
+  let param = "";
+  if (filter != null) {
+    param = `?filter=${filter}`
+  }
+
+  try {
+    const response = await axios.get(`${USER_URL}/my-orders${param}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
+
+export const showSnapshotDetailsBySlugApi = async (token, slug) => {
+  try {
+    const response = await axios.get(`${USER_URL}/my-orders/snapshot/slug/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
