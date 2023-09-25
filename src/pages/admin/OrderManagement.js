@@ -9,7 +9,8 @@ import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
 import { getOrdersApi } from '../../api/admin-api'
-import { detailFormatDate } from '../../utils/utils'
+import { detailFormatDate, formatDate } from '../../utils/utils'
+import { OrderCard } from '../../components/OrderCard'
 
 const OrderManagement = () => {
   useDocumentTitle('Order Management')
@@ -91,8 +92,15 @@ const OrderManagement = () => {
                 <td>{order.status}</td>
                 <td>{order.total}</td>
                 <td className='flex gap-3'>
-                  <Link className='btn btn-neutral'><EyeIcon /></Link>
-
+                  {/* <Link className='btn btn-neutral'><EyeIcon /></Link> */}
+                  <OrderModal
+                    modalId={order.orderId}
+                    orderId={order.orderId}
+                    status={order.status}
+                    date={formatDate(order.createdAt)}
+                    total={order.total}
+                    productSnapshots={order.productSnapshots}
+                  />
                   <ConfirmWindow
                     elementId={`confirm-${order.orderId}`}
                     buttonClass="btn btn-primary"
@@ -118,6 +126,44 @@ const OrderManagement = () => {
           </tbody>
         </AdminTable>
       </AdminLayout >
+    </>
+  )
+}
+
+const OrderModal = ({
+  orderId,
+  modalId,
+  status,
+  date,
+  total,
+  productSnapshots
+}) => {
+  return (
+    <>
+      <button className="btn btn-neutral"
+        onClick={() => document.getElementById(modalId).showModal()}
+      >
+        <EyeIcon />
+      </button>
+      <dialog id={modalId} className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-3">Order Details</h3>
+          <OrderCard
+            orderId={orderId}
+            status={status}
+            date={formatDate(date)}
+            total={total}
+            productSnapshots={productSnapshots}
+          />
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+
+        </div>
+      </dialog>
     </>
   )
 }
