@@ -14,7 +14,7 @@ const Product = ({
         <img src="https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" className='object-contain w-20 h-20  rounded' />
       </Link>
       <div>
-        <Link to={`/p/snapshot/`} className='text-lg font-medium'>{productName}</Link>
+        <Link to={`/p/snapshot/${slug}`} className='text-lg font-medium'>{productName}</Link>
         <div>{quantity} * ${price} = ${quantity * price}</div>
         <div></div>
       </div>
@@ -38,29 +38,29 @@ export const OrderCard = ({
 
   console.log(snapshots)
   const handleStatusClass = (status) => {
-    let color = ""
     switch (status) {
       case "PENDING":
-        color = "yellow-500"
-        break
+        return {
+          status: status,
+          color: "yellow-500"
+        }
       case "COMPLETED":
-        color = "green-500"
-        break
+        return {
+          status: status,
+          color: "green-500"
+        }
       case "CANCELLED":
-        color = "red-500"
-        break
+        return {
+          status: status,
+          color: "red-500"
+        }
       default:
-        color = "black"
-        break
-    }
-    return {
-      status: status,
-      color: color
+        return {
+          status: status,
+          color: "black"
+        }
     }
   }
-
-
-
 
   return (
     <>
