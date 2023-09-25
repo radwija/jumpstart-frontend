@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { EyeIcon } from "../assets/SvgIcons";
-import Layout from "../components/Layout";
+import { EyeIcon } from "../../assets/SvgIcons";
+import Layout from "../../components/Layout";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { AlertMessage } from "../components/AlertMessage";
-import { CategoryBadge } from "../components/CategoryBadge";
-import useDocumentTitle from "./useDocumentTitle";
-import NotFound from "./NotFound";
-import { showSnapshotDetailsBySlugApi } from "../api/user-api";
+import { AlertMessage } from "../../components/AlertMessage";
+import { CategoryBadge } from "../../components/CategoryBadge";
+import useDocumentTitle from "../useDocumentTitle";
+import NotFound from "../NotFound";
+import { showSnapshotDetailsBySlugApi } from "../../api/user-api";
 import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
-import { formatDate } from "../utils/utils";
+import { formatDate } from "../../utils/utils";
 
 const ProductSnapshot = () => {
   const auth = useAuthUser();
@@ -62,11 +62,6 @@ const ProductSnapshot = () => {
         }
       })
   }, [slug])
-
-  const location = useLocation();
-  const isNewAddedProduct = location?.state?.isNewAddedProduct;
-  const messageType = location?.state?.messageType;
-  const message = location?.state?.message;
 
   return (
     <>
