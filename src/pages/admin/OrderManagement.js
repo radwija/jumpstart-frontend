@@ -8,7 +8,7 @@ import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
-import { completeOrderApi, getOrdersApi } from '../../api/admin-api'
+import { cancelOrderApi, completeOrderApi, getOrdersApi } from '../../api/admin-api'
 import { detailFormatDate, formatDate } from '../../utils/utils'
 import { OrderCard } from '../../components/OrderCard'
 import { AlertMessage } from '../../components/AlertMessage'
@@ -109,6 +109,52 @@ const OrderManagement = () => {
       })
   }
 
+  const handleCancelOrder = (orderId) => {
+    cancelOrderApi(token, orderId)
+      .then(res => {
+        setUpdated(true)
+        console.log(res)
+        setAlertMessage({
+          messageType: "success",
+          message: res.data.message
+        })
+        setTimeout(() => {
+          setAlertMessage(null)
+        }, 3000)
+      })
+      .catch(error => {
+        if (error?.response?.data) {
+          // error message from backend
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error?.response?.data.message
+            }
+          )
+        } else if (error) {
+          if (error.status) {
+            navigate("/login")
+          }
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error.message
+            }
+          )
+        } else {
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: "No response from server"
+            }
+          )
+        }
+        setTimeout(() => {
+          setAlertMessage(null)
+        }, 3000)
+      })
+  }
+
 
   return (
     <>
@@ -129,7 +175,7 @@ const OrderManagement = () => {
         <AdminTable>
           <thead>
             <tr>
-              <th>User ID</th>
+              <th>Order ID</th>
               <th>Customer Name</th>
               <th>Email</th>
               <th className='w-60'>Date</th>
@@ -175,7 +221,7 @@ const OrderManagement = () => {
                       confirmButtonText="Yes, delete product"
                       message={`Are you sure to cancel order ID: ${order.orderId}?`}
                       productName={"order.productName"}
-                      // action={() => handleCompleteOrder(order.orderId)}
+                      action={() => handleCancelOrder(order.orderId)}
                       icon={<CrossIcon />}
                     />
                   }
