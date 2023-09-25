@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { completePaymentApi } from '../../api/transaction-api'
+import { completePaymentApi } from '../api/transaction-api'
 import { useAuthUser } from 'react-auth-kit'
+import useDocumentTitle from '../pages/useDocumentTitle'
 
 export const RedirectCapture = () => {
+  useDocumentTitle("Redirect...")
   const queryParameters = new URLSearchParams(window.location.search)
   const captureToken = queryParameters.get("token")
 

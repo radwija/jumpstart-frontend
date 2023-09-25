@@ -20,10 +20,10 @@ import ContactUs from './pages/ContactUs';
 import UpdateProduct from './pages/admin/UpdateProduct';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
-import AccountActivation, { InvalidUrlView } from './pages/auth/registration/AccountActivation';
+import AccountActivation from './pages/auth/registration/AccountActivation';
 import { RequireAuth } from 'react-auth-kit';
 import Category from './pages/Category';
-import { RedirectCapture, RedirectCancel } from './pages/user/PaymentRedirect';
+import { RedirectCapture, RedirectCancel } from './hooks/PaymentRedirect';
 
 
 function App() {
