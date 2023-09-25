@@ -155,43 +155,45 @@ const ProductDetail = () => {
               <h1 className="text-xl font-semibold">Description</h1>
               <p className="paragraph">{product.description}</p>
             </div>
-            {!isAdmin &&
-              <div className='fixed bottom-0 left-0 right-0 z-10 lg:static sm:col-span-12 md:col-span-12 lg:col-span-3'>
-                <div className="p-5 rounded bg-white border shadow">
-                  {alertMessage &&
-                    <div className="mb-3">
-                      <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
-                    </div>
-                  }
-                  <h1 className="text-xl font-semibold">Order product</h1>
-                  <div className="mb-3">Stocks: {product.stock}</div>
 
-                  <div className="join w-full mb-3">
-                    <button type="button" className="btn join-item" onClick={() => handleProductNumber("-")}>-</button>
-                    <input
-                      type="number"
-                      className="join-item mx-2 w-full border text-center"
-                      value={productNumber === 0 ? setProductNumber(1) : productNumber}
-                      onChange={(e) => setProductNumber(Number(e.target.value))}
-                    // onInput={(e) => setProductNumber(Number(e.target.value))}
-                    />
-                    <button type="button" className="btn join-item" onClick={() => handleProductNumber("+")}>+</button>
+            <div className='fixed bottom-0 left-0 right-0 z-10 lg:static sm:col-span-12 md:col-span-12 lg:col-span-3'>
+              <div className="p-5 rounded bg-white border shadow">
+                {alertMessage &&
+                  <div className="mb-3">
+                    <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
                   </div>
-                  <div className="flex justify-between mb-3">
-                    <div>Total:</div>
-                    <div className="text-xl font-semibold">${(productNumber * product.price).toLocaleString("en-US")}</div>
-                  </div>
-                  <button
-                    type="button"
-                    disabled={stockValidation}
-                    className="btn btn-primary w-full"
-                    onClick={() => handleAddProductToCart(product.productId)}
-                  >
-                    <CartIcon /> Add to cart
-                  </button>
-                </div>
+                }
+                <h1 className="text-xl font-semibold">Order product</h1>
+                <div className="mb-3">Stocks: {product.stock}</div>
+                {!isAdmin &&
+                  <>
+                    <div className="join w-full mb-3">
+                      <button type="button" className="btn join-item" onClick={() => handleProductNumber("-")}>-</button>
+                      <input
+                        type="number"
+                        className="join-item mx-2 w-full border text-center"
+                        value={productNumber === 0 ? setProductNumber(1) : productNumber}
+                        onChange={(e) => setProductNumber(Number(e.target.value))}
+                      // onInput={(e) => setProductNumber(Number(e.target.value))}
+                      />
+                      <button type="button" className="btn join-item" onClick={() => handleProductNumber("+")}>+</button>
+                    </div>
+                    <div className="flex justify-between mb-3">
+                      <div>Total:</div>
+                      <div className="text-xl font-semibold">${(productNumber * product.price).toLocaleString("en-US")}</div>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={stockValidation}
+                      className="btn btn-primary w-full"
+                      onClick={() => handleAddProductToCart(product.productId)}
+                    >
+                      <CartIcon /> Add to cart
+                    </button>
+                  </>
+                }
               </div>
-            }
+            </div>
           </div >
         </Layout >
       )}

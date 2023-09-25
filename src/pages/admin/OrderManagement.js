@@ -8,9 +8,10 @@ import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
-import { getOrdersApi } from '../../api/admin-api'
+import { completeOrderApi, getOrdersApi } from '../../api/admin-api'
 import { detailFormatDate, formatDate } from '../../utils/utils'
 import { OrderCard } from '../../components/OrderCard'
+import { AlertMessage } from '../../components/AlertMessage'
 
 const OrderManagement = () => {
   useDocumentTitle('Order Management')
@@ -26,9 +27,11 @@ const OrderManagement = () => {
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
 
+  const [isUpdated, setUpdated] = useState(false)
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
+    setUpdated(false)
     window.scrollTo(0, 0)
     getOrdersApi(token, filter)
       .then(res => {
@@ -38,7 +41,8 @@ const OrderManagement = () => {
       .catch(err => {
         console.log(err)
       })
-  }, [filter])
+
+  }, [filter, isUpdated])
 
   const orderManagementNavigation = [
     {
@@ -58,11 +62,63 @@ const OrderManagement = () => {
       path: "/admin/orders?filter=cancelled"
     },
   ]
+  const [alertMessage, setAlertMessage] = useState(null)
+  const handleCompleteOrder = (orderId) => {
+    completeOrderApi(token, orderId)
+      .then(res => {
+        setUpdated(true)
+        console.log(res)
+        setAlertMessage({
+          messageType: "success",
+          message: res.data.message
+        })
+        setTimeout(() => {
+          setAlertMessage(null)
+        }, 3000)
+      })
+      .catch(error => {
+        if (error?.response?.data) {
+          // error message from backend
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error?.response?.data.message
+            }
+          )
+        } else if (error) {
+          if (error.status) {
+            navigate("/login")
+          }
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: error.message
+            }
+          )
+        } else {
+          setAlertMessage(
+            {
+              messageType: "error",
+              message: "No response from server"
+            }
+          )
+        }
+        setTimeout(() => {
+          setAlertMessage(null)
+        }, 3000)
+      })
+  }
+
 
   return (
     <>
       <AdminLayout>
         <PageHeading headingTitle='Order Management' />
+        {alertMessage &&
+          <div className='mb-4'>
+            <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
+          </div>
+        }
         <div className='overflow-x-auto mb-5'>
           <div className='flex gap-3'>
             {orderManagementNavigation.map((link) => (
@@ -101,25 +157,28 @@ const OrderManagement = () => {
                     total={order.total}
                     productSnapshots={order.productSnapshots}
                   />
-                  <ConfirmWindow
-                    elementId={`confirm-${order.orderId}`}
-                    buttonClass="btn btn-primary"
-                    confirmButtonText="Complete product"
-                    message={`Are you sure to complete order ID: ${order.orderId}?`}
-                    // name={order.productName}
-                    // action={() => handleDeleteProduct(product.productId)}
-                    icon={<CheckIcon />}
-                  />
+                  {order.status === "PENDING" &&
+                    <ConfirmWindow
+                      elementId={`confirm-complete-${order.orderId}`}
+                      buttonClass="btn btn-primary"
+                      confirmButtonText="Complete product"
+                      message={`Are you sure to complete order ID: ${order.orderId}?`}
+                      action={() => handleCompleteOrder(order.orderId)}
+                      icon={<CheckIcon />}
+                    />
+                  }
 
-                  <ConfirmWindow
-                    elementId={`confirm-${order.orderId}`}
-                    buttonClass="btn btn-error"
-                    confirmButtonText="Yes, delete product"
-                    message={`Are you sure to cancel order ID: ${order.orderId}?`}
-                    productName={"order.productName"}
-                    // action={() => handleDeleteProduct(product.productId)}
-                    icon={<CrossIcon />}
-                  />
+                  {order.status === "PENDING" &&
+                    <ConfirmWindow
+                      elementId={`confirm-cancel-${order.orderId}`}
+                      buttonClass="btn btn-error"
+                      confirmButtonText="Yes, delete product"
+                      message={`Are you sure to cancel order ID: ${order.orderId}?`}
+                      productName={"order.productName"}
+                      // action={() => handleCompleteOrder(order.orderId)}
+                      icon={<CrossIcon />}
+                    />
+                  }
                 </td>
               </tr>
             ))}
