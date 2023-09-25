@@ -74,7 +74,8 @@ const OrderManagement = () => {
             <tr>
               <th>User ID</th>
               <th>Customer Name</th>
-              <th>Date</th>
+              <th>Email</th>
+              <th className='w-60'>Date</th>
               <th>Status</th>
               <th>Total Amount</th>
               <th>Action</th>
@@ -84,7 +85,8 @@ const OrderManagement = () => {
             {orders.map((order) => (
               <tr key={order.orderId}>
                 <td>{order.orderId}</td>
-                <td>Customer Name</td>
+                <td>{order.fullName}</td>
+                <td>{order.email}</td>
                 <td>{detailFormatDate(order.createdAt)}</td>
                 <td>{order.status}</td>
                 <td>{order.total}</td>
