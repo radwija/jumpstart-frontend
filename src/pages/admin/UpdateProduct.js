@@ -11,6 +11,7 @@ import * as Yup from "yup"
 import { addProductApi, updateProductApi } from '../../api/admin-api'
 import { showAllCategoriesApi, showProductDetailsApiBySlug } from '../../api/public-api'
 import { AlertMessage } from '../../components/AlertMessage'
+import NotFound from '../NotFound'
 
 const UpdateProduct = () => {
   useDocumentTitle('Update Product')
@@ -130,7 +131,8 @@ const UpdateProduct = () => {
         categoryId: values.categoryId
       })
         .then(res => {
-          console.log(res.data.result.slug)
+          formik.resetForm();
+          // console.log(res.data.result.slug)
           navigate(`/p/${res.data.result.slug}`, {
             state: {
               isNewAddedProduct: true,
@@ -140,7 +142,10 @@ const UpdateProduct = () => {
           })
         })
         .catch(error => {
-          if (error?.response?.data) {
+          if (error.status === 404) {
+            setIsNotFound(true)
+          }
+          else if (error?.response?.data) {
             // error message from backend
             setAlertMessage(
               {
@@ -178,7 +183,7 @@ const UpdateProduct = () => {
   // console.log(initialFormValues)
   return (
     <>
-      <AdminLayout>
+      {isNotFound ? (<NotFound />) : (<AdminLayout>
         <div className='flex'>
           <BackButton to="/admin/inventory" />
           <PageHeading headingTitle='Update Product' />
@@ -334,7 +339,7 @@ const UpdateProduct = () => {
           </div>
           <button type='submit' className='btn btn-primary'>Add product</button>
         </form>
-      </AdminLayout >
+      </AdminLayout >)}
     </>
   )
 }
