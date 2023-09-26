@@ -130,6 +130,12 @@ function App() {
                 <AddProduct />
               </RequireAuth>} />
           <Route
+            path='/admin/update-product/:slug'
+            element={
+              <RequireAuth loginPath='/login'>
+                <UpdateProduct />
+              </RequireAuth>} />
+          <Route
             path='/admin/update-product'
             element={
               <RequireAuth loginPath='/login'>
