@@ -18,6 +18,11 @@ export const Navbar = () => {
     navigate("/")
   }
 
+  const queryParameters = new URLSearchParams(window.location.search)
+  const searchParam = queryParameters.get("q")
+
+  const [searchQuery, setSearchQuery] = useState(searchParam)
+
   return (
     <div className="fixed z-20 navbar bg-base-100 shadow">
       <div className="flex-1">
@@ -31,7 +36,17 @@ export const Navbar = () => {
           <Link to={'/category'} className='btn btn-ghost drawer-button font-normal'>Category</Link>
         </div>
         <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered md:w-auto" />
+          <input
+            type="text"
+            placeholder="Search for products"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                navigate(`/products?q=${searchQuery}`);
+              }
+            }}
+            className="input input-bordered md:w-auto" />
         </div>
         {!isLogin() ?
           (

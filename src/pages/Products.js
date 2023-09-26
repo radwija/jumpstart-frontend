@@ -54,11 +54,14 @@ const Products = () => {
   const handleCategoryChange = (e) => {
     setCategory(e.target.value)
     if (searchParam !== null) {
-      navigate(`?category=${e.target.value}&q=${searchParam}`)
-      setFullParam(`?category=${e.target.value}&q=${searchParam}`)
-    } else {
-      navigate(`?category=${e.target.value}`)
-      setFullParam(`?category=${e.target.value}`)
+      navigate(`/products?category=${e.target.value}&q=${searchParam}`)
+      setFullParam(`/products?category=${e.target.value}&q=${searchParam}`)
+    } if (searchParam === "" && category !== null) {
+      navigate(`/products?category=${e.target.value}`)
+      setFullParam(`/products?category=${e.target.value}`)
+    } if (searchParam === "" && category === null) {
+      navigate(`/products`)
+      setFullParam(`/products`)
     }
   }
   return (
