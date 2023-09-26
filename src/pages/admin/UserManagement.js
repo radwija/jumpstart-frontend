@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminLayout from '../../components/admin/layout/AdminLayout'
 import { PageHeading } from '../../components/PageHeading'
 import useDocumentTitle from '../useDocumentTitle'
@@ -8,6 +8,8 @@ import { AdminTable } from '../../components/AdminTable'
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit'
 import { useRedirectUser } from '../../hooks/redirectUser'
 import { ConfirmWindow } from '../../components/ConfirmWindow'
+import { showUsersApi } from '../../api/admin-api'
+import { formatDate } from '../../utils/utils'
 
 const UserManagement = () => {
   useDocumentTitle('User Management')
@@ -21,8 +23,25 @@ const UserManagement = () => {
   const navigate = useNavigate()
   const redirectUser = useRedirectUser()
 
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0)
+    showUsersApi(token)
+      .then(res => {
+        setUsers(res.data.result.customers)
+      })
+      .catch(error => {
+        if (error?.response?.data) {
+          console.log(error?.response?.data.message)
+        } else if (error) {
+          if (error.status) {
+            navigate("/login")
+          }
+          console.log(error.message)
+        } else {
+          console.log(error)
+        }
+      })
   }, [])
 
   return (
@@ -36,31 +55,35 @@ const UserManagement = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Registered at</th>
+              <th>Activation</th>
               <th>Role</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Spongebob Squarepants</td>
-              <td>spongebob@email.com</td>
-              <td>07/09/2023</td>
-              <td>USER</td>
-              <td className='flex gap-3'>
-                <Link to={`/p/{product.slug}`} className='btn btn-neutral'><EyeIcon /></Link>
-                <Link className='btn btn-secondary'><EditIcon /></Link>
-                <ConfirmWindow
-                  elementId={`confirm-{user.productId}`}
-                  buttonClass="btn btn-error"
-                  confirmButtonText="Yes, delete user"
-                  message={`Are you sure to delete user ID: {user.productId}?`}
-                  name={"user.productName"}
-                  // action={() => handleDeleteProduct(product.productId)}
-                  icon={<TrashIcon />}
-                />
-              </td>
-            </tr>
+            {users.map((user) => (
+              <tr key={user.userId}>
+                <td>{user.userId}</td>
+                <td>{user.fullName}</td>
+                <td>{user.email}</td>
+                <td>{formatDate(user.registeredAt)}</td>
+                <td>{user.isActive === true ? "ACTIVE" : "NOT ACTIVATED"}</td>
+                <td>{user.role}</td>
+                <td className='flex gap-3'>
+                  <Link to={`/admin/users/detail/${user.userId}`} className='btn btn-neutral'><EyeIcon /></Link>
+                  <Link className='btn btn-secondary'><EditIcon /></Link>
+                  <ConfirmWindow
+                    elementId={`confirm-{user.productId}`}
+                    buttonClass="btn btn-error"
+                    confirmButtonText="Yes, delete user"
+                    message={`Are you sure to delete user ID: {user.productId}?`}
+                    name={"user.productName"}
+                    // action={() => handleDeleteProduct(product.productId)}
+                    icon={<TrashIcon />}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </AdminTable>
       </AdminLayout >

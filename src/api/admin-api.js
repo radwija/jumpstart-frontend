@@ -125,3 +125,23 @@ export const cancelOrderApi = async (token, orderId) => {
     }
   }
 }
+
+export const showUsersApi = async (token) => {
+  try {
+    const response = await axios.get(`${ADMIN_URL}/customers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
