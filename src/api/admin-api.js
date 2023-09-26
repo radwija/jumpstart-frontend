@@ -145,3 +145,23 @@ export const showUsersApi = async (token) => {
     }
   }
 }
+
+export const showStatsApi = async (token) => {
+  try {
+    const response = await axios.get(`${ADMIN_URL}/statistics`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
