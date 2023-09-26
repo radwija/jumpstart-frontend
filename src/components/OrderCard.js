@@ -11,7 +11,7 @@ const Product = ({
   return (
     <div div className='flex gap-3' >
       <Link to={`/p/snapshot/${slug}`} className='aspect-square border rounded'>
-        <img src="https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="" className='object-contain w-20 h-20  rounded' />
+        <img src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="" className='object-contain w-20 h-20  rounded' />
       </Link>
       <div>
         <Link to={`/p/snapshot/${slug}`} className='text-lg font-medium'>{productName}</Link>

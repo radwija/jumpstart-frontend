@@ -151,7 +151,7 @@ export const ItemCard = (props) => {
         <div className='flex gap-4'>
           <div className="w-20 h-20 aspect-square bg-white border rounded overflow-hidden">
             <Link to={`/p/${props.slug}`}>
-              <img className="object-contain w-full h-full" src="https://media.gettyimages.com/id/1290195876/photo/smartphone-in-female-hands-taking-photo-isolated-on-white-background.jpg?s=612x612&w=gi&k=20&c=BxAh7CzDecHZsibLq7yHRi7zH8VLyo4zn0MmzvboVg4=" alt="" />
+              <img className="object-contain w-full h-full" src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="" />
             </Link>
           </div>
           <div>

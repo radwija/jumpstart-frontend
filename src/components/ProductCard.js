@@ -9,7 +9,7 @@ const ProductCard = (props) => {
       <div className="card card-compact bg-base-100 border shadow">
         <Link to={`/p/${props.slug}`}>
           <figure className='aspect-square'>
-            <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
+            <img src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="Shoes" />
           </figure>
         </Link>
         <hr />
