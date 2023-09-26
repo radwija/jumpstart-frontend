@@ -2,18 +2,29 @@ import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard';
 import Layout from '../components/Layout';
 import useDocumentTitle from './useDocumentTitle';
-import { showAllProductsApi } from '../api/public-api';
+import { searchForProductsApi, showAllCategoriesApi, showAllProductsApi } from '../api/public-api';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Products = () => {
   useDocumentTitle("Products")
+  const queryParameters = new URLSearchParams(window.location.search)
+  const searchParam = queryParameters.get("q")
+  const categoryParam = queryParameters.get("category")
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+
+  const [search, setSearch] = useState("")
+  const [category, setCategory] = useState("")
+  const [fullParam, setFullParam] = useState("")
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    showAllProductsApi()
+    showAllCategoriesApi()
       .then(res => {
-        setProducts(res.data.result)
+        setCategories(res.data.result)
       })
       .catch(error => {
         if (error.response && error.response.data) {
@@ -22,7 +33,34 @@ const Products = () => {
           return "No respon from server"
         }
       })
-  }, [])
+
+    searchForProductsApi(categoryParam, searchParam)
+      .then(res => {
+        setProducts(res.data.result.searchResults)
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data)
+        } else {
+          return "No respon from server"
+        }
+      })
+  }, [location])
+
+  useEffect(() => {
+
+  }, [category])
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+    if (searchParam !== null) {
+      navigate(`?category=${e.target.value}&q=${searchParam}`)
+      setFullParam(`?category=${e.target.value}&q=${searchParam}`)
+    } else {
+      navigate(`?category=${e.target.value}`)
+      setFullParam(`?category=${e.target.value}`)
+    }
+  }
   return (
     <>
       <Layout>
@@ -30,25 +68,21 @@ const Products = () => {
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:block lg:col-span-3'>
             <h1 className="text-lg font-semibold mb-2">Filter</h1>
             <div className='border shadow rounded p-5 overflow-x-auto'>
-              <form action="" className='flex sm:flex md:flex lg:flex-col gap-3'>
-                <select className="select select-bordered max-w-xs sm:w-full sm:max-w-xs md:w-full md:max-w-xs lg:w-full lg:max-w-xs">
-                  <option disabled selected>Category</option>
-                  <option>Toy</option>
-                  <option>Electronic</option>
+              <div className='flex sm:flex md:flex lg:flex-col gap-3'>
+                <select onChange={(e) => handleCategoryChange(e)} className="select select-bordered max-w-xs sm:w-full sm:max-w-xs md:w-full md:max-w-xs lg:w-full lg:max-w-xs">
+                  <option disabled selected value={0}>Choose category</option>
+                  {categories.length !== 0 && categories.map((category) => (
+                    <option
+                      value={category?.categorySlug}
+                      key={category?.categoryId}
+                      selected={category?.categorySlug === categoryParam}
+                    >
+                      {category.categoryName}
+                    </option>
+                  )
+                  )}
                 </select>
-                <div className="form-control sm:w-full md:w-full lg:w-full">
-                  <label className="label hidden sm:hidden md:hidden lg:block">
-                    <span className="label-text">Min price</span>
-                  </label>
-                  <input type="number" placeholder="Min price" className="input input-bordered w-40 sm:w-full md:w-full lg:w-full" />
-                </div>
-                <div className="form-control sm:w-full md:w-full lg:w-full">
-                  <label className="label hidden sm:hidden md:hidden lg:block">
-                    <span className="label-text">Max price</span>
-                  </label>
-                  <input type="number" placeholder="Max price" className="input input-bordered w-40 sm:w-full md:w-full lg:w-full" />
-                </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className='mx-5 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-9 bg-white'>
