@@ -30,24 +30,26 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState({
     productId: 0,
     productName: "",
+    slug: "",
     description: "",
     price: 0,
     stock: 0,
     weight: 0,
-    createdAt: null,
-    updatedAt: null,
+    categoryId: 0,
     category: {
-      categoryId: 0,
       categoryName: "",
+      categoryId: 0,
       categorySlug: ""
     }
-  })
+  }
+  )
+  const [productName, setProductName] = useState("")
   useEffect(() => {
     window.scrollTo(0, 0)
     disableScroll()
     showProductDetailsApiBySlug(slug)
       .then(res => {
-        console.log(res)
+        setProductName(res.data.result.productName)
         setProduct(res.data.result)
       })
       .catch(error => {
@@ -86,6 +88,7 @@ const UpdateProduct = () => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       productName: product.productName,
       slug: product.slug,
@@ -172,7 +175,7 @@ const UpdateProduct = () => {
 
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     formik;
-
+  // console.log(initialFormValues)
   return (
     <>
       <AdminLayout>
