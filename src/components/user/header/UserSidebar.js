@@ -7,7 +7,7 @@ export const UserSidebar = (props) => {
   return (
     <div className="border shadow rounded p-5">
       <div className='text-center flex flex-col gap-3'>
-        <img src="https://i1.sndcdn.com/artworks-000139163741-dk8qn7-t500x500.jpg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
         <div>
           <h1 className='text-xl font-semibold'>{props?.fullname}</h1>
           <div className="group relative">
