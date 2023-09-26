@@ -26,7 +26,7 @@ export const addProductApi = async (token, productRequest) => {
     const response = await axios.post(`${ADMIN_URL}/add-product`, productRequest, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       },
       withCredentials: true
     })

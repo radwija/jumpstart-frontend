@@ -78,6 +78,7 @@ export const MyCart = () => {
                 itemId={item.itemId}
                 productName={item.product.productName}
                 slug={item.product.slug}
+                image={item.product.image}
                 categoryName={item.product.category.categoryName}
                 quantity={item.quantity}
                 price={item.product.price}
