@@ -20,8 +20,8 @@ export const adminLinks = [
     icon: <CartIcon />
   },
   {
-    name: "Users",
-    path: "/admin/users",
+    name: "Customers",
+    path: "/admin/customers",
     icon: <UsersIcon />
   }
 ];

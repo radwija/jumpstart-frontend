@@ -118,7 +118,7 @@ function App() {
               </RequireAuth>
             } />
           <Route
-            path='/admin/users'
+            path='/admin/customers'
             element={
               <RequireAuth loginPath='/login'>
                 <UserManagement />

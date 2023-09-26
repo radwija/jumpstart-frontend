@@ -47,7 +47,7 @@ const UserManagement = () => {
   return (
     <>
       <AdminLayout>
-        <PageHeading headingTitle='User Management' />
+        <PageHeading headingTitle='Customers' />
         <AdminTable>
           <thead>
             <tr>
@@ -57,7 +57,7 @@ const UserManagement = () => {
               <th>Registered at</th>
               <th>Activation</th>
               <th>Role</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -69,7 +69,7 @@ const UserManagement = () => {
                 <td>{formatDate(user.registeredAt)}</td>
                 <td>{user.isActive === true ? "ACTIVE" : "NOT ACTIVATED"}</td>
                 <td>{user.role}</td>
-                <td className='flex gap-3'>
+                {/* <td className='flex gap-3'>
                   <Link to={`/admin/users/detail/${user.userId}`} className='btn btn-neutral'><EyeIcon /></Link>
                   <Link className='btn btn-secondary'><EditIcon /></Link>
                   <ConfirmWindow
@@ -81,7 +81,7 @@ const UserManagement = () => {
                     // action={() => handleDeleteProduct(product.productId)}
                     icon={<TrashIcon />}
                   />
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
