@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from "../components/Layout";
 import useDocumentTitle from './useDocumentTitle';
 import hero from '../assets/images/hero.png'
 import { PageHeading } from '../components/PageHeading';
 import { CategoryCard } from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
+import { showAllProductsApi } from '../api/public-api';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   useDocumentTitle("Welcome to Jumpstart")
+
+  const [products, setProducts] = useState([])
   useEffect(() => {
     window.scrollTo(0, 0)
+    showAllProductsApi()
+      .then(res => {
+        setProducts(res.data.result)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
   return (
     <>
@@ -30,12 +41,28 @@ const HomePage = () => {
           <section>
             <PageHeading headingTitle="Our Products" />
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 xl:gap-5'>
-              {/* <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard /> */}
+              {products.slice(0, 8).map((product) => (
+                <ProductCard
+                  key={product.productId}
+                  productId={product.productId}
+                  slug={product.slug}
+                  productName={product.productName}
+                  category={product.category}
+                  price={product.price}
+                />
+              )
+              )}
             </div>
+            {products.length > 8 &&
+              <div className='mx-auto text-center py-5'>
+                <Link
+                  to={"/products"}
+                  className='btn btn-primary mx-auto'
+                >
+                  See all products
+                </Link>
+              </div>
+            }
           </section>
         </div>
       </Layout>
