@@ -6,12 +6,22 @@ const Product = ({
   slug,
   productName,
   quantity,
-  price
+  price,
+  image
 }) => {
   return (
     <div div className='flex gap-3' >
       <Link to={`/p/snapshot/${slug}`} className='aspect-square border rounded'>
-        <img src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="" className='object-contain w-20 h-20  rounded' />
+        {image ?
+          (<img
+            src={`data:image/jpeg;base64,${image}`}
+            alt="product thumbnail"
+            className="object-contain w-20 h-full rounded" />) :
+          (<img
+            src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg"
+            alt="product thumbnail"
+            className="object-contain w-20 h-full rounded" />)
+        }
       </Link>
       <div>
         <Link to={`/p/snapshot/${slug}`} className='text-lg font-medium'>{productName}</Link>
@@ -52,7 +62,7 @@ export const OrderCard = ({
   status,
   date,
   total,
-  productSnapshots
+  productSnapshots,
 }) => {
 
   const [snapshots, setSnapshots] = useState([])
@@ -80,6 +90,7 @@ export const OrderCard = ({
               productName={snapshot.productName}
               quantity={snapshot.quantity}
               price={snapshot.price}
+              image={snapshot.image}
             />
           ))}
         </div>
