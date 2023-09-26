@@ -148,8 +148,7 @@ const ProductDetail = () => {
 
               <h1 className="text-xl font-semibold">Details</h1>
               <div>Weight: {product.weight} kg</div>
-              <div>Category: <CategoryBadge categoryName={product.category.categoryName} categoryUrl={product.category?.categorySlug} /></div>
-
+              <div>Category: <CategoryBadge categoryName={product.category.categoryName} categorySlug={product.category.categorySlug} /></div>
               <hr className="my-3" />
 
               <h1 className="text-xl font-semibold">Description</h1>

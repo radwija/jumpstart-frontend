@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const CategoryCard = (props) => {
   return (
-    <Link to={props.to}>
+    <Link to={`/products?category=${props.categorySlug}`}>
       <div
         className="flex justify-center items-center text-white text-2xl font-medium py-4 px-6 border rounded-lg bg-light h-28 sm:h-28 md:h-32 lg:h-40"
         style={{
