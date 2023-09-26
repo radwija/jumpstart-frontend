@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { } from '../../components/OrderCard'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { EditIcon } from '../../assets/SvgIcons'
 import { PageHeading } from '../../components/PageHeading'
 import UserLayout from '../../components/user/layout/UserLayout'
 import useDocumentTitle from '../useDocumentTitle'
 import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit'
 import { myProfileApi } from '../../api/user-api'
+import { AlertMessage } from '../../components/AlertMessage'
 
 export const Profile = () => {
   useDocumentTitle("My Profile")
@@ -17,9 +18,15 @@ export const Profile = () => {
   const isLogin = useIsAuthenticated()
   const isAdmin = isLogin() && role === "ROLE_ADMIN"
 
+  const location = useLocation();
+  const isUpdated = location?.state?.isNewAddedProduct;
+  const messageType = location?.state?.messageType;
+  const message = location?.state?.message;
+
   const [userProfile, setUserProfile] = useState({})
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     myProfileApi(token)
       .then(res => {
         setUserProfile({
@@ -34,12 +41,13 @@ export const Profile = () => {
       .catch(error => {
         console.error(error);
       });
+    window.history.replaceState(null, null)
   }, [token])
 
   return (
     <>
       <UserLayout>
-        <div className='grid grid-cols-9 gap-4'>
+        <div className='grid grid-cols-9 gap-10'>
           <div className="flex flex-col gap-4 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3">
             <div className='flex flex-col gap-3 mx-auto'>
               <div className='text-center flex flex-col gap-3 mask mask-circle w-32 sm:w-32 md:w-32 lg:w-full'>
@@ -49,6 +57,11 @@ export const Profile = () => {
             </div>
           </div>
           <div className="col-span-9 sm:col-span-9 md:col-span-9 lg:col-span-6">
+            {isUpdated &&
+              <div className="mb-3">
+                <AlertMessage messageType={messageType} message={message} />
+              </div>
+            }
             <div className='flex gap-1 mb-3'>
               <PageHeading headingTitle='My profile' />
               <Link to={'/user/profile/update'}>

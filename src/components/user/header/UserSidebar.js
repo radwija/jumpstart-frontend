@@ -22,7 +22,7 @@ export const UserSidebar = (props) => {
       </div>
 
       <ul className='mt-6'>
-        <li><Link to={`/user/profile`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><UserIcon /> Profile</Link></li>
+        <li><Link to={`/user`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><UserIcon /> Profile</Link></li>
         {props?.isAdmin &&
           <li><Link to={`/admin`} className='w-full px-3 py-4 flex gap-3 rounded hover:bg-slate-100'><CompanyIcon /> Administrator</Link></li>
         }
