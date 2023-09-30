@@ -337,7 +337,7 @@ const UpdateProduct = () => {
               </label>
             }
           </div>
-          <button type='submit' className='btn btn-primary'>Add product</button>
+          <button type='submit' className='btn btn-primary'>Update product</button>
         </form>
       </AdminLayout >)}
     </>

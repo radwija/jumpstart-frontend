@@ -83,7 +83,7 @@ const CreateCategory = () => {
               onBlur={handleBlur}
             />
           </div>
-          <button type='submit' className='btn btn-primary'>Add product</button>
+          <button type='submit' className='btn btn-primary'>Create Category</button>
         </form>
       </AdminLayout >
     </>
