@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CartIcon } from "../assets/SvgIcons";
 import Layout from "../components/Layout";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AlertMessage } from "../components/AlertMessage";
 import { showProductDetailsApiBySlug } from "../api/public-api";
 import { CategoryBadge } from "../components/CategoryBadge";
@@ -171,6 +171,14 @@ const ProductDetail = () => {
                 }
                 <h1 className="text-xl font-semibold">Order product</h1>
                 <div className="mb-3">Stocks: {product.stock}</div>
+                {isAdmin &&
+                  <Link
+                    to={`/admin/update-product/${slug}`}
+                    className="btn btn-primary w-full"
+                  >
+                    Update product
+                  </Link>
+                }
                 {!isAdmin &&
                   <>
                     <div className="join w-full mb-3">

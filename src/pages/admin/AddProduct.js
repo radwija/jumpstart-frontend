@@ -229,6 +229,7 @@ const AddProduct = () => {
             </label>
             <input
               type="file"
+              accept=".jpeg, .jpg, ,.png, .avif"
               className="file-input file-input-bordered  w-full max-w-xs"
               name="image"
               onChange={(event) =>
