@@ -99,6 +99,7 @@ const Products = () => {
                 <ProductCard
                   key={product.productId}
                   productId={product.productId}
+                  image={product.image}
                   slug={product.slug}
                   productName={product.productName}
                   category={product.category}

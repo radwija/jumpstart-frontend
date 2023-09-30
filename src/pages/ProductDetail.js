@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CartIcon } from "../assets/SvgIcons";
 import Layout from "../components/Layout";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AlertMessage } from "../components/AlertMessage";
 import { showProductDetailsApiBySlug } from "../api/public-api";
 import { CategoryBadge } from "../components/CategoryBadge";
@@ -105,6 +105,7 @@ const ProductDetail = () => {
     window.scrollTo(0, 0)
     showProductDetailsApiBySlug(slug)
       .then(res => {
+        console.log(res)
         setProduct(res.data.result)
       })
       .catch(error => {
@@ -137,7 +138,13 @@ const ProductDetail = () => {
                 </div>
               }
               <div className="aspect-square border rounded">
-                <img src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="product thumbnail" className="object-contain w-full h-full rounded" />
+                {product?.image ?
+                  (<img
+                    src={`data:image/jpeg;base64,${product?.image}`}
+                    alt="product thumbnail"
+                    className="object-contain w-full h-full rounded" />) :
+                  (<img src="https://static.vecteezy.com/system/resources/previews/004/745/297/non_2x/3d-isometric-paper-shopping-bag-in-circle-icon-shopping-bag-for-advertising-and-branding-collection-for-retail-design-for-web-page-ui-mobile-illustration-for-products-and-things-free-vector.jpg" alt="product thumbnail" className="object-contain w-full h-full rounded" />)
+                }
               </div>
             </div>
             <div className='mx-5 sm:col-span-12 md:col-span-12 lg:col-span-5 bg-white'>
@@ -164,6 +171,14 @@ const ProductDetail = () => {
                 }
                 <h1 className="text-xl font-semibold">Order product</h1>
                 <div className="mb-3">Stocks: {product.stock}</div>
+                {isAdmin &&
+                  <Link
+                    to={`/admin/update-product/${slug}`}
+                    className="btn btn-primary w-full"
+                  >
+                    Update product
+                  </Link>
+                }
                 {!isAdmin &&
                   <>
                     <div className="join w-full mb-3">

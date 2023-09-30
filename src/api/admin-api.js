@@ -26,7 +26,7 @@ export const addProductApi = async (token, productRequest) => {
     const response = await axios.post(`${ADMIN_URL}/add-product`, productRequest, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       },
       withCredentials: true
     })
@@ -45,7 +45,7 @@ export const updateProductApi = async (token, slug, productRequest) => {
     const response = await axios.put(`${ADMIN_URL}/update-product/${slug}`, productRequest, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       },
       withCredentials: true
     })

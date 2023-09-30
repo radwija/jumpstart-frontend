@@ -10,6 +10,8 @@ import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { addProductApi } from '../../api/admin-api'
 import { showAllCategoriesApi } from '../../api/public-api'
+import axios from '../../api/axios'
+import { AlertMessage } from '../../components/AlertMessage'
 
 const AddProduct = () => {
   useDocumentTitle('Add Product')
@@ -24,6 +26,7 @@ const AddProduct = () => {
   const redirectUser = useRedirectUser()
 
   const [categories, setCategories] = useState([])
+  const [alertMessage, setAlertMessage] = useState(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -60,7 +63,8 @@ const AddProduct = () => {
       price: 0,
       stock: 0,
       weight: 0,
-      categoryId: 0
+      categoryId: 0,
+      image: null,
     },
     validationSchema: Yup.object({
       productName: Yup.string()
@@ -82,17 +86,20 @@ const AddProduct = () => {
       categoryId: Yup.number()
         .notOneOf([0], "Please choose category")
         .required('Category is required'),
+      image: Yup.mixed().required("Please provide a photo"),
     }),
-    onSubmit: (values) => {
-      addProductApi(token, {
-        productName: values.productName,
-        slug: values.slug,
-        description: values.description,
-        price: values.price,
-        stock: values.stock,
-        weight: values.weight,
-        categoryId: values.categoryId
-      })
+    onSubmit: async (values) => {
+      const formData = new FormData();
+      formData.append("image", values.image);
+      formData.append("productName", values.productName);
+      formData.append("slug", values.slug);
+      formData.append("description", values.description);
+      formData.append("price", values.price);
+      formData.append("stock", values.stock);
+      formData.append("weight", values.weight);
+      formData.append("categoryId", values.categoryId);
+
+      addProductApi(token, formData)
         .then(res => {
           console.log(res.data.result.slug)
           navigate(`/p/${res.data.result.slug}`, {
@@ -104,7 +111,35 @@ const AddProduct = () => {
           })
         })
         .catch(error => {
-          console.log(error)
+          if (error?.response?.data) {
+            // error message from backend
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: error?.response?.data.message
+              }
+            )
+          } else if (error) {
+            if (error.status) {
+              navigate("/login")
+            }
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: error.message
+              }
+            )
+          } else {
+            setAlertMessage(
+              {
+                messageType: "error",
+                message: "No response from server"
+              }
+            )
+          }
+          setTimeout(() => {
+            setAlertMessage(null)
+          }, 3000)
         })
     }
   })
@@ -119,7 +154,14 @@ const AddProduct = () => {
           <BackButton to="/admin/inventory" />
           <PageHeading headingTitle='Add Product' />
         </div>
-        <form onSubmit={handleSubmit} className='grid gap-y-3'>
+        {alertMessage &&
+          <div className="mb-3">
+            <AlertMessage messageType={alertMessage.messageType} message={alertMessage.message} />
+          </div>
+        }
+        <form
+          onSubmit={handleSubmit}
+          className='grid gap-y-3'>
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Product name</span>
@@ -185,7 +227,16 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text">Product Image</span>
             </label>
-            <input type="file" className="file-input file-input-bordered  w-full max-w-xs" />
+            <input
+              type="file"
+              accept=".jpeg, .jpg, ,.png, .avif"
+              className="file-input file-input-bordered  w-full max-w-xs"
+              name="image"
+              onChange={(event) =>
+                formik.setFieldValue("image", event.target.files[0])
+              }
+              onBlur={handleBlur}
+            />
           </div>
           <div className="form-control w-full">
             <label className="label">

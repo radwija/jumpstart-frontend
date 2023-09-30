@@ -41,16 +41,15 @@ const UpdateProduct = () => {
       categoryName: "",
       categoryId: 0,
       categorySlug: ""
-    }
+    },
+    image: null,
   }
   )
-  const [productName, setProductName] = useState("")
   useEffect(() => {
     window.scrollTo(0, 0)
     disableScroll()
     showProductDetailsApiBySlug(slug)
       .then(res => {
-        setProductName(res.data.result.productName)
         setProduct(res.data.result)
       })
       .catch(error => {
@@ -97,7 +96,8 @@ const UpdateProduct = () => {
       price: product.price,
       stock: product.stock,
       weight: product.weight,
-      categoryId: product.category.categoryId
+      categoryId: product.category.categoryId,
+      image: null,
     },
     validationSchema: Yup.object({
       productName: Yup.string()
@@ -119,17 +119,19 @@ const UpdateProduct = () => {
       categoryId: Yup.number()
         .notOneOf([0], "Please choose category")
         .required('Category is required'),
+      // image: Yup.mixed().required("Please provide a photo"),
     }),
     onSubmit: (values) => {
-      updateProductApi(token, slug, {
-        productName: values.productName,
-        slug: values.slug,
-        description: values.description,
-        price: values.price,
-        stock: values.stock,
-        weight: values.weight,
-        categoryId: values.categoryId
-      })
+      const formData = new FormData();
+      formData.append("image", values.image);
+      formData.append("productName", values.productName);
+      formData.append("slug", values.slug);
+      formData.append("description", values.description);
+      formData.append("price", values.price);
+      formData.append("stock", values.stock);
+      formData.append("weight", values.weight);
+      formData.append("categoryId", values.categoryId);
+      updateProductApi(token, slug, formData)
         .then(res => {
           formik.resetForm();
           // console.log(res.data.result.slug)
@@ -142,6 +144,7 @@ const UpdateProduct = () => {
           })
         })
         .catch(error => {
+          console.log({ error })
           if (error.status === 404) {
             setIsNotFound(true)
           }
@@ -180,6 +183,8 @@ const UpdateProduct = () => {
 
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     formik;
+
+  console.log(values.image)
   // console.log(initialFormValues)
   return (
     <>
@@ -259,7 +264,22 @@ const UpdateProduct = () => {
             <label className="label">
               <span className="label-text">Product Image</span>
             </label>
-            <input type="file" className="file-input file-input-bordered  w-full max-w-xs" />
+            <input
+              type="file"
+              accept=".jpeg, .jpg, ,.png, .avif"
+              className="file-input file-input-bordered  w-full max-w-xs"
+              name="image"
+              onChange={(event) =>
+                formik.setFieldValue("image", event.target.files[0])
+              }
+              onBlur={handleBlur}
+              required={!product.image}
+            />
+            {errors.image && touched.image &&
+              <label className="label">
+                <span className="label-text-alt text-red-600">{errors.image}</span>
+              </label>
+            }
           </div>
           <div className="form-control w-full">
             <label className="label">
@@ -337,7 +357,7 @@ const UpdateProduct = () => {
               </label>
             }
           </div>
-          <button type='submit' className='btn btn-primary'>Add product</button>
+          <button type='submit' className='btn btn-primary'>Update product</button>
         </form>
       </AdminLayout >)}
     </>

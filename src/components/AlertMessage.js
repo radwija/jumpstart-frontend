@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export const AlertMessage = (props) => {
   const handleResponse = (response) => {
@@ -38,6 +39,13 @@ export const AlertMessage = (props) => {
     <div className={`alert ${alertClass}`}>
       {handleResponse(props.messageType).icon}
       <span>{props.message}</span>
+      {props.redirectBtnName &&
+        <Link
+          to={props.redirectTo}
+          className='link'
+        >
+          {props.redirectBtnName}</Link>
+      }
     </div>
   )
 }

@@ -7,10 +7,13 @@ import { Link, useParams } from 'react-router-dom';
 import useDocumentTitle from '../../useDocumentTitle';
 import { accountActivationApi } from '../../../api/auth-api';
 
-export const InvalidUrlView = () => {
+export const InvalidUrlView = (props) => {
   return (
     <>
-      <PageHeading headingTitle="Invalid URL" />
+      {props.message ?
+        <PageHeading headingTitle={props.message} /> :
+        <PageHeading headingTitle="Invalid URL" />
+      }
       <Link to={'/'} className='btn btn-primary'>Go to home</Link>
       <img src={not_found} alt="url not found illustration" className='mx-auto h-96' />
     </>
