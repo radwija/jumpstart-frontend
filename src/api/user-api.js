@@ -40,6 +40,25 @@ export const updateProfileApi = async (token, updateProfileRequest) => {
     }
   }
 }
+export const updateProfilePictureApi = async (token, request) => {
+  try {
+    const response = await axios.put(`${USER_URL}/update-profile-picture`, request, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data"
+      },
+      withCredentials: true
+    })
+    return response
+  } catch (error) {
+    console.log(error)
+    if (error.response && error.response.data) {
+      throw error.response.data
+    } else {
+      throw "No respon from server"
+    }
+  }
+}
 
 export const addProductToCartApi = async (token, cartItemRequest) => {
   try {

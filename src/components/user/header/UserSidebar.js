@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BagIcon, CartIcon, CompanyIcon, UserIcon } from '../../../assets/SvgIcons'
-import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit';
 
 export const UserSidebar = (props) => {
   return (
     <div className="border shadow rounded p-5">
       <div className='text-center flex flex-col gap-3'>
-        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
+        {props.userProfile.profilePicture ?
+          <img src={`data:image/jpeg;base64,${props.userProfile?.profilePicture}`} alt="" className='mx-auto object-cover mask mask-circle w-24' /> :
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="" className='mx-auto object-cover mask mask-circle w-24' />
+        }
         <div>
-          <h1 className='text-xl font-semibold'>{props?.fullname}</h1>
+          <h1 className='text-xl font-semibold'>{`${props?.userProfile?.firstName} ${props?.userProfile?.lastName}`}</h1>
           <div className="group relative">
-            <div className="truncate max-w-xs" title={props.email}>
+            <div className="truncate max-w-xs" title={props.userProfile.email}>
               {props.email}
             </div>
             <div className="hidden group-hover:block absolute z-10 p-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap left-1/2 transform -translate-x-1/2">

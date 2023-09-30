@@ -237,6 +237,11 @@ const AddProduct = () => {
               }
               onBlur={handleBlur}
             />
+            {errors.image && touched.image &&
+              <label className="label">
+                <span className="label-text-alt text-red-600">{errors.image}</span>
+              </label>
+            }
           </div>
           <div className="form-control w-full">
             <label className="label">

@@ -8,6 +8,7 @@ import useDocumentTitle from '../useDocumentTitle'
 import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit'
 import { myProfileApi } from '../../api/user-api'
 import { AlertMessage } from '../../components/AlertMessage'
+import { UpdateProfileImageModal, UpdateProfilePictureModal } from '../../components/user/modal/UpdateProfilePictureModal'
 
 export const Profile = () => {
   useDocumentTitle("My Profile")
@@ -35,7 +36,8 @@ export const Profile = () => {
           gender: res.gender,
           city: res.city,
           country: res.country,
-          address: res.address
+          address: res.address,
+          profilePicture: res.profilePicture
         });
       })
       .catch(error => {
@@ -51,9 +53,12 @@ export const Profile = () => {
           <div className="flex flex-col gap-4 col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-3">
             <div className='flex flex-col gap-3 mx-auto'>
               <div className='text-center flex flex-col gap-3 mask mask-circle w-32 sm:w-32 md:w-32 lg:w-full'>
-                <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="" className='mx-auto object-cover w-full h-full' />
+                {userProfile.profilePicture ?
+                  <img src={`data:image/jpeg;base64,${userProfile?.profilePicture}`} alt="" className='mx-auto object-cover w-full h-full' /> :
+                  <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="" className='mx-auto object-cover w-full h-full' />
+                }
               </div>
-              <button className='btn btn-primary w-full'>Change picture</button>
+              <UpdateProfilePictureModal />
             </div>
           </div>
           <div className="col-span-9 sm:col-span-9 md:col-span-9 lg:col-span-6">
