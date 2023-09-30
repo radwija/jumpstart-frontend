@@ -30,19 +30,24 @@ const OrderManagement = () => {
   const [isUpdated, setUpdated] = useState(false)
   const [orders, setOrders] = useState([])
 
+  const [orderBy, setOrderBy] = useState("")
+
   useEffect(() => {
     setUpdated(false)
     window.scrollTo(0, 0)
-    getOrdersApi(token, filter)
+    getOrdersApi(token, filter, orderBy)
       .then(res => {
         setOrders(res.data.result.orders)
-        console.log(res)
       })
       .catch(err => {
         console.log(err)
       })
 
-  }, [filter, isUpdated])
+  }, [filter, isUpdated, orderBy])
+
+  const handleOrderChange = (e) => {
+    setOrderBy(e.target.value)
+  }
 
   const orderManagementNavigation = [
     {
@@ -167,6 +172,14 @@ const OrderManagement = () => {
         }
         <div className='overflow-x-auto mb-5'>
           <div className='flex gap-3'>
+            <select
+              onChange={(e) => handleOrderChange(e)}
+              className='select select-bordered max-w-xs'
+            >
+              <option disabled value="">Order by</option>
+              <option selected value="desc">Newest first</option>
+              <option value="asc">Oldest first</option>
+            </select>
             {orderManagementNavigation.map((link) => (
               <Link to={link.path} key={link.name} className={`btn btn-outline btn-primary`}>{link.name}</Link>
             ))}

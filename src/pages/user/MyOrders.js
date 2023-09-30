@@ -53,8 +53,6 @@ const MyOrders = () => {
       <PageHeading headingTitle='Order history' />
       <div className='flex gap-3 overflow-x-auto mb-2'>
         <select
-          name=""
-          id=""
           onChange={(e) => handleOrderChange(e)}
           className='select select-bordered max-w-xs'
         >

@@ -78,10 +78,14 @@ export const deleteProductByProductIdApi = async (token, productId) => {
   }
 }
 
-export const getOrdersApi = async (token, filter) => {
+export const getOrdersApi = async (token, filter, orderBy) => {
   let param = "";
-  if (filter != null) {
+  if (filter !== null && orderBy === null) {
     param = `?filter=${filter}`
+  } else if (orderBy !== null && filter === null) {
+    param = `?order=${orderBy}`
+  } else if (filter !== null && orderBy !== null) {
+    param = `?filter=${filter}&order=${orderBy}`
   }
 
   try {
