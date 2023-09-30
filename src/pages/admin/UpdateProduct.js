@@ -41,7 +41,8 @@ const UpdateProduct = () => {
       categoryName: "",
       categoryId: 0,
       categorySlug: ""
-    }
+    },
+    image: null,
   }
   )
   useEffect(() => {
@@ -96,7 +97,7 @@ const UpdateProduct = () => {
       stock: product.stock,
       weight: product.weight,
       categoryId: product.category.categoryId,
-      image: null
+      image: null,
     },
     validationSchema: Yup.object({
       productName: Yup.string()
@@ -118,7 +119,7 @@ const UpdateProduct = () => {
       categoryId: Yup.number()
         .notOneOf([0], "Please choose category")
         .required('Category is required'),
-      image: Yup.mixed().required("Please provide a photo"),
+      // image: Yup.mixed().required("Please provide a photo"),
     }),
     onSubmit: (values) => {
       const formData = new FormData();
@@ -143,6 +144,7 @@ const UpdateProduct = () => {
           })
         })
         .catch(error => {
+          console.log({ error })
           if (error.status === 404) {
             setIsNotFound(true)
           }
@@ -181,6 +183,8 @@ const UpdateProduct = () => {
 
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     formik;
+
+  console.log(values.image)
   // console.log(initialFormValues)
   return (
     <>
@@ -269,6 +273,7 @@ const UpdateProduct = () => {
                 formik.setFieldValue("image", event.target.files[0])
               }
               onBlur={handleBlur}
+              required={!product.image}
             />
             {errors.image && touched.image &&
               <label className="label">
