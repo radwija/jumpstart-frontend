@@ -207,7 +207,7 @@ const OrderManagement = () => {
                     <ConfirmWindow
                       elementId={`confirm-complete-${order.orderId}`}
                       buttonClass="btn btn-primary"
-                      confirmButtonText="Complete product"
+                      confirmButtonText="Complete order"
                       message={`Are you sure to complete order ID: ${order.orderId}?`}
                       action={() => handleCompleteOrder(order.orderId)}
                       icon={<CheckIcon />}
@@ -218,7 +218,7 @@ const OrderManagement = () => {
                     <ConfirmWindow
                       elementId={`confirm-cancel-${order.orderId}`}
                       buttonClass="btn btn-error"
-                      confirmButtonText="Yes, delete product"
+                      confirmButtonText="Yes, cancel order"
                       message={`Are you sure to cancel order ID: ${order.orderId}?`}
                       productName={"order.productName"}
                       action={() => handleCancelOrder(order.orderId)}
