@@ -32,7 +32,7 @@ const HomePage = () => {
           <section>
             <PageHeading headingTitle="Category" />
             <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-3 xl:gap-5'>
-              <CategoryCard categorySlug='toys' img="https://cdn.pixabay.com/photo/2017/07/25/22/54/lego-2539844_1280.jpg" name='Toy' />
+              <CategoryCard categorySlug='toys' img="https://cdn.pixabay.com/photo/2017/07/25/22/54/lego-2539844_1280.jpg" name='Toys' />
               <CategoryCard categorySlug='gadget' img="https://cdn.pixabay.com/photo/2016/11/29/06/18/apple-1867762_1280.jpg" name='Gadget' />
               <CategoryCard categorySlug='fashion' img="https://cdn.pixabay.com/photo/2016/11/22/19/08/hangers-1850082_1280.jpg" name='Fashion' />
               <CategoryCard categorySlug='sports' img="https://media.istockphoto.com/id/1387419697/id/foto/pelari-wanita-kebugaran-berlari-di-jembatan-tepi-laut.webp?b=1&s=612x612&w=0&k=20&c=uCsC5QJyUq-vtPryxkrQ46X2IP6AK86xwPREY1Wtm2I=" name='Sports' />

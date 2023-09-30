@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthUser, useIsAuthenticated, useSignOut } from 'react-auth-kit';
 import { getMyCartApi } from '../api/user-api';
 
-export const Navbar = () => {
+export const Navbar = (props) => {
   const auth = useAuthUser();
   const role = auth()?.role?.[0]
   const isLogin = useIsAuthenticated()
@@ -73,7 +73,10 @@ export const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt='user avatar' />
+                    {props.userProfile.profilePicture ?
+                      <img src={`data:image/jpeg;base64,${props.userProfile.profilePicture}`} alt="" className='user avatar' /> :
+                      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt='user avatar' />
+                    }
                   </div>
                 </label>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
