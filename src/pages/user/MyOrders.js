@@ -25,13 +25,14 @@ const MyOrders = () => {
   const redirectUser = useRedirectUser()
 
   const [orders, setOrders] = useState([])
+  const [orderBy, setOrderBy] = useState("")
 
   useEffect(() => {
     window.scrollTo(0, 0)
     if (isLogin() && isAdmin) {
       redirectUser(role)
     }
-    getMyOrdersApi(token, filter)
+    getMyOrdersApi(token, filter, orderBy)
       .then(res => {
         setOrders(res.data.result.orders)
       }
@@ -39,17 +40,36 @@ const MyOrders = () => {
       .catch(err => {
         console.log(err)
       })
-  }, [token, filter])
+  }, [token, filter, orderBy])
+
+  const handleOrderChange = (e) => {
+    setOrderBy(e.target.value)
+  }
+
+
 
   return (
     <UserLayout>
       <PageHeading headingTitle='Order history' />
-      <ul className='flex gap-3 overflow-x-auto mb-2'>
-        <li><Link to={"/user/orders"} className='btn btn-outline btn-primary'>All orders</Link></li>
-        <li><Link to={"/user/orders?filter=pending"} className='btn btn-outline btn-primary'>Pending</Link></li>
-        <li><Link to={"/user/orders?filter=completed"} className='btn btn-outline btn-primary'>Completed</Link></li>
-        <li><Link to={"/user/orders?filter=cancelled"} className='btn btn-outline btn-primary'>Cancelled</Link></li>
-      </ul>
+      <div className='flex gap-3 overflow-x-auto mb-2'>
+        <select
+          name=""
+          id=""
+          onChange={(e) => handleOrderChange(e)}
+          className='select select-bordered max-w-xs'
+        >
+          <option disabled value="">Order by</option>
+          <option selected value="desc">Newest first</option>
+          <option value="asc">Oldest first</option>
+        </select>
+        <ul className='flex gap-3'>
+          <li><Link to={"/user/orders"} className='btn btn-outline btn-primary'>All orders</Link></li>
+          <li><Link to={"/user/orders?filter=pending"} className='btn btn-outline btn-primary'>Pending</Link></li>
+          <li><Link to={"/user/orders?filter=completed"} className='btn btn-outline btn-primary'>Completed</Link></li>
+          <li><Link to={"/user/orders?filter=cancelled"} className='btn btn-outline btn-primary'>Cancelled</Link></li>
+        </ul>
+      </div>
+
       <div className='flex flex-col gap-4'>
         {orders.length === 0 && <span>There isn't any order in this filter</span>}
         {orders.map((order) => (

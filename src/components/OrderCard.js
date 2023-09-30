@@ -71,8 +71,6 @@ export const OrderCard = ({
     setSnapshots(productSnapshots)
   }, [productSnapshots])
 
-  console.log(snapshots)
-
   return (
     <>
       <div className='p-4 bg-white border rounded shadow'>
